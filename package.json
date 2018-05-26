@@ -1,0 +1,30 @@
+{
+  "name": "round2",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@cerebral/forms": "^3.2.2",
+    "@cerebral/react": "^3.2.2",
+    "@cerebral/router": "^3.2.2",
+    "cerebral": "^4.2.2",
+    "isbn-validator": "^1.2.0",
+    "jss": "^9.8.1",
+    "jss-camel-case": "^6.1.0",
+    "jss-global": "^3.0.0",
+    "jss-nested": "^6.0.1",
+    "qrcode.react": "^0.8.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-jss": "^8.4.0",
+    "react-loadable": "^5.4.0",
+    "react-scripts": "1.1.4",
+    "semantic-ui-css": "^2.3.1",
+    "semantic-ui-react": "^0.80.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
