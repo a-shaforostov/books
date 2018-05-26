@@ -17,7 +17,7 @@ jss.use(jssNested(), jssCamelCase(), jssGlobal());
 
 class AppWrapper extends Component {
   componentDidMount() {
-    setTimeout(() => this.props.applicationLoaded(), 3000);
+    this.props.applicationLoaded();
   };
 
   render() {

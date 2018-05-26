@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
+import { connect } from "@cerebral/react";
+import { state } from 'cerebral/tags';
 import injectSheet from 'react-jss';
 import { pageTransitionDelay } from '../../app/constants';
 
-import { Segment, Button } from 'semantic-ui-react';
-
 import MainPage from '../MainPage';
 import AdminPage from '../AdminPage';
+
+import LoginForm from '../LoginForm';
 
 const styles = {
   '@global body': {
@@ -15,24 +17,24 @@ const styles = {
 
   '@global .page-enter, .page-appear': {
     opacity: 0.01,
-    // left: '100vw',
   },
 
   '@global .page-appear-active, .page-enter-active': {
     opacity: 1,
-    // left: 0,
     transition: `opacity ${pageTransitionDelay}ms ease-out`,
   },
 
   '@global .page-exit': {
     opacity: 1,
-    // left: 0,
   },
 
   '@global .page-exit-active': {
     opacity: 0.01,
-    // left: '100vw',
     transition: `opacity ${pageTransitionDelay}ms ease-out`,
+  },
+
+  '@global .ui.page.modals.transition.visible': {
+    display: 'flex !important',
   },
 
   container: {
@@ -45,8 +47,14 @@ function Application(props) {
     <div className={props.classes.container}>
       <MainPage />
       <AdminPage />
+      <LoginForm open={props.visibleLogin} />
     </div>
   )
 }
 
-export default injectSheet(styles)(Application);
+export default connect(
+  {
+    visibleLogin: state`visibleForms.login`,
+  },
+  injectSheet(styles)(Application),
+);

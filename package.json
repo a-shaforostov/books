@@ -8,6 +8,7 @@
     "@cerebral/router": "^3.2.2",
     "cerebral": "^4.2.2",
     "isbn-validator": "^1.2.0",
+    "js-sha1": "^0.6.0",
     "jss": "^9.8.1",
     "jss-camel-case": "^6.1.0",
     "jss-global": "^3.0.0",

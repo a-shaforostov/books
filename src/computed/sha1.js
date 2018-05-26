@@ -1,6 +1,6 @@
 import { Compute } from "cerebral";
 import { props } from "cerebral/tags";
-import { entities } from '../app/constants';
+import sha1 from 'js-sha1';
 
 export const entityUrl = Compute(
   props`entity`,

@@ -19,6 +19,18 @@ export const applicationLoaded = [
   {
     true: set(state`currentPage`, state`initialPage`),
     false: redirect('/'),
-  }
-
+  },
 ];
+
+export const showModal = set(state`visibleForms.${props`name`}`, props`show`);
+export const updateField = set(state`forms.${props`form`}.${props`name`}.value`, props`value`);
+export const submitLogin = actions.submitLogin;
+export const openLogin = [
+  set(state`visibleForms.login`, true),
+  resetForm(state`forms.login`),
+];
+export const closeLogin = [
+  set(state`visibleForms.login`, false),
+  set(state`loginError`, false),
+];
+export const logout = set(state`user`, null);
