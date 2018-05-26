@@ -28,8 +28,9 @@ const styles = {
     height: '100px',
   },
   text: {
-    paddingTop: '20px',
-    fontSize: '120%',
+    paddingTop: '25px',
+    fontSize: '20px',
+    fontFamily: 'Arial, sans-serif',
   },
 };
 

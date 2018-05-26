@@ -15,20 +15,24 @@ const styles = {
 
   '@global .page-enter, .page-appear': {
     opacity: 0.01,
+    // left: '100vw',
   },
 
   '@global .page-appear-active, .page-enter-active': {
     opacity: 1,
-    transition: `all ${pageTransitionDelay}ms ease-out`,
+    // left: 0,
+    transition: `opacity ${pageTransitionDelay}ms ease-out`,
   },
 
   '@global .page-exit': {
     opacity: 1,
+    // left: 0,
   },
 
   '@global .page-exit-active': {
     opacity: 0.01,
-    transition: `all ${pageTransitionDelay}ms ease-out`,
+    // left: '100vw',
+    transition: `opacity ${pageTransitionDelay}ms ease-out`,
   },
 
   container: {
@@ -39,12 +43,6 @@ const styles = {
 function Application(props) {
   return (
     <div className={props.classes.container}>
-      <Segment>
-        <Button>Login</Button>
-      </Segment>
-      <a href="/">root</a>
-      <a href="/admin">admin</a>
-      <div>Application</div>
       <MainPage />
       <AdminPage />
     </div>

@@ -4,6 +4,8 @@ import { state, signal } from 'cerebral/tags';
 import { CSSTransition } from 'react-transition-group';
 import { pageTransitionDelay } from '../app/constants';
 
+import Header from './Header';
+
 class MainPage extends Component {
   render() {
     return (
@@ -13,7 +15,7 @@ class MainPage extends Component {
         classNames="page"
         unmountOnExit
       >
-        <div {...this.props}>MainPage</div>
+        <Header />
       </CSSTransition>
 
     )
