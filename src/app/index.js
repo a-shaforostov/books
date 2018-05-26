@@ -5,7 +5,7 @@ import router from './router';
 
 export default Module({
   state: {
-    currentPage: 'root',
+    currentPage: null,
     isApplicationLoaded: false,
   },
   signals: {

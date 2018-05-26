@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';
 
@@ -8,35 +8,22 @@ import jssNested from 'jss-nested';
 import jssCamelCase from 'jss-camel-case';
 import jssGlobal from 'jss-global';
 
-import MainPage from '../MainPage';
-import AdminPage from '../AdminPage';
-
+import Application from './Application';
 import 'semantic-ui-css/semantic.css';
+// import '../../assets/semantic.chubby.min.css';
 
 const jss = createJss();
 jss.use(jssNested(), jssCamelCase(), jssGlobal());
 
-const pages = {
-  root: MainPage,
-  admin: AdminPage,
-};
-
-class Application extends Component {
+class AppWrapper extends Component {
   componentDidMount() {
-    this.props.applicationLoaded();
+    setTimeout(() => this.props.applicationLoaded(), 3000);
   };
 
   render() {
-    const Page = pages[this.props.currentPage];
-
     return (
       <JssProvider jss={jss}>
-        <Fragment>
-          <a href="/">root</a>
-          <a href="/admin">admin</a>
-          <div>Application</div>
-          <Page />
-        </Fragment>
+        <Application />
       </JssProvider>
     )
   }
@@ -47,5 +34,5 @@ export default connect(
     currentPage: state`currentPage`,
     applicationLoaded: signal`applicationLoaded`,
   },
-  Application,
+  AppWrapper,
 );
