@@ -25,10 +25,31 @@ export default Module({
           value: '',
           defaultValue: '',
         },
-      }
+      },
+      library: {
+        id: { defaultValue: '' },
+        name: { defaultValue: '' },
+        address: { defaultValue: '' },
+        lat: { defaultValue: '49.2333877' },
+        lng: { defaultValue: '28.4418335' },
+      },
+      publish: {
+        isbn: { defaultValue: '' },
+        author: { defaultValue: '' },
+        year: { defaultValue: '' },
+        image: { defaultValue: '' },
+      },
+      book: {
+        id: { defaultValue: '' },
+        isbn: { defaultValue: '' },
+        timeout: { defaultValue: '' },
+      },
     },
     visibleForms: {
       login: false,
+      library: false,
+      publish: false,
+      book: false
     },
     users: {
       'test@gmail.com': {
@@ -43,6 +64,11 @@ export default Module({
         pass: 'e42776aa51230617b6ac2d4690d78771d26acd39',
         avatar: avatar2,
       },
+    },
+    data: {
+      libraries: [],
+      published: [],
+      books: [],
     }
   },
   signals: {
@@ -56,6 +82,8 @@ export default Module({
     closeLogin: sequences.closeLogin,
     logout: sequences.logout,
     autologin: sequences.autologin,
+    loadFile: sequences.loadFile,
+    downloadFile: sequences.downloadFile,
   },
   providers: {
     hash: hashProvider,

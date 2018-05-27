@@ -48,3 +48,12 @@ export const autologin = [
     false: [],
   },
 ];
+
+export const downloadFile = actions.downloadFile;
+
+export const loadFile = [
+  // actions.undoClear,
+  actions.loadFile,
+  // actions.undoPush,
+];
+
