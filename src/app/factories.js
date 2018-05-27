@@ -4,19 +4,35 @@ import { state } from 'cerebral/tags';
 import { pageTransitionDelay } from './constants';
 import * as sequences from "./sequences";
 
-export const openRoute = route => [
-  when(state`isApplicationLoaded`),
-  {
-    true: [
-      set(state`currentPage`, null),
-      wait(pageTransitionDelay),
-      set(state`currentPage`, route),
-    ],
-    false: [
-      set(state`initialPage`, route),
-    ],
-  },
-];
+export const openRoute = route => {
+  return [
+    // В залежності від стану додатку
+    when(state`isApplicationLoaded`),
+    {
+      true: [
+        // Відпрацювати тільки якщо перехід на інший роут
+        when(state`currentPage`, currentPage => currentPage !== route),
+        {
+          true: [
+            () => console.log(route),
+            ({ state }) => console.log(state.get('currentPage')),
+            set(state`currentPage`, null),
+            wait(pageTransitionDelay),
+            set(state`currentPage`, route),
+          ],
+          false: [
+            () => console.log(route),
+            ({ state }) => console.log(state.get('currentPage')),
+            () => console.log(false),
+          ],
+        },
+      ],
+      false: [
+        set(state`initialPage`, route),
+      ],
+    },
+  ];
+};
 
 export const authenticate = (continueSequence = []) => {
   return [
