@@ -24,6 +24,7 @@ export const applicationLoaded = [
 
 export const showModal = set(state`visibleForms.${props`name`}`, props`show`);
 export const updateField = set(state`forms.${props`form`}.${props`name`}.value`, props`value`);
+
 export const submitLogin = actions.submitLogin;
 export const openLogin = [
   set(state`visibleForms.login`, true),
@@ -32,5 +33,18 @@ export const openLogin = [
 export const closeLogin = [
   set(state`visibleForms.login`, false),
   set(state`loginError`, false),
+  ({ longPromise }) => longPromise.rejectPromise(),
 ];
-export const logout = set(state`user`, null);
+export const logout = [
+  set(state`user`, null),
+  actions.logout,
+  redirect('/'),
+];
+export const autologin = [
+  actions.autologin,
+  when(props`notFound`, props`silent`, (notFound, silent) => notFound && !silent),
+  {
+    true: openLogin,
+    false: [],
+  },
+];

@@ -9,4 +9,8 @@ const controller = Controller(app, {
     : null
 });
 
+// try to login silently (w/o login form)
+const autologin = controller.getSignal('autologin');
+autologin({ silent: true });
+
 export default controller;

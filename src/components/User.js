@@ -6,12 +6,14 @@ import { state, signal } from 'cerebral/tags';
 import { Segment, Button, List, Image } from 'semantic-ui-react';
 
 const styles = {
+  avatar: {
+    height: '28px',
+  },
 };
-
 
 class User extends Component {
   handleLogin = () => {
-    this.props.openLogin();
+    this.props.autologin();
   };
 
   handleLogout = () => {
@@ -19,14 +21,14 @@ class User extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, classes } = this.props;
     return (
       <div>
         {
           this.props.user &&
           <List horizontal relaxed>
             <List.Item>
-              <Image src={user.avatar} />
+              <Image src={user.avatar} className={classes.avatar} />
               <List.Content>
                 <List.Header>{user.name}</List.Header>
               </List.Content>
@@ -35,6 +37,7 @@ class User extends Component {
             <Button onClick={this.handleLogout}>Вихід</Button>
           </List>
         }
+        <a href="/admin">Admin</a>
         {
           !this.props.user &&
           <Button onClick={this.handleLogin}>Вхід</Button>
@@ -47,7 +50,7 @@ class User extends Component {
 export default connect(
   {
     user: state`user`,
-    openLogin: signal`openLogin`,
+    autologin: signal`autologin`,
     logout: signal`logout`,
   },
   injectSheet(styles)(User),

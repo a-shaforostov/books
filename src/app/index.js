@@ -2,10 +2,12 @@ import { Module } from "cerebral";
 import * as sequences from "./sequences";
 import FormsProvider from '@cerebral/forms';
 
-import { hashProvider } from "./providers";
+import { hashProvider, longPromise } from "./providers";
+import { authenticate } from './factories';
 import router from './router';
 
-import avatar from '../assets/avatar.png';
+import avatar from '../assets/avatar.jpg';
+import avatar2 from '../assets/girl.jpg';
 
 export default Module({
   state: {
@@ -30,15 +32,22 @@ export default Module({
     },
     users: {
       'test@gmail.com': {
-        name: 'Тарас Бульба',
+        id: 'test@gmail.com',
+        name: 'Тарас Шевченко',
         pass: 'e42776aa51230617b6ac2d4690d78771d26acd39',
         avatar: avatar,
-      }
+      },
+      'test2@gmail.com': {
+        id: 'test2@gmail.com',
+        name: 'Леся Українка',
+        pass: 'e42776aa51230617b6ac2d4690d78771d26acd39',
+        avatar: avatar2,
+      },
     }
   },
   signals: {
     rootRouted: sequences.rootRouted,
-    adminRouted: sequences.adminRouted,
+    adminRouted: authenticate(sequences.adminRouted),
     applicationLoaded: sequences.applicationLoaded,
     showModal: sequences.showModal,
     updateField: sequences.updateField,
@@ -46,9 +55,11 @@ export default Module({
     openLogin: sequences.openLogin,
     closeLogin: sequences.closeLogin,
     logout: sequences.logout,
+    autologin: sequences.autologin,
   },
   providers: {
     hash: hashProvider,
+    longPromise,
     form: FormsProvider({
       // Add additional rules
       rules: {

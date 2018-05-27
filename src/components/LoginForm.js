@@ -47,7 +47,7 @@ class LoginForm extends Component {
           <Form id="loginForm" onSubmit={this.handleSubmit}>
             <Form.Field>
               <label>Ім'я</label>
-              <Form.Input name="name" value={form.name.value} onChange={this.handleChange} autoComplete="new-password"  />
+              <Form.Input name="name" value={form.name.value} onChange={this.handleChange} autoComplete="username"  />
             </Form.Field>
             <Form.Field>
               <label>Пароль</label>
