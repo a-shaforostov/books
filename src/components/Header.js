@@ -15,6 +15,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
   logo: {
     display: 'flex',
@@ -63,8 +64,8 @@ class Header extends Component {
       <Segment className={classes.header}>
         <div className={classes.group}>
           <a href="/" className={classes.logo}>
-            <img src={logo} alt=""/>&nbsp;&nbsp;&nbsp;
-            <img src={title} alt=""/>
+            <img src={logo} alt="logo"/>&nbsp;&nbsp;&nbsp;
+            <img src={title} alt="title"/>
           </a>
           <div className={classes.menu}>
             <input
@@ -76,7 +77,7 @@ class Header extends Component {
               hidden
             />
             <label htmlFor="button-data-load">
-              <Button as="span" tabIndex="2">Відкрити</Button>
+              <Button as="span" tabIndex="0">Відкрити</Button>
             </label>
             <Button onClick={this.handleSaveData}>Зберегти</Button>
           </div>

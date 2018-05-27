@@ -15,7 +15,12 @@ class MainPage extends Component {
         classNames="page"
         unmountOnExit
       >
-        <Header />
+        <div>
+          <Header />
+          <main>
+            Main Page
+          </main>
+        </div>
       </CSSTransition>
 
     )

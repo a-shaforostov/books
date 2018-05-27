@@ -15,7 +15,12 @@ class AdminPage extends Component {
         classNames="page"
         unmountOnExit
       >
-        <Header />
+        <div>
+          <Header />
+          <main>
+            Admin Page
+          </main>
+        </div>
       </CSSTransition>
     )
   }
