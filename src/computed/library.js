@@ -11,16 +11,17 @@ export default Compute(
 
     const library = libraries.find(library => library.id === selected);
     const booksInLibrary = books.filter(book => book.library === library.id).map(book => {
-      const publishedData = published.find(item => item.isbn === book.isbn);
+      const publishedData = published.find(item => item.id === book.isbn);
+      const { id, ...rest } = publishedData;
       return {
         ...book,
-        ...publishedData,
+        ...rest,
       }
     });
 
     return {
       ...library,
-      books: booksInLibrary,
+      books: booksInLibrary.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1),
     }
   }
 );

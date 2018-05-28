@@ -32,6 +32,10 @@ export default Module({
         selected: null,
         edit: null,
       },
+      published: {
+        selected: null,
+        edit: null,
+      },
     },
     forms: {
       login: {
@@ -51,8 +55,8 @@ export default Module({
         lat: { value: '' },
         lng: { value: '' },
       },
-      publish: {
-        isbn: { defaultValue: '' },
+      published: {
+        id: { defaultValue: ''  },
         author: { defaultValue: '' },
         name: { defaultValue: '' },
         year: { defaultValue: '' },
@@ -158,35 +162,35 @@ export default Module({
       ],
       published: [
         {
-          isbn: '978-617-12-1552-8',
+          id: '978-617-12-1552-8',
           author: 'Л. Гунель',
           name: 'Бог завжди подорожує інкогніто',
           year: 2016,
           image: 'https://www.bookclub.ua/images/db/goods/k/39843_60833_k.jpg',
         },
         {
-          isbn: '978-617-12-4544-0',
+          id: '978-617-12-4544-0',
           author: 'С. Дж. Тюдор',
           name: 'Крейдяна Людина',
           year: 2018,
           image: 'https://www.bookclub.ua/images/db/goods/k/47726_76411_k.jpg',
         },
         {
-          isbn: '978-617-12-4563-1',
+          id: '978-617-12-4563-1',
           author: 'Н. Нікалео та ін.',
           name: 'Львів. Пані. Панянки',
           year: 2018,
           image: 'https://www.bookclub.ua/images/db/goods/k/47992_77520_k.jpg',
         },
         {
-          isbn: '978-617-12-4738-3',
+          id: '978-617-12-4738-3',
           author: 'Дж. Метьюз',
           name: 'Червоний горобець',
           year: 2018,
           image: 'https://www.bookclub.ua/images/db/goods/k/47725_76463_k.jpg',
         },
         {
-          isbn: '978-617-12-4676-8',
+          id: '978-617-12-4676-8',
           author: 'М. Ткачівська',
           name: 'Голос перепілки',
           year: 2018,
@@ -266,11 +270,13 @@ export default Module({
     downloadFile: sequences.downloadFile,
     selectLibrary: sequences.selectLibrary,
     selectBook: sequences.selectBook,
+    selectPublished: sequences.selectPublished,
     deleteEntity: sequences.deleteEntity,
     deleteEntityConfirm: sequences.deleteEntityConfirm,
     editEntity: sequences.editEntity,
     resetEditForm: sequences.resetEditForm,
     postEntity: sequences.postEntity,
+    removeFromLibraries: sequences.removeFromLibraries,
   },
   providers: {
     hash: hashProvider,

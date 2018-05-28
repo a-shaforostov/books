@@ -128,6 +128,10 @@ export const deleteEntityConfirm = ({ state, props }) => {
       const books = state.get(`data.books`);
       state.set(`data.books`, books.filter(book => book.library !== id));
     }
+    if (entity === 'published') {
+      const books = state.get(`data.books`);
+      state.set(`data.books`, books.filter(book => book.isbn !== id));
+    }
 
     // delete entity itself
     state.set(`data.${entity}`, items.filter(item => item.id !== id));
@@ -154,8 +158,12 @@ export const postEntity = (context) => {
     state.set(`data.${props.entity}`, entities.map(item => item.id === formData.id ? {...formData} : item));
   }
 
-
   // Hide form
   state.set(`env.${props.entity}.edit`, null);
 };
 
+export const removeFromLibraries = ({ state, props }) => {
+  const id = props.id;
+  const books = state.get('data.books');
+  state.set('data.books', books.filter(book => book.isbn !== id));
+};

@@ -62,6 +62,9 @@ export const selectLibrary = [
   set(state`env.books.selected`, null),
 ];
 export const selectBook = set(state`env.books.selected`, props`id`);
+export const selectPublished = set(state`env.published.selected`, props`id`);
+
+export const removeFromLibraries = actions.removeFromLibraries;
 
 export const deleteEntity = [
   set(state`delete.entity`, props`entity`),

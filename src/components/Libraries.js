@@ -10,7 +10,7 @@ import paper from '../assets/white-paper.jpg';
 
 const styles = {
   list: {
-    width: '30%',
+    width: '50%',
   },
   header: {
     color: 'white!important',
@@ -21,7 +21,7 @@ const styles = {
     display: 'flex',
     margin: '1em 0 !important',
     backgroundImage: `url(${paper})`,
-    maxHeight: 'calc(100% - 25px)',
+    height: 'calc(100% - 25px)',
     borderRadius: '0!important',
   },
   addLibrary: {
@@ -40,6 +40,8 @@ const styles = {
     alignItems: 'flex-start',
     backgroundColor: 'transparent!important',
     cursor: 'pointer',
+    paddingTop: '6px!important',
+    paddingBottom: '6px!important',
   },
   librarySel: {
     backgroundColor: '#d4a16387!important',
@@ -100,15 +102,17 @@ class Libraries extends Component {
 
           <div className={classes.interior}>
             {
-              libraries.map(lib => (
-                <Segment
-                  key={lib.id}
-                  className={classnames([classes.library, { [classes.librarySel]: selected === lib.id }])}
-                  onClick={this.handleSelect(lib.id)}
-                >
-                  <span className={classes.name}>{lib.name}</span>
-                </Segment>
-              ))
+              libraries
+                .sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+                .map(lib => (
+                  <Segment
+                    key={lib.id}
+                    className={classnames([classes.library, { [classes.librarySel]: selected === lib.id }])}
+                    onClick={this.handleSelect(lib.id)}
+                  >
+                    <span className={classes.name}>{lib.name}</span>
+                  </Segment>
+                ))
             }
           </div>
         </Segment.Group>

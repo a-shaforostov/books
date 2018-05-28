@@ -11,8 +11,10 @@ import { Segment, Button } from 'semantic-ui-react';
 import Header from './Header';
 import Libraries from './Libraries';
 import LibraryInfo from './LibraryInfo';
+import Published from './Published';
 import DeleteConfirmation from './forms/DeleteConfirmation';
 import EditLibrary from './forms/EditLibrary';
+import EditPublished from './forms/EditPublished';
 import back from '../assets/wood-bg.jpg';
 
 const styles = {
@@ -34,9 +36,17 @@ const styles = {
     border: 'none!important',
     display: 'flex',
     overflowY: 'hidden',
+    justifyContent: 'space-between',
+  },
+  librarySide: {
+    width: '60%',
+    display: 'flex',
   },
   '@global body': {
     backgroundImage: `url(${back})!important`,
+  },
+  '@global .ui.modal.visible.active': {
+    marginTop: '0!important',
   }
 };
 
@@ -66,10 +76,16 @@ class AdminPage extends Component {
           <Header />
           <main className={classes.contentWrapper}>
             <Segment className={classes.content}>
-              <Libraries
-                onEdit={this.handleEdit}
-              />
-              <LibraryInfo
+              <div className={classes.librarySide}>
+                <Libraries
+                  onEdit={this.handleEdit}
+                />
+                <LibraryInfo
+                  onDelete={this.handleDelete}
+                  onEdit={this.handleEdit}
+                />
+              </div>
+              <Published
                 onDelete={this.handleDelete}
                 onEdit={this.handleEdit}
               />
@@ -81,6 +97,10 @@ class AdminPage extends Component {
             onDelete={this.handleDeleteConfirm}
           />
           <EditLibrary
+            onEdit={this.handleEdit}
+          />
+          <EditPublished
+            onEdit={this.handleEdit}
           />
         </div>
       </CSSTransition>

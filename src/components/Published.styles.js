@@ -2,16 +2,7 @@ import paper from '../assets/white-paper.jpg';
 
 export default {
   list: {
-    width: '50%',
-    // opacity: 1,
-    transform: 'perspective(2440px) rotateY(0deg)',
-    transformOrigin: 'left',
-    transition: 'transform 1s',
-  },
-  hidden: {
-    // opacity: 0.01,
-    transform: 'perspective(2440px) rotateY(-90deg)',
-    transition: 'transform 1s',
+    width: '30%',
   },
   header: {
     color: 'white!important',
@@ -21,7 +12,6 @@ export default {
   group: {
     display: 'flex',
     margin: '1em 0 !important',
-    padding: '10px!important',
     backgroundImage: `url(${paper})`,
     height: 'calc(100% - 25px)',
     borderRadius: '0!important',
@@ -40,6 +30,11 @@ export default {
     backgroundColor: 'rgba(255,255,255,0.65)!important',
     // backgroundColor: 'white!important',
     fontWeight: '700',
+  },
+  isbn: {
+    fontSize: '87%',
+    marginLeft: '21px',
+    opacity: '0.7',
   },
   libName: {
     fontFamily: 'Georgia, Arial, sans-serif',
@@ -126,7 +121,7 @@ export default {
     marginBottom: '10px',
   },
   row: {
-    marginBottom: '10px',
+    marginBottom: '4px',
   },
   footer: {
     margin: '10px 0 0px',
@@ -143,9 +138,37 @@ export default {
   },
   deleteBookButton: {
     position: 'absolute',
-    bottom: '10px',
+    bottom: '20px',
     right: '10px',
     '&:hover': {
+      color: 'red',
+    },
+  },
+  removeBookButton: {
+    position: 'absolute',
+    bottom: '20px',
+    right: '30px',
+    '&:hover': {
+      color: 'red',
+    },
+  },
+  editBookButton: {
+    position: 'absolute',
+    bottom: '20px',
+    right: '50px',
+    '&:hover': {
+      color: 'green',
+    },
+  },
+  bigBookButton: {
+    marginTop: '5px!important',
+    '&.edit:hover': {
+      color: 'green',
+    },
+    '&.remove:hover': {
+      color: 'red',
+    },
+    '&.delete:hover': {
       color: 'red',
     },
   },
@@ -154,5 +177,30 @@ export default {
     padding: '0 20px',
     fontStyle: 'italic',
     textAlign: 'center',
+  },
+  addBook: {
+    backgroundColor: 'transparent!important',
+    cursor: 'pointer',
+    fontWeight: 700,
+    transition: 'all 500ms',
+    '&:hover': {
+      backgroundColor: '#d4a16387!important',
+      transition: 'all 500ms',
+    },
+  },
+  presenceTitle: {
+    marginTop: '5px',
+  },
+  presence: {
+    display: 'flex',
+    fontSize: '90%',
+    fontWeight: '400',
+  },
+  presenceName: {
+    width: '30px',
+    paddingRight: '5px',
+    textAlign: 'right',
+    color: 'green',
+    fontWeight: '700',
   },
 };
