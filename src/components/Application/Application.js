@@ -39,7 +39,8 @@ const styles = {
 
   container: {
     padding: '10px',
-  }
+    height: '100vh',
+  },
 };
 
 function Application(props) {

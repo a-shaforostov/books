@@ -57,3 +57,6 @@ export const loadFile = [
   // actions.undoPush,
 ];
 
+
+export const selectLibrary = set(state`env.libraries.selected`, props`id`);
+export const selectBook = set(state`env.books.selected`, props`id`);

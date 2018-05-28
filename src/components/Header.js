@@ -16,6 +16,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
+    backgroundColor: 'rgba(199, 146, 114, 0.7)!important',
   },
   logo: {
     display: 'flex',

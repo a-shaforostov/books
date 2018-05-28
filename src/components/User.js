@@ -8,6 +8,7 @@ import { Segment, Button, List, Image } from 'semantic-ui-react';
 const styles = {
   avatar: {
     height: '28px',
+    borderRadius: '50%',
   },
 };
 

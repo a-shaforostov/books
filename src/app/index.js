@@ -13,8 +13,21 @@ export default Module({
   state: {
     currentPage: null,
     isApplicationLoaded: false,
-    user: null,
+    user: {
+      id: 'test@gmail.com',
+      name: 'Тарас Шевченко',
+      pass: 'e42776aa51230617b6ac2d4690d78771d26acd39',
+      avatar: avatar,
+    },
     loginError: false,
+    env: {
+      libraries: {
+        selected: "3",
+      },
+      books: {
+        selected: "3",
+      },
+    },
     forms: {
       login: {
         name: {
@@ -36,6 +49,7 @@ export default Module({
       publish: {
         isbn: { defaultValue: '' },
         author: { defaultValue: '' },
+        name: { defaultValue: '' },
         year: { defaultValue: '' },
         image: { defaultValue: '' },
       },
@@ -66,9 +80,135 @@ export default Module({
       },
     },
     data: {
-      libraries: [],
-      published: [],
-      books: [],
+      libraries: [
+        {
+          id: '1',
+          name: 'Публічна бібліотека імені Лесі Українки',
+          address: 'бульвар Ігоря Шамо, 2/7, Київ, 02000',
+          lat: '50.435301',
+          lng: '30.599626',
+        },
+        {
+          id: '2',
+          name: 'Центральна міська бібліотека імені Т. Г. Шевченка для дітей',
+          address: 'проспект Перемоги, 25А, Київ, 02000',
+          lat: '50.4500103',
+          lng: '30.4704845',
+        },
+        {
+          id: '3',
+          name: 'Національна бібліотека України імені В. І. Вернадського',
+          address: 'Голосіївський просп., 3, Київ, 03039',
+          lat: '50.3975225',
+          lng: '30.5150566',
+        },
+        {
+          id: '4',
+          name: 'Міська спеціалізована молодіжна бібліотека "Молода гвардія"',
+          address: 'вулиця Льва Толстого, 49, Київ, 02000',
+          lat: '50.4404744',
+          lng: '30.4988414',
+        },
+        {
+          id: '5',
+          name: 'Бібліотека імені Анни Ахматової',
+          address: 'вулиця Казанська, 20, Київ, 02000',
+          lat: '50.4985287',
+          lng: '30.457203',
+        },
+        {
+          id: '11',
+          name: 'Публічна бібліотека імені Лесі Українки',
+          address: 'бульвар Ігоря Шамо, 2/7, Київ, 02000',
+          lat: '50.435301',
+          lng: '30.599626',
+        },
+        {
+          id: '12',
+          name: 'Центральна міська бібліотека імені Т. Г. Шевченка для дітей',
+          address: 'проспект Перемоги, 25А, Київ, 02000',
+          lat: '50.4500103',
+          lng: '30.4704845',
+        },
+        {
+          id: '13',
+          name: 'Національна бібліотека України імені В. І. Вернадського',
+          address: 'Голосіївський просп., 3, Київ, 03039',
+          lat: '50.3975225',
+          lng: '30.5150566',
+        },
+        {
+          id: '14',
+          name: 'Міська спеціалізована молодіжна бібліотека "Молода гвардія"',
+          address: 'вулиця Льва Толстого, 49, Київ, 02000',
+          lat: '50.4404744',
+          lng: '30.4988414',
+        },
+        {
+          id: '15',
+          name: 'Бібліотека імені Анни Ахматової',
+          address: 'вулиця Казанська, 20, Київ, 02000',
+          lat: '50.4985287',
+          lng: '30.457203',
+        },
+      ],
+      published: [
+        {
+          isbn: '978-617-12-1552-8',
+          author: 'Л. Гунель',
+          name: 'Бог завжди подорожує інкогніто',
+          year: 2016,
+          image: 'https://www.bookclub.ua/images/db/goods/k/39843_60833_k.jpg',
+        },
+        {
+          isbn: '978-617-12-4544-0',
+          author: 'С. Дж. Тюдор',
+          name: 'Крейдяна Людина',
+          year: 2018,
+          image: 'https://www.bookclub.ua/images/db/goods/k/47726_76411_k.jpg',
+        },
+        {
+          isbn: '978-617-12-4563-1',
+          author: 'Н. Нікалео та ін.',
+          name: 'Львів. Пані. Панянки',
+          year: 2018,
+          image: 'https://www.bookclub.ua/images/db/goods/k/47992_77520_k.jpg',
+        },
+        {
+          isbn: '978-617-12-4738-3',
+          author: 'Дж. Метьюз',
+          name: 'Червоний горобець',
+          year: 2018,
+          image: 'https://www.bookclub.ua/images/db/goods/k/47725_76463_k.jpg',
+        },
+        {
+          isbn: '978-617-12-4676-8',
+          author: 'М. Ткачівська',
+          name: 'Голос перепілки',
+          year: 2018,
+          image: 'https://www.bookclub.ua/images/db/goods/k/47988_77181_k.jpg',
+        },
+      ],
+      books: [
+        {
+          id: '1',
+          isbn: '978-617-12-4676-8',
+          library: '3',
+          reserved: null,
+        },
+        {
+          id: '2',
+          isbn: '978-617-12-4738-3',
+          library: '3',
+          reserved: null,
+        },
+        {
+          id: '3',
+          isbn: '978-617-12-4563-1',
+          library: '3',
+          reserved: null,
+        },
+      ],
     }
   },
   signals: {
@@ -84,6 +224,8 @@ export default Module({
     autologin: sequences.autologin,
     loadFile: sequences.loadFile,
     downloadFile: sequences.downloadFile,
+    selectLibrary: sequences.selectLibrary,
+    selectBook: sequences.selectBook,
   },
   providers: {
     hash: hashProvider,
