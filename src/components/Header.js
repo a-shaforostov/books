@@ -17,6 +17,7 @@ const styles = {
     alignItems: 'center',
     flexWrap: 'wrap',
     backgroundColor: 'rgba(199, 146, 114, 0.7)!important',
+    flexShrink: 0,
   },
   logo: {
     display: 'flex',

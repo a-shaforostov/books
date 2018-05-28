@@ -35,7 +35,7 @@ export const submitLogin = ({ state, hash, form, path, longPromise }) => {
   const approved = storedUser && hash.sha1(pass.value) === storedUser.pass;
   if (approved) {
     state.set('user', storedUser);
-    state.set(`visibleForms.login`, false);
+    state.set(`env.login.edit`, false);
     state.set(`loginError`, false);
     longPromise.resolvePromise();
     if (window.PasswordCredential) {
@@ -111,4 +111,45 @@ export async function loadFile({ state, props }) {
 
   state.set('data', dataObj);
 }
+
+export const deleteEntityConfirm = ({ state, props }) => {
+  const { confirm } = props;
+  if (confirm) {
+    const entity = state.get(`delete.entity`);
+    const id = state.get(`delete.id`);
+    const items = state.get(`data.${entity}`);
+
+    // remove selection before deleting
+    state.set(`env.${entity}.selected`, null);
+
+    // delete relations
+    // delete books from library
+    if (entity === 'libraries') {
+      const books = state.get(`data.books`);
+      state.set(`data.books`, books.filter(book => book.library !== id));
+    }
+
+    // delete entity itself
+    state.set(`data.${entity}`, items.filter(item => item.id !== id));
+  }
+
+  state.set(`delete.entity`, null);
+  state.set(`delete.id`, null);
+  state.set(`delete.name`, null);
+};
+
+export const postEntity = (context) => {
+  const { state, form, props } = context;
+
+  // Prepare data
+  const formData = form.toJSON(`forms.${props.entity}`);
+  if (formData.id === -1) formData.id = Date.now();
+
+  // Update state
+  const entities = state.get(`data.${props.entity}`);
+  state.set(`data.${props.entity}`, entities.map(item => item.id === formData.id ? {...formData} : item));
+
+  // Hide form
+  state.set(`env.${props.entity}.edit`, null);
+};
 

@@ -11,6 +11,8 @@ import { Segment, Button } from 'semantic-ui-react';
 import Header from './Header';
 import Libraries from './Libraries';
 import LibraryInfo from './LibraryInfo';
+import DeleteConfirmation from './forms/DeleteConfirmation';
+import EditLibrary from './forms/EditLibrary';
 import back from '../assets/wood-bg.jpg';
 
 const styles = {
@@ -31,6 +33,7 @@ const styles = {
     backgroundColor: 'transparent!important',
     border: 'none!important',
     display: 'flex',
+    overflowY: 'hidden',
   },
   '@global body': {
     backgroundImage: `url(${back})!important`,
@@ -38,9 +41,20 @@ const styles = {
 };
 
 class AdminPage extends Component {
+  handleDelete = ({entity, id, name}) => {
+    this.props.deleteEntity({entity, id, name});
+  };
+
+  handleDeleteConfirm = confirm => {
+    this.props.deleteEntityConfirm({ confirm });
+  };
+
+  handleEdit = ({entity, id}) => {
+    this.props.editEntity({entity, id});
+  };
+
   render() {
-    const { classes } = this.props;
-    console.log(back);
+    const { classes, deleteObj = {} } = this.props;
     return (
       <CSSTransition
         in={this.props.currentPage === 'admin'}
@@ -53,9 +67,19 @@ class AdminPage extends Component {
           <main className={classes.contentWrapper}>
             <Segment className={classes.content}>
               <Libraries />
-              <LibraryInfo />
+              <LibraryInfo
+                onDelete={this.handleDelete}
+                onEdit={this.handleEdit}
+              />
             </Segment>
           </main>
+          <DeleteConfirmation
+            item={deleteObj.name}
+            open={!!deleteObj.id}
+            onDelete={this.handleDeleteConfirm}
+          />
+          <EditLibrary
+          />
         </div>
       </CSSTransition>
     )
@@ -65,6 +89,10 @@ class AdminPage extends Component {
 export default connect(
   {
     currentPage: state`currentPage`,
+    deleteObj: state`delete`,
+    deleteEntity: signal`deleteEntity`,
+    deleteEntityConfirm: signal`deleteEntityConfirm`,
+    editEntity: signal`editEntity`,
   },
   injectSheet(styles)(AdminPage),
 );

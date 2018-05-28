@@ -21,11 +21,16 @@ export default Module({
     },
     loginError: false,
     env: {
+      login: {
+        edit: null,
+      },
       libraries: {
-        selected: "3",
+        selected: null,
+        edit: null,
       },
       books: {
-        selected: "3",
+        selected: null,
+        edit: null,
       },
     },
     forms: {
@@ -39,7 +44,7 @@ export default Module({
           defaultValue: '',
         },
       },
-      library: {
+      libraries: {
         id: { defaultValue: '' },
         name: { defaultValue: '' },
         address: { defaultValue: '' },
@@ -59,11 +64,10 @@ export default Module({
         timeout: { defaultValue: '' },
       },
     },
-    visibleForms: {
-      login: false,
-      library: false,
-      publish: false,
-      book: false
+    delete: {
+      entity: null,
+      id: null,
+      name: '',
     },
     users: {
       'test@gmail.com': {
@@ -208,6 +212,42 @@ export default Module({
           library: '3',
           reserved: null,
         },
+        {
+          id: '11',
+          isbn: '978-617-12-4676-8',
+          library: '3',
+          reserved: null,
+        },
+        {
+          id: '12',
+          isbn: '978-617-12-4738-3',
+          library: '3',
+          reserved: null,
+        },
+        {
+          id: '13',
+          isbn: '978-617-12-4563-1',
+          library: '3',
+          reserved: null,
+        },
+        {
+          id: '111',
+          isbn: '978-617-12-4676-8',
+          library: '3',
+          reserved: null,
+        },
+        {
+          id: '112',
+          isbn: '978-617-12-4738-3',
+          library: '3',
+          reserved: null,
+        },
+        {
+          id: '113',
+          isbn: '978-617-12-4563-1',
+          library: '3',
+          reserved: null,
+        },
       ],
     }
   },
@@ -226,6 +266,11 @@ export default Module({
     downloadFile: sequences.downloadFile,
     selectLibrary: sequences.selectLibrary,
     selectBook: sequences.selectBook,
+    deleteEntity: sequences.deleteEntity,
+    deleteEntityConfirm: sequences.deleteEntityConfirm,
+    editEntity: sequences.editEntity,
+    resetEditForm: sequences.resetEditForm,
+    postEntity: sequences.postEntity,
   },
   providers: {
     hash: hashProvider,

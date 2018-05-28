@@ -1,4 +1,3 @@
-// import { redirect } from "@cerebral/router/operators";
 import { set, toggle, unset, when, wait } from "cerebral/operators";
 import { resetForm } from '@cerebral/forms/operators';
 import { redirect } from '@cerebral/router/operators';
@@ -22,16 +21,16 @@ export const applicationLoaded = [
   },
 ];
 
-export const showModal = set(state`visibleForms.${props`name`}`, props`show`);
+export const showModal = set(state`env.${props`name`}.edit`, props`show`);
 export const updateField = set(state`forms.${props`form`}.${props`name`}.value`, props`value`);
 
 export const submitLogin = actions.submitLogin;
 export const openLogin = [
-  set(state`visibleForms.login`, true),
+  set(state`env.login.edit`, true),
   resetForm(state`forms.login`),
 ];
 export const closeLogin = [
-  set(state`visibleForms.login`, false),
+  set(state`env.login.edit`, false),
   set(state`loginError`, false),
   ({ longPromise }) => longPromise.rejectPromise(),
 ];
@@ -60,3 +59,20 @@ export const loadFile = [
 
 export const selectLibrary = set(state`env.libraries.selected`, props`id`);
 export const selectBook = set(state`env.books.selected`, props`id`);
+
+export const deleteEntity = [
+  set(state`delete.entity`, props`entity`),
+  set(state`delete.id`, props`id`),
+  set(state`delete.name`, props`name`),
+];
+
+export const deleteEntityConfirm = actions.deleteEntityConfirm;
+export const postEntity = actions.postEntity;
+
+export const editEntity = [
+  set(state`env.${props`entity`}.edit`, props`id`),
+];
+
+export const resetEditForm = resetForm(state`${props`form`}`);
+
+

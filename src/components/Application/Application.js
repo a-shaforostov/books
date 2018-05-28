@@ -55,7 +55,7 @@ function Application(props) {
 
 export default connect(
   {
-    visibleLogin: state`visibleForms.login`,
+    visibleLogin: state`env.login.edit`,
   },
   injectSheet(styles)(Application),
 );

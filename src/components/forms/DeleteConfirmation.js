@@ -26,12 +26,12 @@ class DeleteConfirmation extends Component {
     return (
       <Modal size="tiny" open={open} onClose={this.handleClose} style={styles.modal}>
         <Modal.Content>
-          <div>Delete</div>
+          <div>Видалити елемент</div>
           {item && <div style={styles.subtitle}>{item}?</div>}
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.handleClose}>Cancel</Button>
-          <Button color="red" content='Confirm' onClick={this.handleConfirm} />
+          <Button onClick={this.handleClose}>Відмінити</Button>
+          <Button color="red" content='Видалити' onClick={this.handleConfirm} />
         </Modal.Actions>
       </Modal>
     )
