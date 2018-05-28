@@ -143,11 +143,17 @@ export const postEntity = (context) => {
 
   // Prepare data
   const formData = form.toJSON(`forms.${props.entity}`);
-  if (formData.id === -1) formData.id = Date.now();
+  debugger;
+  if (formData.id === '-1') {
+    // Create entity
+    formData.id = Date.now();
+    state.push(`data.${props.entity}`, {...formData});
+  } else {
+    // Update entity
+    const entities = state.get(`data.${props.entity}`);
+    state.set(`data.${props.entity}`, entities.map(item => item.id === formData.id ? {...formData} : item));
+  }
 
-  // Update state
-  const entities = state.get(`data.${props.entity}`);
-  state.set(`data.${props.entity}`, entities.map(item => item.id === formData.id ? {...formData} : item));
 
   // Hide form
   state.set(`env.${props.entity}.edit`, null);

@@ -37,7 +37,7 @@ export default {
     paddingBottom: '6px!important',
   },
   bookSel: {
-    backgroundColor: 'rgba(255,255,255,0.65)!important',
+    backgroundColor: '#d4a16387!important',
     // backgroundColor: 'white!important',
     fontWeight: '700',
   },
@@ -69,6 +69,12 @@ export default {
     overflowX: 'hidden',
     overflowY: 'auto',
     flexGrow: 1,
+  },
+  interiorEmpty: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    border: '2px dotted brown',
   },
   '@global .ui.segments:not(.horizontal) .segment:first-child': {
     borderTop: 'none',
@@ -142,5 +148,11 @@ export default {
     '&:hover': {
       color: 'red',
     },
-  }
+  },
+  dropPlace: {
+    flexGrow: 0,
+    padding: '0 20px',
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
 };

@@ -51,7 +51,7 @@ class LibraryInfo extends Component {
             <Segment.Group piled className={classes.group}>
               <div className={classes.libName}>{library.name}</div>
               <div className={classes.libAddr}>{library.address}</div>
-              <div className={classes.interior}>
+              <div className={classnames([classes.interior, {[classes.interiorEmpty]: library.books.length === 0}])}>
                 {
                   library.books.map(book => (
                     <Segment
@@ -103,6 +103,10 @@ class LibraryInfo extends Component {
                       />
                     </Segment>
                   ))
+                }
+                {
+                  library.books.length === 0 &&
+                  <div className={classes.dropPlace}>Перетягніть книгу на цей лист. <br/> Так вона потрапить в бібліотеку.</div>
                 }
               </div>
               <div className={classes.footer}>

@@ -57,7 +57,10 @@ export const loadFile = [
 ];
 
 
-export const selectLibrary = set(state`env.libraries.selected`, props`id`);
+export const selectLibrary = [
+  set(state`env.libraries.selected`, props`id`),
+  set(state`env.books.selected`, null),
+];
 export const selectBook = set(state`env.books.selected`, props`id`);
 
 export const deleteEntity = [

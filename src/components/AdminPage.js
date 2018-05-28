@@ -66,7 +66,9 @@ class AdminPage extends Component {
           <Header />
           <main className={classes.contentWrapper}>
             <Segment className={classes.content}>
-              <Libraries />
+              <Libraries
+                onEdit={this.handleEdit}
+              />
               <LibraryInfo
                 onDelete={this.handleDelete}
                 onEdit={this.handleEdit}

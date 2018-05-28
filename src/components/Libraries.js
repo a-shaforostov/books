@@ -4,11 +4,9 @@ import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';
 import classnames from 'classnames';
 
-import { Segment, Header } from 'semantic-ui-react';
-
+import { Segment, Header, Icon } from 'semantic-ui-react';
 
 import paper from '../assets/white-paper.jpg';
-
 
 const styles = {
   list: {
@@ -26,6 +24,16 @@ const styles = {
     maxHeight: 'calc(100% - 25px)',
     borderRadius: '0!important',
   },
+  addLibrary: {
+    backgroundColor: 'transparent!important',
+    cursor: 'pointer',
+    fontWeight: 700,
+    transition: 'all 500ms',
+    '&:hover': {
+      backgroundColor: '#d4a16387!important',
+      transition: 'all 500ms',
+    },
+  },
   library: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -34,11 +42,11 @@ const styles = {
     cursor: 'pointer',
   },
   librarySel: {
-    backgroundColor: 'rgba(0,0,0,0.15)!important',
+    backgroundColor: '#d4a16387!important',
     fontWeight: '700',
   },
   name: {
-    width: '90%',
+    width: '95%',
   },
   interior: {
     overflowX: 'hidden',
@@ -71,12 +79,25 @@ class Libraries extends Component {
     this.props.selectLibrary({ id: selected === id ? null : id });
   };
 
+  handleEdit = e => {
+    e.stopPropagation();
+    this.props.onEdit({ entity: 'libraries', id: -1 });
+  };
+
   render() {
     const { classes, libraries, selected } = this.props;
     return (
       <div className={classes.list}>
         <Header as="h3" className={classes.header}>Бібліотеки</Header>
         <Segment.Group piled className={classes.group}>
+          <Segment
+            key={-1}
+            className={classes.addLibrary}
+            onClick={this.handleEdit}
+          >
+            <span className={classes.name}><Icon name="add" /> Додати бібліотеку</span>
+          </Segment>
+
           <div className={classes.interior}>
             {
               libraries.map(lib => (
@@ -86,7 +107,6 @@ class Libraries extends Component {
                   onClick={this.handleSelect(lib.id)}
                 >
                   <span className={classes.name}>{lib.name}</span>
-                  <span>&gt;</span>
                 </Segment>
               ))
             }

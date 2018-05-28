@@ -45,11 +45,11 @@ export default Module({
         },
       },
       libraries: {
-        id: { defaultValue: '' },
-        name: { defaultValue: '' },
-        address: { defaultValue: '' },
-        lat: { defaultValue: '49.2333877' },
-        lng: { defaultValue: '28.4418335' },
+        id: { value: '-1', defaultValue: '-1' },
+        name: { value: '' },
+        address: { value: '' },
+        lat: { value: '' },
+        lng: { value: '' },
       },
       publish: {
         isbn: { defaultValue: '' },
