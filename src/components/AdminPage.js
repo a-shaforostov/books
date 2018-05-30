@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';
 import injectSheet from 'react-jss';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContextProvider } from 'react-dnd';
 
 import { CSSTransition } from 'react-transition-group';
 import { pageTransitionDelay } from '../app/constants';
@@ -75,21 +77,23 @@ class AdminPage extends Component {
         <div className={classes.page}>
           <Header />
           <main className={classes.contentWrapper}>
-            <Segment className={classes.content}>
-              <div className={classes.librarySide}>
-                <Libraries
-                  onEdit={this.handleEdit}
-                />
-                <LibraryInfo
+            <DragDropContextProvider backend={HTML5Backend}>
+              <Segment className={classes.content}>
+                <div className={classes.librarySide}>
+                  <Libraries
+                    onEdit={this.handleEdit}
+                  />
+                  <LibraryInfo
+                    onDelete={this.handleDelete}
+                    onEdit={this.handleEdit}
+                  />
+                </div>
+                <Published
                   onDelete={this.handleDelete}
                   onEdit={this.handleEdit}
                 />
-              </div>
-              <Published
-                onDelete={this.handleDelete}
-                onEdit={this.handleEdit}
-              />
-            </Segment>
+              </Segment>
+            </DragDropContextProvider>
           </main>
           <DeleteConfirmation
             item={deleteObj.name}
