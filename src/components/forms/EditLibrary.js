@@ -2,15 +2,21 @@ import React, { Component } from 'react';
 import { state, signal } from 'cerebral/tags';
 import { connect } from '@cerebral/react';
 import { form } from '@cerebral/forms';
+import injectSheet from 'react-jss';
 
-import { Button, Modal, Form } from 'semantic-ui-react';
+import { Button, Modal, Form, Icon } from 'semantic-ui-react';
 import libraryCompute from "../../computed/library";
 
 const styles = {
-  subtitle: {
-    color: 'gray',
+  fieldError: {
+    marginTop: '-13px',
+    display: 'block',
     fontSize: '80%',
-  }
+    color: 'red',
+  },
+  mapButton: {
+    marginLeft: '6px!important',
+  },
 };
 
 class EditLibrary extends Component {
@@ -38,6 +44,7 @@ class EditLibrary extends Component {
       this.props.updateField({ form: 'libraries', name: 'address', value: library.address });
       this.props.updateField({ form: 'libraries', name: 'lat', value: library.lat });
       this.props.updateField({ form: 'libraries', name: 'lng', value: library.lng });
+      this.props.updateField({ form: 'published', name: 'isNew', value: false });
     }
   };
 
@@ -48,38 +55,54 @@ class EditLibrary extends Component {
   }
 
   render() {
-    const { showModal, id, form, subtitle } = this.props;
+    const { showModal, id, form, classes } = this.props;
     return (
       <Modal size="tiny" open={!!id} onClose={this.handleClose}>
         <Modal.Header>
           <div>{`${id === -1 ? 'Створення' : 'Редагування'} бібліотеки`}</div>
-          {/*{subtitle && <div style={styles.subtitle}>{subtitle}</div>}*/}
         </Modal.Header>
         <Modal.Content>
           <Form id="libraryForm" onSubmit={this.handleSubmit}>
             <Form.Field>
               <label>Назва</label>
               <Form.Input name="name" value={form.name.value} onChange={this.handleChange} />
+              {
+                !form.name.isValid && !form.name.isPristine &&
+                <span className={classes.fieldError}>&nbsp;{form.name.errorMessage || 'Поле має бути заповнене'}</span>
+              }
             </Form.Field>
             <Form.Field>
               <label>Адреса</label>
               <Form.Input name="address" value={form.address.value} onChange={this.handleChange} />
+              {
+                !form.address.isValid && !form.address.isPristine &&
+                <span className={classes.fieldError}>&nbsp;{form.address.errorMessage || 'Поле має бути заповнене'}</span>
+              }
             </Form.Field>
             <Form.Group>
               <Form.Field>
                 <label>Широта</label>
                 <Form.Input name="lat" value={form.lat.value} onChange={this.handleChange} />
+                {
+                  !form.lat.isValid && !form.lat.isPristine &&
+                  <span className={classes.fieldError} style={{marginTop: 0}}>&nbsp;{form.lat.errorMessage}</span>
+                }
               </Form.Field>
               <Form.Field>
                 <label>Довгота</label>
                 <Form.Input name="lng" value={form.lng.value} onChange={this.handleChange} />
+                {
+                  !form.lng.isValid && !form.lng.isPristine &&
+                  <span className={classes.fieldError} style={{marginTop: 0}}>&nbsp;{form.lng.errorMessage}</span>
+                }
               </Form.Field>
+              <Button type="button" className={classes.mapButton}><Icon name="map outline" size="large" />Карта</Button>
             </Form.Group>
           </Form>
         </Modal.Content>
         <Modal.Actions>
           <Button negative onClick={this.handleClose}>Відмінити</Button>
-          <Button type="submit" form="libraryForm" positive icon='checkmark' labelPosition='right' content='Зберегти' />
+          <Button type="submit" form="libraryForm" positive icon='checkmark' labelPosition='right' content='Зберегти' disabled={!form.isValid} />
         </Modal.Actions>
       </Modal>
     )
@@ -96,5 +119,5 @@ export default connect(
     updateField: signal`updateField`,
     resetEditForm: signal`resetEditForm`,
   },
-  EditLibrary,
-)
+  injectSheet(styles)(EditLibrary),
+);

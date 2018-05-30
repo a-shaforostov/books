@@ -165,8 +165,8 @@ class Published extends Component {
                                 const { id, count, name } = stats.byLibraries[key];
                                 return (
                                   <div key={id} className={classes.presence}>
-                                    <span className={classes.presenceName}>{count}</span>
-                                    <a onClick={this.handleSelectLibrary(id)}>{name}</a>
+                                    <span className={classes.presenceNumber}>{count}</span>
+                                    <a className={classes.presenceLink} onClick={this.handleSelectLibrary(id)}>{name}</a>
                                   </div>
                                 )
                               })

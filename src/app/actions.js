@@ -142,24 +142,33 @@ export const deleteEntityConfirm = ({ state, props }) => {
   state.set(`delete.name`, null);
 };
 
-export const postEntity = (context) => {
+export const postEntity = context => {
   const { state, form, props } = context;
 
   // Prepare data
   const formData = form.toJSON(`forms.${props.entity}`);
-  debugger;
-  if (formData.id === '-1') {
+
+  const { isNew, ...data } = formData;
+  if (isNew) {
     // Create entity
-    formData.id = Date.now();
-    state.push(`data.${props.entity}`, {...formData});
+    data.id = data.id || Date.now();
+    push(props.entity, data);
   } else {
     // Update entity
-    const entities = state.get(`data.${props.entity}`);
-    state.set(`data.${props.entity}`, entities.map(item => item.id === formData.id ? {...formData} : item));
+    update(props.entity, data);
   }
 
   // Hide form
   state.set(`env.${props.entity}.edit`, null);
+
+  function push(entity, data) {
+    state.push(`data.${entity}`, data);
+  }
+
+  function update(entity, data) {
+    const arr = state.get(`data.${entity}`);
+    state.set(`data.${entity}`, arr.map(item => item.id === data.id ? data : item));
+  }
 };
 
 export const removeFromLibraries = ({ state, props }) => {

@@ -22,7 +22,10 @@ export const applicationLoaded = [
 ];
 
 export const showModal = set(state`env.${props`name`}.edit`, props`show`);
-export const updateField = set(state`forms.${props`form`}.${props`name`}.value`, props`value`);
+export const updateField = [
+  set(state`forms.${props`form`}.${props`name`}.value`, props`value`),
+  set(state`forms.${props`form`}.${props`name`}.isPristine`, false),
+];
 
 export const submitLogin = actions.submitLogin;
 export const openLogin = [

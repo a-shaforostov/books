@@ -1,6 +1,7 @@
 import { Module } from "cerebral";
 import * as sequences from "./sequences";
 import FormsProvider from '@cerebral/forms';
+import { state } from 'cerebral/tags';
 
 import { hashProvider, longPromise } from "./providers";
 import { authenticate } from './factories';
@@ -49,23 +50,26 @@ export default Module({
         },
       },
       libraries: {
-        id: { value: '-1', defaultValue: '-1' },
-        name: { value: '' },
-        address: { value: '' },
-        lat: { value: '' },
-        lng: { value: '' },
+        id: { value: '', defaultValue: '' },
+        name: { value: '', isRequired: true },
+        address: { value: '', isRequired: true },
+        lat: { value: '', validationRules: [/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/] },
+        lng: { value: '', validationRules: [/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/] },
+        isNew: { defaultValue: true },
       },
       published: {
-        id: { defaultValue: ''  },
-        author: { defaultValue: '' },
-        name: { defaultValue: '' },
-        year: { defaultValue: '' },
-        image: { defaultValue: '' },
+        id: { value: '', defaultValue: '', isRequired: true, validationRules: ['existance:published']},
+        author: { value: '', defaultValue: '', isRequired: true },
+        name: { value: '', defaultValue: '', isRequired: true  },
+        year: { value: '', defaultValue: '' , validationRules: [/^1[5-9]\d\d|20[0-2]\d$/] },
+        image: { value: '', defaultValue: '' },
+        isNew: { value: true, defaultValue: true },
       },
       book: {
         id: { defaultValue: '' },
         isbn: { defaultValue: '' },
         timeout: { defaultValue: '' },
+        isNew: { defaultValue: true },
       },
     },
     delete: {
@@ -284,26 +288,23 @@ export default Module({
     form: FormsProvider({
       // Add additional rules
       rules: {
-        myAddedRule(value, arg, get) {
-          // value of the field
-          value
-          // arg passed to the rule
-          arg
-          // The "get" argument from computed. Use it to grab
-          // state or props passed to component. The component
-          // will track use of these dependencies for rerender
-          get
-
-          return true
-        }
+        existance(value, arg, get) {
+          const arr = get(state`data.${arg}`);
+          const isNew = get(state`forms.${arg}.isNew.value`);
+          return !(isNew && arr.some(item => item.id === value));
+        },
       },
 
       // errorMessage property added to field when invalid with the following rules
       errorMessages: {
-        minLength(value, minLength) {
-          return `The length is ${
-            value.length
-            }, should be equal or more than ${minLength}`
+        existance() {
+          return 'Такий ідентифікатор вже є в системі';
+        },
+        isRequired() {
+          return 'Поле має бути заповненим';
+        },
+        regexp() {
+          return 'Значення не відповідає формату';
         }
       }
     }),

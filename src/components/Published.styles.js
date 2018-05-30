@@ -196,11 +196,14 @@ export default {
     fontSize: '90%',
     fontWeight: '400',
   },
-  presenceName: {
+  presenceNumber: {
     width: '30px',
     paddingRight: '5px',
     textAlign: 'right',
     color: 'green',
     fontWeight: '700',
+  },
+  presenceLink: {
+    textDecoration: 'underline!important',
   },
 };

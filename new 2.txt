@@ -16,3 +16,19 @@ login: test2@gmail.com, password: netflix
 
 
 npx ecstatic --gzip -p 8087 --cache 25920000
+
+    transform: rotateZ(-4deg) translateY(-20px);
+    transition: transform 1s;
+	
+	
+display: flex;
+    justifyContent: 'space-between',
+	
+	
+	
+	    width: '60%',
+    display: 'flex',
+	
+	
+    Express Talk Business Edition: 3198447009246 activate now
+	3361084-gqodkbwp код регистрации
