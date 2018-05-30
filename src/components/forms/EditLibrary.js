@@ -6,6 +6,7 @@ import injectSheet from 'react-jss';
 
 import { Button, Modal, Form, Icon } from 'semantic-ui-react';
 import libraryCompute from "../../computed/library";
+import MapModal from "./MapModal";
 
 const styles = {
   fieldError: {
@@ -52,12 +53,17 @@ class EditLibrary extends Component {
     if (this.props.id === null && props.id !== null) {
       this.handleOpen(props.id);
     }
-  }
+  };
+
+  handleApplyCoords = ({ lat, lng }) => {
+    this.props.updateField({ form: 'libraries', name: 'lat', value: lat });
+    this.props.updateField({ form: 'libraries', name: 'lng', value: lng });
+  };
 
   render() {
     const { showModal, id, form, classes } = this.props;
     return (
-      <Modal size="tiny" open={!!id} onClose={this.handleClose}>
+      <Modal size="tiny" open={!!id} closeOnDimmerClick={false} onClose={this.handleClose}>
         <Modal.Header>
           <div>{`${id === -1 ? 'Створення' : 'Редагування'} бібліотеки`}</div>
         </Modal.Header>
@@ -96,7 +102,11 @@ class EditLibrary extends Component {
                   <span className={classes.fieldError} style={{marginTop: 0}}>&nbsp;{form.lng.errorMessage}</span>
                 }
               </Form.Field>
-              <Button type="button" className={classes.mapButton}><Icon name="map outline" size="large" />Карта</Button>
+              {/*<Button type="button" className={classes.mapButton}><Icon name="map outline" size="large" />Карта</Button>*/}
+              <MapModal
+                coords={form.lat.value && form.lng.value && { latitude: +form.lat.value, longitude: +form.lng.value }}
+                onApply={this.handleApplyCoords}
+              />
             </Form.Group>
           </Form>
         </Modal.Content>

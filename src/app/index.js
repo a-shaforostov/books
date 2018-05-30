@@ -53,8 +53,8 @@ export default Module({
         id: { value: '', defaultValue: '' },
         name: { value: '', isRequired: true },
         address: { value: '', isRequired: true },
-        lat: { value: '', validationRules: [/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/] },
-        lng: { value: '', validationRules: [/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/] },
+        lat: { value: '', validationRules: [/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,20}$/] },
+        lng: { value: '', validationRules: [/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,20}$/] },
         isNew: { defaultValue: true },
       },
       published: {
