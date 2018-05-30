@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { compose, withProps, lifecycle } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 
 import { Dimmer, Loader } from 'semantic-ui-react';
@@ -23,7 +23,11 @@ class GMap extends Component {
       >
         {
           markers && markers.map(marker => (
-            <Marker key={''+marker.lat+marker.lng} position={{ lat: marker.lat, lng: marker.lng }} />
+            <Marker key={''+marker.lat+marker.lng} position={{ lat: marker.lat, lng: marker.lng }}>
+              <InfoWindow onCloseClick={null}>
+                <div>{marker.name}</div>
+              </InfoWindow>
+            </Marker>
           ))
         }
       </GoogleMap>

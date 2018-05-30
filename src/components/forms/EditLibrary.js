@@ -104,7 +104,7 @@ class EditLibrary extends Component {
               </Form.Field>
               {/*<Button type="button" className={classes.mapButton}><Icon name="map outline" size="large" />Карта</Button>*/}
               <MapModal
-                coords={form.lat.value && form.lng.value && { latitude: +form.lat.value, longitude: +form.lng.value }}
+                coords={form.lat.value && form.lng.value && { latitude: +form.lat.value, longitude: +form.lng.value, name: form.name.value }}
                 onApply={this.handleApplyCoords}
               />
             </Form.Group>

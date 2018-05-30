@@ -33,6 +33,7 @@ class MapModal extends Component {
         marker: {
           lat: this.props.coords.latitude,
           lng: this.props.coords.longitude,
+          name: this.props.coords.name,
         },
       });
     } else {
