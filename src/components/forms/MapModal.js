@@ -53,8 +53,10 @@ class MapModal extends Component {
   };
 
   handleUpdateMarker = ({ lat, lng }) => {
-    this.setState({
-      marker: { lat, lng },
+    this.setState(state => {
+      return {
+        marker: { lat, lng, name: state.marker.name },
+      }
     })
   };
 
