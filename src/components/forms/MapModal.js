@@ -23,6 +23,7 @@ class MapModal extends Component {
     open: false,
     coords: {},
     marker: null,
+    name: '',
   };
 
   handleOpen = () => {
@@ -33,14 +34,15 @@ class MapModal extends Component {
         marker: {
           lat: this.props.coords.latitude,
           lng: this.props.coords.longitude,
-          name: this.props.coords.name,
         },
+        name: this.props.name,
       });
     } else {
       navigator.geolocation.getCurrentPosition(location => {
         this.setState({
           open: true,
           coords: location.coords,
+          name: this.props.name,
         });
       });
     }
@@ -55,7 +57,7 @@ class MapModal extends Component {
   handleUpdateMarker = ({ lat, lng }) => {
     this.setState(state => {
       return {
-        marker: { lat, lng, name: state.marker.name },
+        marker: { lat, lng },
       }
     })
   };
@@ -67,7 +69,7 @@ class MapModal extends Component {
 
   render() {
     const { showModal, id, form, classes, onApply } = this.props;
-    const { open, marker } = this.state;
+    const { open, marker, name } = this.state;
     const { latitude, longitude } = this.state.coords;
     return (
       <Modal
@@ -83,7 +85,7 @@ class MapModal extends Component {
         <Modal.Content>
           <GMap
             defaultCenter={{ lat: latitude, lng: longitude }}
-            markers={marker ? [marker] : []}
+            markers={marker ? [{ ...marker, name }] : []}
             onUpdateMarker={this.handleUpdateMarker}
           />
         </Modal.Content>

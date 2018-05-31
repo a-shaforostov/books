@@ -13,4 +13,7 @@ const controller = Controller(app, {
 const autologin = controller.getSignal('autologin');
 autologin({ silent: true });
 
+const startConversation = controller.getSignal('publicModule.startStep');
+startConversation();
+
 export default controller;

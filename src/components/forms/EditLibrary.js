@@ -45,7 +45,7 @@ class EditLibrary extends Component {
       this.props.updateField({ form: 'libraries', name: 'address', value: library.address });
       this.props.updateField({ form: 'libraries', name: 'lat', value: library.lat });
       this.props.updateField({ form: 'libraries', name: 'lng', value: library.lng });
-      this.props.updateField({ form: 'published', name: 'isNew', value: false });
+      this.props.updateField({ form: 'libraries', name: 'isNew', value: false });
     }
   };
 
@@ -104,7 +104,8 @@ class EditLibrary extends Component {
               </Form.Field>
               {/*<Button type="button" className={classes.mapButton}><Icon name="map outline" size="large" />Карта</Button>*/}
               <MapModal
-                coords={form.lat.value && form.lng.value && { latitude: +form.lat.value, longitude: +form.lng.value, name: form.name.value }}
+                coords={form.lat.value && form.lng.value && { latitude: +form.lat.value, longitude: +form.lng.value }}
+                name={form.name.value}
                 onApply={this.handleApplyCoords}
               />
             </Form.Group>

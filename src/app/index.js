@@ -6,6 +6,7 @@ import { state } from 'cerebral/tags';
 import { hashProvider, longPromise } from "./providers";
 import { authenticate } from './factories';
 import router from './router';
+import publicModule from './publicModule';
 
 import avatar from '../assets/avatar.jpg';
 import avatar2 from '../assets/girl.jpg';
@@ -55,7 +56,7 @@ export default Module({
         address: { value: '', isRequired: true },
         lat: { value: '', validationRules: [/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,20}$/] },
         lng: { value: '', validationRules: [/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,20}$/] },
-        isNew: { defaultValue: true },
+        isNew: { value: true, defaultValue: true },
       },
       published: {
         id: { value: '', defaultValue: '', isRequired: true, validationRules: ['existance:published']},
@@ -281,6 +282,7 @@ export default Module({
     resetEditForm: sequences.resetEditForm,
     postEntity: sequences.postEntity,
     removeFromLibraries: sequences.removeFromLibraries,
+    putInLibrary: sequences.putInLibrary,
   },
   providers: {
     hash: hashProvider,
@@ -309,5 +311,8 @@ export default Module({
       }
     }),
   },
-  modules: { router },
+  modules: {
+    router,
+    publicModule,
+  },
 });

@@ -9,6 +9,7 @@ import User from './User';
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
+import back from '../assets/back2.jpg';
 
 const styles = {
   header: {
@@ -16,8 +17,13 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'wrap',
-    backgroundColor: 'rgba(199, 146, 114, 0.7)!important',
+    backgroundImage: `url(${back})!important`,
     flexShrink: 0,
+    backgroundPositionY: 'center',
+    backgroundRepeatX: 'no-repeat',
+    backgroundSize: 'cover',
+    border: 'none',
+    borderRadius: 0,
   },
   logo: {
     display: 'flex',
@@ -33,8 +39,13 @@ const styles = {
   menu: {
     marginLeft: '30px!important',
   },
-  inputFile: {
-
+  '@global .page-header .button': {
+    border: '2px solid black',
+    backgroundColor: 'transparent',
+  },
+  '@global .page-header .button:hover': {
+    backgroundColor: '#CACBCD',
+    background: 'linear-gradient(to bottom, rgba(242,246,248,1) 0%, rgba(216,225,231,1) 47%, rgba(181,198,208,1) 93%, rgba(224,239,249,1) 100%)',
   },
 };
 
@@ -63,7 +74,7 @@ class Header extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Segment className={classes.header}>
+      <Segment className={`${classes.header} page-header`}>
         <div className={classes.group}>
           <a href="/" className={classes.logo}>
             <img src={logo} alt="logo"/>&nbsp;&nbsp;&nbsp;

@@ -11,8 +11,10 @@ export default {
   },
   bookSel: {
     backgroundColor: 'rgba(255,255,255,0.65)!important',
-    // backgroundColor: 'white!important',
     fontWeight: '700',
+  },
+  draggingBook: {
+    color: 'orangered',
   },
   isbn: {
     fontSize: '87%',

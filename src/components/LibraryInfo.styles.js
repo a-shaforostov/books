@@ -69,11 +69,15 @@ export default {
     overflowX: 'hidden',
     overflowY: 'auto',
     flexGrow: 1,
+    border: '2px dotted transparent',
   },
   interiorEmpty: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    border: '2px dotted brown',
+  },
+  interiorDrop: {
     border: '2px dotted brown',
   },
   '@global .ui.segments:not(.horizontal) .segment:first-child': {
@@ -130,6 +134,8 @@ export default {
   },
   footer: {
     margin: '10px 0 0px',
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
   footerButton: {
     cursor: 'pointer',

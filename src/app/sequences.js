@@ -1,4 +1,4 @@
-import { set, toggle, unset, when, wait } from "cerebral/operators";
+import { set, push, unset, when, wait } from "cerebral/operators";
 import { resetForm } from '@cerebral/forms/operators';
 import { redirect } from '@cerebral/router/operators';
 import { props, state } from "cerebral/tags";
@@ -84,4 +84,4 @@ export const editEntity = [
 
 export const resetEditForm = resetForm(state`${props`form`}`);
 
-
+export const putInLibrary = actions.putInLibrary;

@@ -1,5 +1,3 @@
-import { set, toggle, unset, when, wait } from "cerebral/operators";
-
 export const autologin = ({ state, path, props }) => {
   if (window.PasswordCredential) {
     const user = state.get('user');
@@ -175,4 +173,16 @@ export const removeFromLibraries = ({ state, props }) => {
   const id = props.id;
   const books = state.get('data.books');
   state.set('data.books', books.filter(book => book.isbn !== id));
+};
+
+export const putInLibrary = ({ state, props }) => {
+  const id = Date.now();
+  const isbn = props.id;
+  const library = state.get('env.libraries.selected');
+  state.push('data.books', {
+    id,
+    isbn,
+    library,
+    reserved: false,
+  });
 };
