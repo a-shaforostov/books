@@ -109,7 +109,10 @@ class Chat extends Component {
       case 'startBook':
         this.props.findBooks({ criteria: value });
         break;
+      default:
+        this.props.justTextStep({ value });
     }
+    this.setState({ input: '' });
   };
 
   scrollToBottom(el, scrollDuration) {
@@ -146,7 +149,6 @@ class Chat extends Component {
 
   render() {
     const { classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks } = this.props;
-    // this.myRef.current.scrollToBottom();
     return (
       <div className={classes.chat}>
         <div className={classes.bot}>
@@ -232,6 +234,7 @@ export default connect(
     stopStep: signal`publicModule.stopStep`,
     startBookStep: signal`publicModule.startBookStep`,
     findBooks: signal`publicModule.findBooks`,
+    justTextStep: signal`publicModule.justTextStep`,
   },
   injectSheet(styles)(Chat),
 );

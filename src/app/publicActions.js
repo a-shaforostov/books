@@ -35,6 +35,28 @@ export const startBookStep = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+export const justTextStep = ({ state, props }) => {
+  const value = {
+    id: Date.now(),
+    author: 'guest',
+    time: timeFormat(new Date()),
+    content: props.value,
+  };
+  state.push('publicModule.dialog', value);
+  props.stepId = value.id;
+};
+
+export const unknownStep = ({ state, props }) => {
+  const value = {
+    id: Date.now(),
+    author: 'bot',
+    time: timeFormat(new Date()),
+    type: 'unknown',
+  };
+  state.push('publicModule.dialog', value);
+  props.stepId = value.id;
+};
+
 export const startSearchBook = ({ state, props }) => {
   const value = {
     id: Date.now(),
@@ -85,6 +107,12 @@ export const findBooks = ({ state, props, path }) => {
 
   // books in libraries that fit criteria
   const rawBooks = books.filter(book => publishedBooks.some(pb => pb.id === book.isbn));
+
+  // fill names
+  rawBooks.forEach(book => book.name = publishedBooks.find(pb => pb.id === book.isbn).name);
+
+  // order
+  rawBooks.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
 
   // group by libraries
   const groupedBooks = rawBooks.reduce((acc, book) => {

@@ -13,6 +13,13 @@ const styles = {
     width: '220px',
     padding: '4px 5px',
   },
+  library: {
+    fontSize: '90%',
+  },
+  book: {
+    fontSize: '90%',
+    marginLeft: '20px',
+  },
 } ;
 
 export const stepInitialEl = ({ signals, isActive }) => {
@@ -47,6 +54,14 @@ export const stepStartBookEl = () => {
   return (
     <div>
       <div>Введіть текст для пошуку. Це може бути фрагмент назви, автора або ISBN</div>
+    </div>
+  )
+};
+
+export const unknownEl = () => {
+  return (
+    <div>
+      <div>Я Вас не розумію. Керуйтеся настановами.</div>
     </div>
   )
 };
@@ -97,12 +112,23 @@ export const foundBooksEl = ({ signals, isActive, data }) => {
           data &&
           Object.keys(data).map(key => (
             <div key={key}>
-              <div>
+              <div  style={styles.library}>
                 {data[key].library.name} ({data[key].count})
               </div>
               <div>
                 {
-
+                  data[key].books.map(book => {
+                    return (
+                      <div key={book.id}  style={styles.book}>
+                        {book.name}&nbsp;
+                        [{
+                          book.reserved
+                          ? book.reserved
+                          : isActive ? <a href="#">Замовити</a> : <span>Замовити</span>
+                        }]
+                      </div>
+                    )
+                  })
                 }
               </div>
             </div>
@@ -124,4 +150,5 @@ export default {
   result: stepResultEl,
   bookNotFound: bookNotFoundEl,
   foundBooks: foundBooksEl,
+  unknown: unknownEl,
 };

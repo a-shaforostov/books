@@ -231,7 +231,7 @@ export default Module({
           id: '12',
           isbn: '978-617-12-4738-3',
           library: '3',
-          reserved: null,
+          reserved: '21:38:10',
         },
         {
           id: '13',

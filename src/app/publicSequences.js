@@ -15,6 +15,18 @@ export const greetStep = [
   set(state`publicModule.currentStepId`, props`stepId`),
 ];
 
+export const justTextStep = [
+  actions.justTextStep,
+  set(state`publicModule.currentStep`, 'justText'),
+  set(state`publicModule.currentStepId`, props`stepId`),
+  actions.unknownStep,
+  set(state`publicModule.currentStep`, 'unknown'),
+  set(state`publicModule.currentStepId`, props`stepId`),
+  actions.greetStep,
+  set(state`publicModule.currentStep`, 'greet'),
+  set(state`publicModule.currentStepId`, props`stepId`),
+];
+
 export const startBookStep = [
   actions.startBookStep,
   set(state`publicModule.currentStep`, 'startBook'),
