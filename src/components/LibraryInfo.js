@@ -6,6 +6,7 @@ import { state, signal } from 'cerebral/tags';
 import classnames from 'classnames';
 import flow from 'lodash/flow';
 import { DropTarget } from 'react-dnd';
+import { isReserveActive, timeFormatHMS } from '../app/utils';
 
 import libraryCompute from '../computed/library';
 
@@ -94,9 +95,9 @@ class LibraryInfo extends Component {
                                 <span>Резерв до:&nbsp;</span>
                                 <span className={classes.bookData}>
                               {
-                                book.reserved ?
-                                  <span style={{color: 'red'}}>{book.reserved}</span> :
-                                  <span style={{color: 'green'}}>Вільна</span>
+                                book.reserved && isReserveActive(book.reserved)
+                                  ? <span style={{color: 'red'}}>{timeFormatHMS(book.reserved)}</span>
+                                  : <span style={{color: 'green'}}>Вільна</span>
                               }
                             </span>
                               </div>

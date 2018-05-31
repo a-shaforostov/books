@@ -9,6 +9,10 @@ export default Module({
     currentStepId: null,
     steps: ['start', 'stop', 'greet', 'startNearest', 'startLibrary', 'startBook', 'nearest', 'library', 'book'],
     dialog: [],
+    reserve: {
+      name: null,
+      id: null,
+    }
   },
   signals: {
     startStep: sequences.startStep,
@@ -22,6 +26,9 @@ export default Module({
     // bookStep: sequences.bookStep,
     findBooks: sequences.findBooks,
     justTextStep: sequences.justTextStep,
+    reserveBookRequest: sequences.reserveBookRequest,
+    reserveBookCancel: sequences.reserveBookCancel,
+    reserveBookApprove: sequences.reserveBookApprove,
   },
   providers: {},
   modules: {},

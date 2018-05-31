@@ -1,12 +1,10 @@
-function timeFormat(date) {
-  return `${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;
-}
+import { timeFormatHM, timeFormatHMS } from './utils';
 
 export const startStep = ({ state, props }) => {
   const value = {
     id: Date.now(),
     author: 'bot',
-    time: timeFormat(new Date()),
+    time: timeFormatHM(new Date()),
     type: 'start',
   };
   state.push('publicModule.dialog', value);
@@ -17,7 +15,7 @@ export const greetStep = ({ state, props }) => {
   const value = {
     id: Date.now(),
     author: 'bot',
-    time: timeFormat(new Date()),
+    time: timeFormatHM(new Date()),
     type: 'greet',
   };
   state.push('publicModule.dialog', value);
@@ -28,7 +26,7 @@ export const startBookStep = ({ state, props }) => {
   const value = {
     id: Date.now(),
     author: 'bot',
-    time: timeFormat(new Date()),
+    time: timeFormatHM(new Date()),
     type: 'startBook',
   };
   state.push('publicModule.dialog', value);
@@ -39,7 +37,7 @@ export const justTextStep = ({ state, props }) => {
   const value = {
     id: Date.now(),
     author: 'guest',
-    time: timeFormat(new Date()),
+    time: timeFormatHM(new Date()),
     content: props.value,
   };
   state.push('publicModule.dialog', value);
@@ -50,7 +48,7 @@ export const unknownStep = ({ state, props }) => {
   const value = {
     id: Date.now(),
     author: 'bot',
-    time: timeFormat(new Date()),
+    time: timeFormatHM(new Date()),
     type: 'unknown',
   };
   state.push('publicModule.dialog', value);
@@ -61,7 +59,7 @@ export const startSearchBook = ({ state, props }) => {
   const value = {
     id: Date.now(),
     author: 'guest',
-    time: timeFormat(new Date()),
+    time: timeFormatHM(new Date()),
     content: `Шукаємо книги за текстом: ${props.criteria}`,
   };
   state.push('publicModule.dialog', value);
@@ -72,7 +70,7 @@ export const bookNotFound = ({ state, props }) => {
   const value = {
     id: Date.now(),
     author: 'bot',
-    time: timeFormat(new Date()),
+    time: timeFormatHM(new Date()),
     type: 'bookNotFound',
   };
   state.push('publicModule.dialog', value);
@@ -83,7 +81,7 @@ export const foundBooks = ({ state, props }) => {
   const value = {
     id: Date.now(),
     author: 'bot',
-    time: timeFormat(new Date()),
+    time: timeFormatHM(new Date()),
     type: 'foundBooks',
     data: props.result,
   };
@@ -108,8 +106,12 @@ export const findBooks = ({ state, props, path }) => {
   // books in libraries that fit criteria
   const rawBooks = books.filter(book => publishedBooks.some(pb => pb.id === book.isbn));
 
-  // fill names
-  rawBooks.forEach(book => book.name = publishedBooks.find(pb => pb.id === book.isbn).name);
+  // fill names and authors
+  rawBooks.forEach(book => {
+    const pb = publishedBooks.find(pb => pb.id === book.isbn);
+    book.name = pb.name;
+    book.author = pb.author;
+  });
 
   // order
   rawBooks.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
@@ -125,6 +127,19 @@ export const findBooks = ({ state, props, path }) => {
       },
     }
   }, {});
+
+  // const groupedBooks = {};
+  // rawBooks.forEach(book => {
+  //   if (groupedBooks[book.library]) {
+  //     if (groupedBooks[book.library].books) {
+  //       groupedBooks[book.library].books.push(book);
+  //     } else {
+  //       groupedBooks[book.library].books = [book];
+  //     }
+  //   } else {
+  //     groupedBooks[book.library] = { books: [] }
+  //   }
+  // });
 
   // update libraries with data and books number
   Object.keys(groupedBooks).forEach(item => {
@@ -143,3 +158,35 @@ export const findBooks = ({ state, props, path }) => {
     return path.fail();
   }
 };
+
+export const reserveBookApprove = ({ state, props }) => {
+  const books = state.get('data.books');
+  const id = state.get('publicModule.reserve.id');
+  const name = state.get('publicModule.reserve.name');
+  const now = new Date();
+  const time = new Date(now.getTime() + 5*60*1000);
+  const updated = books.map(book => book.id === id ? { ...book, reserved: time } : book);
+  state.set('data.books', updated);
+
+  const value = {
+    id: Date.now(),
+    author: 'bot',
+    time: timeFormatHM(new Date()),
+    type: 'bookReserved',
+    data: name,
+  };
+  state.push('publicModule.dialog', value);
+  props.stepId = value.id;
+};
+
+
+
+// export const updateFoundBooks = ({ state }) => {
+//   const found = state.get('foundBooks');
+//   const books = state.get('data.books');
+//   Object.keys(found).forEach(key => {
+//     const src = books.find(srcBook => srcBook.id === found[key].id);
+//     debugger;
+//     found[key].reserved = src.reserved;
+//   })
+// };

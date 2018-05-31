@@ -1,6 +1,7 @@
 import React from 'react';
 import { Segment, Button } from 'semantic-ui-react';
 import LibraryInfo from "./LibraryInfo";
+import { isReserveActive, timeFormatHMS } from '../app/utils';
 
 const styles = {
   wrapper: {
@@ -77,6 +78,17 @@ export const bookNotFoundEl = ({ signals, isActive }) => {
   )
 };
 
+export const bookReservedEl = ({ signals, isActive, data }) => {
+  return (
+    <div>
+      <div>Книга {data} зарезервована</div>
+      <div style={{...styles.row, ...styles.wrapper}}>
+        <Button positive style={styles.button} disabled={!isActive} onClick={() => signals.greetStep()}>Продовжити</Button>
+      </div>
+    </div>
+  )
+};
+
 export const stepResultEl = ({ libraries, books }) => {
   return (
     <div>
@@ -120,11 +132,21 @@ export const foundBooksEl = ({ signals, isActive, data }) => {
                   data[key].books.map(book => {
                     return (
                       <div key={book.id}  style={styles.book}>
-                        {book.name}&nbsp;
+                        {book.name}&nbsp;({book.author})&nbsp;
                         [{
-                          book.reserved
-                          ? book.reserved
-                          : isActive ? <a href="#">Замовити</a> : <span>Замовити</span>
+                          book.reserved && isReserveActive(book.reserved)
+                          ? timeFormatHMS(book.reserved)
+                          : isActive
+                            ? <a
+                                href="#"
+                                onClick={e => {
+                                  e.preventDefault();
+                                  signals.reserveBookRequest({ id: book.id, name: book.name });
+                                }}
+                              >
+                                Замовити
+                              </a>
+                            : <span>Замовити</span>
                         }]
                       </div>
                     )
@@ -151,4 +173,5 @@ export default {
   bookNotFound: bookNotFoundEl,
   foundBooks: foundBooksEl,
   unknown: unknownEl,
+  bookReserved: bookReservedEl,
 };

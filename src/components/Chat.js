@@ -5,6 +5,7 @@ import injectSheet from 'react-jss';
 import classnames from 'classnames';
 
 import stepElements from './steps';
+import QRModal from './forms/QRModal';
 
 import { Segment, Button, Input } from 'semantic-ui-react';
 
@@ -148,7 +149,7 @@ class Chat extends Component {
   };
 
   render() {
-    const { classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks } = this.props;
+    const { classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks, reserve, reserveBookRequest } = this.props;
     return (
       <div className={classes.chat}>
         <div className={classes.bot}>
@@ -193,6 +194,7 @@ class Chat extends Component {
                                 greetStep,
                                 stopStep,
                                 startBookStep,
+                                reserveBookRequest,
                               },
                               isActive: message.id === stepId,
                               data: message.data,
@@ -215,10 +217,10 @@ class Chat extends Component {
               onKeyUp={this.handleKeyUp}
               placeholder="Введіть текст та натисніть Enter"
             />
+            <QRModal id={reserve.id} name={reserve.name} />
+
           </div>
         </div>
-
-
       </div>
     )
   }
@@ -230,11 +232,13 @@ export default connect(
     stepId: state`publicModule.currentStepId`,
     currentStep: state`publicModule.currentStep`,
     foundBooks: state`foundBooks`,
+    reserve: state`publicModule.reserve`,
     greetStep: signal`publicModule.greetStep`,
     stopStep: signal`publicModule.stopStep`,
     startBookStep: signal`publicModule.startBookStep`,
     findBooks: signal`publicModule.findBooks`,
     justTextStep: signal`publicModule.justTextStep`,
+    reserveBookRequest: signal`publicModule.reserveBookRequest`,
   },
   injectSheet(styles)(Chat),
 );

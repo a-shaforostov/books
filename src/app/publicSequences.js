@@ -54,3 +54,21 @@ export const findBooks = [
     ],
   },
 ];
+
+export const reserveBookRequest = [
+  set(state`publicModule.reserve.id`, props`id`),
+  set(state`publicModule.reserve.name`, props`name`),
+];
+
+export const reserveBookCancel = [
+  set(state`publicModule.reserve.id`, null),
+  set(state`publicModule.reserve.name`, null),
+];
+
+export const reserveBookApprove = [
+  actions.reserveBookApprove,
+  set(state`publicModule.reserve.id`, null),
+  set(state`publicModule.reserve.name`, null),
+  set(state`publicModule.currentStep`, 'bookReserved'),
+  set(state`publicModule.currentStepId`, props`stepId`),
+];
