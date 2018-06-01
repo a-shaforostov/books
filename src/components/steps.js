@@ -16,10 +16,14 @@ const styles = {
   },
   library: {
     fontSize: '90%',
+    borderBottom: '1px solid gray',
+    fontWeight: '700',
+    marginTop: '5px',
   },
   book: {
     fontSize: '90%',
     marginLeft: '20px',
+    borderBottom: '1px solid gray',
   },
 } ;
 
@@ -115,7 +119,7 @@ export const stepResultEl = ({ libraries, books }) => {
   )
 };
 
-export const foundBooksEl = ({ signals, isActive, data }) => {
+export const foundBooksEl = ({ signals, isActive, data, books }) => {
   return (
     <div>
       <div>Результат пошуку:</div>
@@ -130,6 +134,8 @@ export const foundBooksEl = ({ signals, isActive, data }) => {
               <div>
                 {
                   data[key].books.map(book => {
+                    const res = books.find(item => item.id === book.id);
+                    book.reserved = res ? res.reserved : book.reserved;
                     return (
                       <div key={book.id}  style={styles.book}>
                         {book.name}&nbsp;({book.author})&nbsp;

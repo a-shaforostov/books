@@ -1,4 +1,5 @@
 import { timeFormatHM, timeFormatHMS } from './utils';
+import { reservationTime } from './constants';
 
 export const startStep = ({ state, props }) => {
   const value = {
@@ -164,19 +165,19 @@ export const reserveBookApprove = ({ state, props }) => {
   const id = state.get('publicModule.reserve.id');
   const name = state.get('publicModule.reserve.name');
   const now = new Date();
-  const time = new Date(now.getTime() + 5*60*1000);
+  const time = new Date(now.getTime() + reservationTime*60*1000);
   const updated = books.map(book => book.id === id ? { ...book, reserved: time } : book);
   state.set('data.books', updated);
 
-  const value = {
-    id: Date.now(),
-    author: 'bot',
-    time: timeFormatHM(new Date()),
-    type: 'bookReserved',
-    data: name,
-  };
-  state.push('publicModule.dialog', value);
-  props.stepId = value.id;
+  // const value = {
+  //   id: Date.now(),
+  //   author: 'bot',
+  //   time: timeFormatHM(new Date()),
+  //   type: 'bookReserved',
+  //   data: name,
+  // };
+  // state.push('publicModule.dialog', value);
+  // props.stepId = value.id;
 };
 
 

@@ -10,6 +10,7 @@ import QRModal from './forms/QRModal';
 import { Segment, Button, Input } from 'semantic-ui-react';
 
 import botImage from '../assets/bot.png';
+import {foundBooks} from "../app/publicActions";
 
 const styles = {
   chat: {
@@ -73,7 +74,7 @@ const styles = {
   text: {
     padding: '15px 10px 10px',
     borderRadius: '7px',
-    textAlign: 'justify',
+    // textAlign: 'justify',
   },
   textBot: {
     backgroundColor: 'aliceblue',
@@ -144,14 +145,27 @@ class Chat extends Component {
   };
 
   componentDidMount() {
+    const updateBooksState = () => {
+      // check book updates for last message
+      const lastDialog = this.props.dialog.slice(-1);
+      // if (lastDialog[0].type === 'foundBooks')
+      this.forceUpdate();
+    };
+
+    this.interval = setInterval(updateBooksState, 5000);
+
     if (this.myRef.current)
       this.scrollToBottom(this.myRef.current, 500);
   };
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
-    const { classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks, reserve, reserveBookRequest } = this.props;
+    const { reRenderKey, classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks, reserve, reserveBookRequest, books } = this.props;
     return (
-      <div className={classes.chat}>
+      <div className={classes.chat} key={reRenderKey}>
         <div className={classes.bot}>
           <img src={botImage} alt="bot"/>
         </div>
@@ -198,6 +212,7 @@ class Chat extends Component {
                               },
                               isActive: message.id === stepId,
                               data: message.data,
+                              books,
                             })
                             :
                             message.content
@@ -228,6 +243,7 @@ class Chat extends Component {
 
 export default connect(
   {
+    books: state`data.books`,
     dialog: state`publicModule.dialog`,
     stepId: state`publicModule.currentStepId`,
     currentStep: state`publicModule.currentStep`,

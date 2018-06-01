@@ -69,6 +69,6 @@ export const reserveBookApprove = [
   actions.reserveBookApprove,
   set(state`publicModule.reserve.id`, null),
   set(state`publicModule.reserve.name`, null),
-  set(state`publicModule.currentStep`, 'bookReserved'),
-  set(state`publicModule.currentStepId`, props`stepId`),
+  // set(state`publicModule.currentStep`, 'bookReserved'),
+  // set(state`publicModule.currentStepId`, props`stepId`),
 ];

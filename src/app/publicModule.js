@@ -12,7 +12,8 @@ export default Module({
     reserve: {
       name: null,
       id: null,
-    }
+    },
+    reRender: 0,
   },
   signals: {
     startStep: sequences.startStep,
