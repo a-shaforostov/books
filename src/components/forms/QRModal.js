@@ -19,13 +19,28 @@ const styles = {
 };
 
 class QRModal extends Component {
+  qrRef = React.createRef();
+
   handleClose = () => {
     this.props.reserveBookCancel();
   };
 
   handleApprove = () => {
+    const { name, libName } = this.props;
     this.props.reserveBookApprove();
+    this.downloadQR({ name, libName });
   };
+
+  downloadQR = ({ name, libName }) => {
+    // serialize svg in string
+    const serializer = new XMLSerializer();
+    let source = serializer.serializeToString(this.qrRef.current);
+    source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+    //convert svg source to URI data scheme.
+    const data = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
+    this.props.downloadFile({ data, filename: `${name} (${libName}).svg` });
+  };
+
 
   // handleOpen = id => {
   //   const { library, resetEditForm } = this.props;
@@ -54,17 +69,25 @@ class QRModal extends Component {
   // };
 
   render() {
-    const { showModal, id, form, classes, name } = this.props;
+    const { showModal, id, form, classes, name, libName } = this.props;
     return (
       <Modal size="tiny" open={!!id} onClose={this.handleClose}>
         <Modal.Header>
           <div>Замовлення книги</div>
+          <div className={classes.subHeader}>{libName}</div>
           <div className={classes.subHeader}>{name}</div>
         </Modal.Header>
         <Modal.Content className={classes.content}>
           {
             id &&
-            <QRCode value={id} />
+            <svg
+              width="128"
+              height="128"
+              xmlns="http://www.w3.org/2000/svg"
+              ref={this.qrRef}
+            >
+              <QRCode value={id} renderAs="svg" />
+            </svg>
           }
         </Modal.Content>
         <Modal.Actions>
@@ -83,6 +106,7 @@ export default connect(
     // postEntity: signal`postEntity`,
     reserveBookCancel: signal`publicModule.reserveBookCancel`,
     reserveBookApprove: signal`publicModule.reserveBookApprove`,
+    downloadFile: signal`downloadFile`,
   },
   injectSheet(styles)(QRModal),
 );

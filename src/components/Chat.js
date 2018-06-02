@@ -232,7 +232,7 @@ class Chat extends Component {
               onKeyUp={this.handleKeyUp}
               placeholder="Введіть текст та натисніть Enter"
             />
-            <QRModal id={reserve.id} name={reserve.name} />
+            <QRModal id={reserve.id} name={reserve.name} libName={reserve.libName} />
 
           </div>
         </div>

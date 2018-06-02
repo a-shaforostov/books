@@ -147,7 +147,7 @@ export const foundBooksEl = ({ signals, isActive, data, books }) => {
                                 href="#"
                                 onClick={e => {
                                   e.preventDefault();
-                                  signals.reserveBookRequest({ id: book.id, name: book.name });
+                                  signals.reserveBookRequest({ id: book.id, name: book.name, libName: data[key].library.name });
                                 }}
                               >
                                 Замовити

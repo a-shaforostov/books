@@ -210,7 +210,7 @@ export default Module({
           reserved: null,
         },
         {
-          id: '2',
+          id: '287542348726',
           isbn: '978-617-12-4738-3',
           library: '3',
           reserved: null,

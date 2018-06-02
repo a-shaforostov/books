@@ -11,6 +11,7 @@ export default Module({
     dialog: [],
     reserve: {
       name: null,
+      libName: null,
       id: null,
     },
     reRender: 0,
