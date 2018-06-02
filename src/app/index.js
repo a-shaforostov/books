@@ -257,6 +257,30 @@ export default Module({
           library: '3',
           reserved: null,
         },
+        {
+          id: '17',
+          isbn: '978-617-12-4676-8',
+          library: '1',
+          reserved: null,
+        },
+        {
+          id: '18',
+          isbn: '978-617-12-4676-8',
+          library: '2',
+          reserved: null,
+        },
+        {
+          id: '19',
+          isbn: '978-617-12-4676-8',
+          library: '4',
+          reserved: null,
+        },
+        {
+          id: '199',
+          isbn: '978-617-12-4676-8',
+          library: '5',
+          reserved: null,
+        },
       ],
     }
   },

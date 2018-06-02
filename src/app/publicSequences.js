@@ -10,6 +10,14 @@ export const startStep = [
 ];
 
 export const greetStep = [
+  when(state`publicModule.myPosition`, pos => !!pos),
+  {
+    true: [],
+    false: [
+      actions.geolocationDenied,
+      set(state`publicModule.myPosition`, { lat: 50.45466, lng: 30.5238 }),
+    ],
+  },
   actions.greetStep,
   set(state`publicModule.currentStep`, 'greet'),
   set(state`publicModule.currentStepId`, props`stepId`),
@@ -81,4 +89,13 @@ export const showAllLibsStep = [
 export const showOneLib = [
   set(state`publicModule.mapLib`, props`lib`),
   set(state`publicModule.mapStyle`, `oneLibMapStyle`),
+];
+
+export const setMyPosition = [
+  ({ props }) => console.log(props),
+  when(props`position`, loc => !!loc),
+  {
+    true: set(state`publicModule.myPosition`, props`position`),
+    false: set(state`publicModule.myPosition`, null),
+  },
 ];

@@ -10,3 +10,16 @@ export const isReserveActive = (time) => {
   const now = new Date();
   return time > now;
 };
+
+export const formatDistance = dist => {
+  const km = Math.floor(dist / 1000);
+  const m = Math.round(dist - km * 1000);
+  const parts = [];
+  if (km > 0) parts.push(`${km} км `);
+  if (km < 10) {
+    parts.push(`${m} м`);
+  } else {
+    parts.unshift('~');
+  }
+  return parts.join('');
+};

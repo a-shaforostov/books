@@ -28,6 +28,7 @@ class GMap extends Component {
 
     switch (mapStyle) {
       case 'allLibsMapStyle':
+        debugger;
         this.mapElement.current.panTo(defaultCenter);
         this.showAllLibs();
         break;

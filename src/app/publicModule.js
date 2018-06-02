@@ -16,6 +16,7 @@ export default Module({
     },
     reRender: 0,
     mapStyle: null,
+    myPosition: null,
   },
   signals: {
     startStep: sequences.startStep,
@@ -34,6 +35,7 @@ export default Module({
     reserveBookCancel: sequences.reserveBookCancel,
     reserveBookApprove: sequences.reserveBookApprove,
     showOneLib: sequences.showOneLib,
+    setMyPosition: sequences.setMyPosition,
   },
   providers: {},
   modules: {},

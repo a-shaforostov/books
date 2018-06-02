@@ -23,6 +23,17 @@ export const greetStep = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+export const geolocationDenied = ({ state, props }) => {
+  const value = {
+    id: Math.random(),
+    author: 'bot',
+    time: timeFormatHM(new Date()),
+    type: 'geolocationDenied',
+  };
+  state.push('publicModule.dialog', value);
+  props.stepId = value.id;
+};
+
 export const startBookStep = ({ state, props }) => {
   const value = {
     id: Date.now(),
@@ -172,10 +183,35 @@ export const findBooks = ({ state, props, path }) => {
     libNode.library = lib;
   });
 
-  state.set('foundBooks', groupedBooks);
-  props.result = groupedBooks;
+  // calc distance in place it in object
+  if (window.google) {
+    const myPosition = state.get('publicModule.myPosition');
+    const updateDistance = libs => {
+      const geom = window.google.maps.geometry.spherical;
+      for (let lib in libs) {
+        const from = new window.google.maps.LatLng(myPosition);
+        const to = new window.google.maps.LatLng({
+          lat: +libs[lib].library.lat,
+          lng: +libs[lib].library.lng,
+        });
+        libs[lib].dist = geom.computeDistanceBetween(from, to);
+      }
+    };
+    updateDistance(groupedBooks);
+  }
 
-  if (Object.keys(groupedBooks).length) {
+  // build array that ordered by distance (or by name if geolocation is disabled)
+  const arrBooks = Object.keys(groupedBooks).map(key => groupedBooks[key]);
+  if (window.google) {
+    arrBooks.sort((a, b) => a.dist - b.dist);
+  } else {
+    arrBooks.sort((a, b) => a.library.name.toLowerCase() > b.library.name.toLowerCase() ? 1 : -1);
+  }
+
+  state.set('foundBooks', arrBooks);
+  props.result = arrBooks;
+
+  if (arrBooks.length) {
     return path.success();
   } else {
     return path.fail();

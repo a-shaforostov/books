@@ -2,6 +2,7 @@ import React from 'react';
 import { Segment, Button } from 'semantic-ui-react';
 import LibraryInfo from "./LibraryInfo";
 import { isReserveActive, timeFormatHMS } from '../app/utils';
+import { formatDistance } from '../app/utils';
 
 const styles = {
   wrapper: {
@@ -24,6 +25,11 @@ const styles = {
     fontSize: '90%',
     marginLeft: '20px',
     borderBottom: '1px solid gray',
+  },
+  dist: {
+    color: 'green',
+    fontSize: '90%',
+    whiteSpace: 'nowrap',
   },
 };
 
@@ -58,7 +64,16 @@ export const stepStartLibraryEl = () => {
 export const stepStartBookEl = () => {
   return (
     <div>
-      <div>Введіть текст для пошуку. Це може бути фрагмент назви, автора або ISBN</div>
+      <div>Введіть текст для пошуку. Це може бути фрагмент назви, автора або ISBN. Знайдені книжки будуть згруповані за бібліотеками.
+      Першими будуть виведені бібліотеки, найближчі до Вас.</div>
+    </div>
+  )
+};
+
+export const geolocationDeniedEl = () => {
+  return (
+    <div>
+      <div>Нажаль, ми не змогли визначити Ваші координати. Дозвольте додатку отримати Ваше розташування. Інакше ми не зможемо надати Вам найзручніші пропозиції. Наразі вважатимемо, що ви в центрі Києва :) </div>
     </div>
   )
 };
@@ -131,11 +146,12 @@ export const stepResultEl = ({ libraries, books }) => {
   )
 };
 
-export const foundBooksEl = ({ signals, isActive, data, books }) => {
+export const foundBooksEl = ({ signals, isActive, data, books, myPosition }) => {
   const handleLibClick = libId => e => {
     e.preventDefault();
-    // e.stopPropagation();
-    signals.showOneLib({ lib: data[libId].library });
+    const libObj = data.find(lib => lib.library.id === libId);
+    const lib = libObj ? libObj.library : {};
+    signals.showOneLib({ lib });
   };
 
   return (
@@ -144,14 +160,16 @@ export const foundBooksEl = ({ signals, isActive, data, books }) => {
       <div>
         {
           data &&
-          Object.keys(data).map(key => (
-            <div key={key}>
+          data.map(lib => (
+            <div key={lib.library.id}>
               <div  style={styles.library}>
-                <a href="#" title="Показати на карті" onClick={handleLibClick(key)}>{data[key].library.name}</a> ({data[key].count})
+                <a href="#" title="Показати на карті" onClick={handleLibClick(lib.library.id)}>{lib.library.name}</a>
+                <span title="Кількість книг, що знайдено в бібліотеці"> ({lib.count}) </span>
+                <span title="Відстань від бібліотеки" style={styles.dist}>{formatDistance(lib.dist)}</span>
               </div>
               <div>
                 {
-                  data[key].books.map(book => {
+                  lib.books.map(book => {
                     const res = books.find(item => item.id === book.id);
                     book.reserved = res ? res.reserved : book.reserved;
                     return (
@@ -165,7 +183,7 @@ export const foundBooksEl = ({ signals, isActive, data, books }) => {
                                 href="#"
                                 onClick={e => {
                                   e.preventDefault();
-                                  signals.reserveBookRequest({ id: book.id, name: book.name, libName: data[key].library.name });
+                                  signals.reserveBookRequest({ id: book.id, name: book.name, libName: lib.library.name });
                                 }}
                               >
                                 Замовити
@@ -199,4 +217,5 @@ export default {
   unknown: unknownEl,
   bookReserved: bookReservedEl,
   allLibsWasShown: allLibsWasShownEl,
+  geolocationDenied: geolocationDeniedEl,
 };

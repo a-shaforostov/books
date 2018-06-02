@@ -32,9 +32,17 @@ class MapPortal extends Component {
   mapRef = React.createRef();
 
   componentDidMount() {
+    const { setMyPosition } = this.props;
     navigator.geolocation.getCurrentPosition(location => {
       this.setState({
         coords: location.coords,
+      });
+
+      setMyPosition({
+        position: {
+          lat: location.coords.latitude,
+          lng: location.coords.longitude,
+        },
       });
     });
     // const PlacesService = window.google.maps.places.PlacesService;
@@ -66,9 +74,9 @@ class MapPortal extends Component {
       >
         <div className={classes.portal}>
           {
-            latitude && longitude &&
+            // latitude && longitude &&
             <GMap
-              defaultCenter={{lat: latitude, lng: longitude}}
+              defaultCenter={{lat: latitude || 50.45466, lng: longitude || 30.5238}}
               returnMarkers={this.returnMarkers}
               markers={this.state.markers}
               mapStyle={mapStyle}
@@ -87,6 +95,7 @@ export default connect(
     currentPage: state`currentPage`,
     mapStyle: state`publicModule.mapStyle`,
     mapLib: state`publicModule.mapLib`,
+    setMyPosition: signal`publicModule.setMyPosition`,
   },
   injectSheet(styles)(MapPortal),
 );
