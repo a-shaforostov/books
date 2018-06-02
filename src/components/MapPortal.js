@@ -29,6 +29,8 @@ class MapPortal extends Component {
     markers: [],
   };
 
+  mapRef = React.createRef();
+
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(location => {
       this.setState({
@@ -49,6 +51,8 @@ class MapPortal extends Component {
     })
   };
 
+  showAllLibs = () => this.mapRef.current && this.mapRef.current.showAllLibs();
+
   render() {
     const { classes } = this.props;
     const { latitude, longitude } = this.state.coords;
@@ -67,6 +71,7 @@ class MapPortal extends Component {
               defaultCenter={{lat: latitude, lng: longitude}}
               returnMarkers={this.returnMarkers}
               markers={this.state.markers}
+              // ref={this.mapRef}
             />
           }
         </div>

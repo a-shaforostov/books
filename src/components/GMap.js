@@ -24,37 +24,23 @@ class GMap extends Component {
   };
 
   componentDidMount() {
-    // const PlacesService = window.google.maps.places.PlacesService;
-    // debugger;
-    // const map = new window.google.maps.Map(this.mapElement.current, {
-    //   ...this.props,
-    //   defaultZoom: 14,
-    // });
-    //
-    // // const map = findDOMNode(this.mapElement.current);
-    // console.log(map);
-    // this.placesService = new PlacesService(this.mapElement.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
-    // debugger;
-    const PlacesService = window.google.maps.places.PlacesService;
-    this.placesService = new PlacesService(this.mapElement.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
-    const request = {
-      location: this.props.defaultCenter,
-      radius: '5000',
-      types: ['library']
-    };
-    this.placesService.nearbySearch(request, callback);
-    const { returnMarkers } = this.props;
-    function callback(results, status) {
-      // if (status == window.google.maps.places.PlacesServiceStatus.OK) {
-      returnMarkers(results);
-        // for (var i = 0; i < results.length; i++) {
-        //   var place = results[i];
-        //   console.log(results[i]);
-        // }
-      // }
-    }
-
   }
+
+  showAllLibs = () => {
+    return new Promise(resolve => {
+      const PlacesService = window.google.maps.places.PlacesService;
+      this.placesService = new PlacesService(this.mapElement.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+      const request = {
+        location: this.props.defaultCenter,
+        radius: '5000',
+        types: ['library']
+      };
+      this.placesService.nearbySearch(request, callback);
+      function callback(results, status) {
+        resolve(results);
+      }
+    });
+  };
 
   render() {
     const { markers } = this.props;

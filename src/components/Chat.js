@@ -163,7 +163,11 @@ class Chat extends Component {
   }
 
   render() {
-    const { reRenderKey, classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks, reserve, reserveBookRequest, books } = this.props;
+    const { mapPortal, currentStep, reRenderKey, classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks, reserve, reserveBookRequest, showAllLibsStep, books } = this.props;
+    if (currentStep === 'allLibsWasShown') {
+      debugger;
+      mapPortal.current.showAllLibs();
+    }
     return (
       <div className={classes.chat} key={reRenderKey}>
         <div className={classes.bot}>
@@ -209,6 +213,7 @@ class Chat extends Component {
                                 stopStep,
                                 startBookStep,
                                 reserveBookRequest,
+                                showAllLibsStep,
                               },
                               isActive: message.id === stepId,
                               data: message.data,
@@ -254,6 +259,7 @@ export default connect(
     startBookStep: signal`publicModule.startBookStep`,
     findBooks: signal`publicModule.findBooks`,
     justTextStep: signal`publicModule.justTextStep`,
+    showAllLibsStep: signal`publicModule.showAllLibsStep`,
     reserveBookRequest: signal`publicModule.reserveBookRequest`,
   },
   injectSheet(styles)(Chat),

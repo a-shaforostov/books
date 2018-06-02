@@ -45,6 +45,28 @@ export const justTextStep = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+export const showAllLibs = ({ state, props }) => {
+  const value = {
+    id: Date.now(),
+    author: 'guest',
+    time: timeFormatHM(new Date()),
+    content: 'Покажи всі бібліотеки поблизу від мене',
+  };
+  state.push('publicModule.dialog', value);
+  props.stepId = value.id;
+};
+
+export const allLibsWasShown = ({ state, props }) => {
+  const value = {
+    id: Date.now(),
+    author: 'bot',
+    time: timeFormatHM(new Date()),
+    type: 'allLibsWasShown',
+  };
+  state.push('publicModule.dialog', value);
+  props.stepId = value.id;
+};
+
 export const unknownStep = ({ state, props }) => {
   const value = {
     id: Date.now(),

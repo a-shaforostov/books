@@ -43,6 +43,8 @@ const styles = {
 };
 
 class MainPage extends Component {
+  portalRef = React.createRef();
+
   render() {
     const { classes } = this.props;
     return (
@@ -57,9 +59,9 @@ class MainPage extends Component {
           <main className={classes.contentWrapper}>
             <Segment className={classes.content}>
               <div className={classes.chatContainer}>
-                <Chat />
+                <Chat mapPortal={this.portalRef} />
               </div>
-              <MapPortal />
+              <MapPortal ref={this.portalRef} />
             </Segment>
           </main>
         </div>

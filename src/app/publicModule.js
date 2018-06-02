@@ -7,7 +7,7 @@ export default Module({
   state: {
     currentStep: null,
     currentStepId: null,
-    steps: ['start', 'stop', 'greet', 'startNearest', 'startLibrary', 'startBook', 'nearest', 'library', 'book'],
+    steps: ['start', 'stop', 'greet', 'startNearest', 'startLibrary', 'startBook', 'nearest', 'library', 'book', 'showAllLibs'],
     dialog: [],
     reserve: {
       name: null,
@@ -28,6 +28,7 @@ export default Module({
     // bookStep: sequences.bookStep,
     findBooks: sequences.findBooks,
     justTextStep: sequences.justTextStep,
+    showAllLibsStep: sequences.showAllLibsStep,
     reserveBookRequest: sequences.reserveBookRequest,
     reserveBookCancel: sequences.reserveBookCancel,
     reserveBookApprove: sequences.reserveBookApprove,

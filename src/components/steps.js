@@ -39,7 +39,7 @@ export const stepStartEl = ({ signals, isActive }) => {
   return (
     <div style={styles.wrapper}>
       <div>Оберіть розділ</div>
-      <div style={styles.row}><Button positive style={styles.button} disabled={!isActive}>Бібліотеки поблизу</Button></div>
+      <div style={styles.row}><Button positive style={styles.button} disabled={!isActive} onClick={() => signals.showAllLibsStep()}>Всі бібліотеки поблизу</Button></div>
       <div style={styles.row}><Button positive style={styles.button} disabled={!isActive}>Знайти бібліотеку</Button></div>
       <div style={styles.row}><Button positive style={styles.button} disabled={!isActive} onClick={() => signals.startBookStep()}>Знайти книгу</Button></div>
       <div style={styles.row}><Button negative style={styles.button} disabled={!isActive} onClick={() => signals.stopStep()}>Завершити бесіду</Button></div>
@@ -75,6 +75,18 @@ export const bookNotFoundEl = ({ signals, isActive }) => {
   return (
     <div>
       <div>Книг за Вашим запитом не знайдено :(</div>
+      <div style={{...styles.row, ...styles.wrapper}}>
+        <Button positive style={styles.button} disabled={!isActive} onClick={() => signals.greetStep()}>Продовжити</Button>
+      </div>
+    </div>
+  )
+};
+
+export const allLibsWasShownEl = ({ signals, isActive }) => {
+  return (
+    <div>
+      <div>На карті відмічені всі бібліотеки поблизу Вас, про які знає Google ;)</div>
+      <div>Наведить курсор на маркер, щоб побачити назву бібліотеки</div>
       <div style={{...styles.row, ...styles.wrapper}}>
         <Button positive style={styles.button} disabled={!isActive} onClick={() => signals.greetStep()}>Продовжити</Button>
       </div>
@@ -180,4 +192,5 @@ export default {
   foundBooks: foundBooksEl,
   unknown: unknownEl,
   bookReserved: bookReservedEl,
+  allLibsWasShown: allLibsWasShownEl,
 };

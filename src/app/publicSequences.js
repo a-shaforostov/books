@@ -17,14 +17,8 @@ export const greetStep = [
 
 export const justTextStep = [
   actions.justTextStep,
-  set(state`publicModule.currentStep`, 'justText'),
-  set(state`publicModule.currentStepId`, props`stepId`),
   actions.unknownStep,
-  set(state`publicModule.currentStep`, 'unknown'),
-  set(state`publicModule.currentStepId`, props`stepId`),
-  actions.greetStep,
-  set(state`publicModule.currentStep`, 'greet'),
-  set(state`publicModule.currentStepId`, props`stepId`),
+  greetStep,
 ];
 
 export const startBookStep = [
@@ -45,14 +39,13 @@ export const findBooks = [
     success: [
       actions.foundBooks,
       set(state`publicModule.currentStep`, 'foundBooks'),
-      set(state`publicModule.currentStepId`, props`stepId`),
     ],
     fail: [
       actions.bookNotFound,
       set(state`publicModule.currentStep`, 'bookNotFound'),
-      set(state`publicModule.currentStepId`, props`stepId`),
     ],
   },
+  set(state`publicModule.currentStepId`, props`stepId`),
 ];
 
 export const reserveBookRequest = [
@@ -74,4 +67,11 @@ export const reserveBookApprove = [
   set(state`publicModule.reserve.libName`, null),
   // set(state`publicModule.currentStep`, 'bookReserved'),
   // set(state`publicModule.currentStepId`, props`stepId`),
+];
+
+export const showAllLibsStep = [
+  actions.showAllLibs,
+  actions.allLibsWasShown,
+  set(state`publicModule.currentStep`, 'allLibsWasShown'),
+  set(state`publicModule.currentStepId`, props`stepId`),
 ];
