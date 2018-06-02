@@ -47,7 +47,7 @@ export const justTextStep = ({ state, props }) => {
 
 export const showAllLibs = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'guest',
     time: timeFormatHM(new Date()),
     content: 'Покажи всі бібліотеки поблизу від мене',
