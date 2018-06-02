@@ -1,11 +1,8 @@
-import React, { Component, Fragment } from 'react';
-import { findDOMNode } from 'react-dom';
-import { compose, withProps, withStateHandlers, lifecycle } from "recompose";
+import React, { Component } from 'react';
+import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
-import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 
-import { Dimmer, Loader } from 'semantic-ui-react';
+import { Dimmer, Loader, Segment } from 'semantic-ui-react';
 
 class GMap extends Component {
   constructor(props) {
@@ -122,9 +119,9 @@ class GMap extends Component {
 export default compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBZANw9QWCv3-zoqnrzgOwamZp5w1xP1-Q&v=3.exp&language=uk&libraries=geometry,drawing,places",
-    loadingElement: <div className="loadingElement" style={{ height: `calc(100vh - 200px)` }} ><Dimmer active><Loader>Завантаження карти</Loader></Dimmer></div>,
+    loadingElement: <div className="loadingElement" style={{ height: `100%` }} ><Dimmer active><Loader>Завантаження карти</Loader></Dimmer></div>,
     mapElement: <div className="mapElement" style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `calc(100vh - 200px)` }} />,
+    containerElement: <Segment raised piled style={{ height: `100%` }} />,
   }),
   withScriptjs,
   withGoogleMap,

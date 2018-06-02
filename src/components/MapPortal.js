@@ -5,8 +5,6 @@ import { CSSTransition } from 'react-transition-group';
 import { pageTransitionDelay } from '../app/constants';
 import injectSheet from 'react-jss';
 
-import { Segment, Button } from 'semantic-ui-react';
-
 import GMap from "./GMap";
 
 const styles = {
@@ -14,7 +12,7 @@ const styles = {
     position: 'absolute',
     height: 'calc(100% - 80px)',
     backgroundColor: 'white',
-    width: '50%',
+    width: '55%',
     bottom: '5%',
     right: '6%',
   }

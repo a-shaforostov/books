@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { findDOMNode } from 'react-dom';
 import injectSheet from 'react-jss';
 import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';
@@ -45,7 +44,7 @@ class LibraryInfo extends Component {
 
   render() {
     const { classes, selected, selectedLib } = this.props;
-    const { isOver, canDrop, connectDropTarget } = this.props;
+    const { isOver, connectDropTarget } = this.props;
     const { library } = this.state;
     return (
       <div className={classnames([classes.list, {[classes.hidden]: !selectedLib}])}>
@@ -158,10 +157,6 @@ class LibraryInfo extends Component {
 }
 
 const libraryTarget = {
-  // canDrop(props, monitor) {
-  //   return true;
-  // },
-
   drop(props, monitor, component) {
     // Obtain the dragged item
     const item = monitor.getItem();

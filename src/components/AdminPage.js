@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';
 import injectSheet from 'react-jss';
@@ -8,7 +8,7 @@ import { DragDropContextProvider } from 'react-dnd';
 import { CSSTransition } from 'react-transition-group';
 import { pageTransitionDelay } from '../app/constants';
 
-import { Segment, Button } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
 import Header from './Header';
 import Libraries from './Libraries';

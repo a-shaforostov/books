@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from "@cerebral/react";
 import { state } from 'cerebral/tags';
 import injectSheet from 'react-jss';
@@ -13,6 +13,7 @@ const styles = {
   '@global body': {
     margin: 0,
     padding: 0,
+    backgroundColor: '#974315',
   },
 
   '@global .page-enter, .page-appear': {
@@ -38,7 +39,7 @@ const styles = {
   },
 
   container: {
-    padding: '10px',
+    padding: '0',
     height: '100vh',
   },
 };

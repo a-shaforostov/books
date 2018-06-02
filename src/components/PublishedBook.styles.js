@@ -33,7 +33,7 @@ export default {
     transform: 'translateX(0px)',
     fontSize: '100%',
     transition: 'all 500ms ease-out',
-    width: 'calc(100% - 25px)',
+    width: 'calc(100% - 52px)',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',

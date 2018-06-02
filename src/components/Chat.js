@@ -7,10 +7,10 @@ import classnames from 'classnames';
 import stepElements from './steps';
 import QRModal from './forms/QRModal';
 
-import { Segment, Button, Input } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react';
 
 import botImage from '../assets/bot.png';
-import {foundBooks} from "../app/publicActions";
+import sheet from '../assets/sheet.png';
 
 const styles = {
   chat: {
@@ -27,6 +27,17 @@ const styles = {
     alignItems: 'stretch',
     justifyContent: 'space-between',
     height: '100%',
+    boxShadow: '2px 4px 13px -2px #000000b3',
+  },
+  under: {
+    backgroundImage: `url(${sheet})`,
+    height: '100%',
+    position: 'absolute',
+    transform: 'rotateZ(-2deg)',
+    left: '-43px',
+    top: '-19px',
+    zIndex: '-1',
+    width: '100%',
   },
   top: {
     height: '46px',
@@ -146,9 +157,6 @@ class Chat extends Component {
 
   componentDidMount() {
     const updateBooksState = () => {
-      // check book updates for last message
-      const lastDialog = this.props.dialog.slice(-1);
-      // if (lastDialog[0].type === 'foundBooks')
       this.forceUpdate();
     };
 
@@ -163,16 +171,14 @@ class Chat extends Component {
   }
 
   render() {
-    const { mapPortal, currentStep, myPosition, showAllLibsStep, showRegLibsStep, showOneLib, reRenderKey, classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks, reserve, reserveBookRequest, books } = this.props;
-    // if (currentStep === 'allLibsWasShown') {
-    //   debugger;
-    //   mapPortal.current.showAllLibs();
-    // }
+    const { myPosition, showAllLibsStep, showRegLibsStep, showOneLib, reRenderKey, classes, dialog, stepId, greetStep, stopStep, startBookStep, reserve, reserveBookRequest, books } = this.props;
+
     return (
       <div className={classes.chat} key={reRenderKey}>
         <div className={classes.bot}>
           <img src={botImage} alt="bot"/>
         </div>
+        <div className={classes.under} />
         <div className={classes.wrapper}>
           <div className={classes.top}>Доброго дня! Чим можу допомогти?</div>
           <div className={classes.interior} ref={this.myRef}>
@@ -233,13 +239,15 @@ class Chat extends Component {
             </div>
           </div>
           <div>
-            <Input
-              className={classes.inputRow}
-              value={this.state.input}
-              onChange={this.handleChange}
-              onKeyUp={this.handleKeyUp}
-              placeholder="Введіть текст та натисніть Enter"
-            />
+            <label>
+              <Input
+                className={classes.inputRow}
+                value={this.state.input}
+                onChange={this.handleChange}
+                onKeyUp={this.handleKeyUp}
+                placeholder="Введіть текст та натисніть Enter"
+              />
+            </label>
             <QRModal id={reserve.id} name={reserve.name} libName={reserve.libName} />
 
           </div>
@@ -255,7 +263,6 @@ export default connect(
     dialog: state`publicModule.dialog`,
     stepId: state`publicModule.currentStepId`,
     currentStep: state`publicModule.currentStep`,
-    foundBooks: state`foundBooks`,
     reserve: state`publicModule.reserve`,
     myPosition: state`publicModule.myPosition`,
     greetStep: signal`publicModule.greetStep`,

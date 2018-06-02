@@ -3,7 +3,7 @@ import injectSheet from 'react-jss';
 import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';
 
-import { Segment, Button, List, Image } from 'semantic-ui-react';
+import { Button, List, Image } from 'semantic-ui-react';
 
 const styles = {
   avatar: {

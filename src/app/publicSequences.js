@@ -1,6 +1,5 @@
-import { set, push, unset, when, wait } from "cerebral/operators";
+import { set, when } from "cerebral/operators";
 import { props, state } from "cerebral/tags";
-import * as factories from "./factories";
 import * as actions from "./publicActions";
 
 export const startStep = [

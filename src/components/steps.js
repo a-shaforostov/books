@@ -1,6 +1,5 @@
 import React from 'react';
-import { Segment, Button } from 'semantic-ui-react';
-import LibraryInfo from "./LibraryInfo";
+import { Button } from 'semantic-ui-react';
 import { isReserveActive, timeFormatHMS } from '../app/utils';
 import { formatDistance } from '../app/utils';
 

@@ -1,4 +1,4 @@
-import { timeFormatHM, timeFormatHMS } from './utils';
+import { timeFormatHM } from './utils';
 import { reservationTime } from './constants';
 import { removeDashes, isApproxEqual } from './utils';
 import { downloadFile } from './actions';
@@ -248,7 +248,6 @@ export const findBooks = ({ state, props, path }) => {
 export const reserveBookApprove = ({ state, props }) => {
   const books = state.get('data.books');
   const id = state.get('publicModule.reserve.id');
-  const name = state.get('publicModule.reserve.name');
   const now = new Date();
   const time = new Date(now.getTime() + reservationTime*60*1000);
   const updated = books.map(book => book.id === id ? { ...book, reserved: time } : book);
@@ -256,7 +255,7 @@ export const reserveBookApprove = ({ state, props }) => {
 };
 
 export const saveDialog = async (context) => {
-  const { state, props } = context;
+  const { props } = context;
   const dialog = document.getElementById('dialogContent');
   const canvas = await html2canvas(dialog);
   // const uri = "data:text/html;charset=UTF-8,"+encodeURIComponent(dialogHtml);

@@ -24,7 +24,7 @@ export const formatDistance = dist => {
   return parts.join('');
 };
 
-export const removeDashes = str => str.replace(/\-/g, '');
+export const removeDashes = str => str.replace(/-/g, '');
 
 const matching = (strInputA, strInputB, lngLen) => {
   const strA = strInputA;

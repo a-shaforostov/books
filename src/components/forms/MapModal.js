@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import { state, signal } from 'cerebral/tags';
 import { connect } from '@cerebral/react';
-import { form } from '@cerebral/forms';
 import injectSheet from 'react-jss';
-import { compose, withProps } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 
-
-import { Button, Modal, Form, Icon } from 'semantic-ui-react';
-import libraryCompute from "../../computed/library";
+import { Button, Modal, Icon } from 'semantic-ui-react';
 import GMap from "../GMap";
 
 const styles = {
@@ -68,7 +61,7 @@ class MapModal extends Component {
   };
 
   render() {
-    const { showModal, id, form, classes, onApply } = this.props;
+    const { classes } = this.props;
     const { open, marker, name } = this.state;
     const { latitude, longitude } = this.state.coords;
     return (

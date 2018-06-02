@@ -10,7 +10,6 @@ import jssGlobal from 'jss-global';
 
 import Application from './Application';
 import 'semantic-ui-css/semantic.css';
-// import '../../assets/semantic.chubby.min.css';
 
 const jss = createJss();
 jss.use(jssNested(), jssCamelCase(), jssGlobal());

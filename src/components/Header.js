@@ -24,6 +24,7 @@ const styles = {
     backgroundSize: 'cover',
     border: 'none',
     borderRadius: 0,
+    margin: '10px!important',
   },
   logo: {
     display: 'flex',
@@ -48,11 +49,6 @@ const styles = {
     background: 'linear-gradient(to bottom, rgba(242,246,248,1) 0%, rgba(216,225,231,1) 47%, rgba(181,198,208,1) 93%, rgba(224,239,249,1) 100%)',
   },
 };
-
-const options = [
-  { key: 1, text: 'Відкрити файл', value: 'open' },
-  { key: 2, text: 'Зберегти файл', value: 'save' },
-];
 
 class Header extends Component {
   handleLoadData = (e) => {

@@ -3,14 +3,7 @@ import injectSheet from 'react-jss';
 import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';
 
-import {
-  ConnectDragSource,
-  DragSource,
-  DragSourceConnector,
-  DragSourceMonitor,
-} from 'react-dnd';
-
-import { Segment, Header, Icon, Popup } from 'semantic-ui-react';
+import { Segment, Header, Icon } from 'semantic-ui-react';
 
 import booksInLibraries from '../computed/booksInLibraries';
 import PublishedBook from './PublishedBook';
@@ -45,7 +38,6 @@ class Published extends Component {
 
   render() {
     const { classes, selected, published, stats } = this.props;
-    const { isDragging, connectDragSource } = this.props;
 
     return (
       <div className={classes.list}>

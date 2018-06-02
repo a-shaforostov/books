@@ -4,7 +4,7 @@ import { connect } from '@cerebral/react';
 import { form } from '@cerebral/forms';
 import injectSheet from 'react-jss';
 
-import { Button, Modal, Form, Icon } from 'semantic-ui-react';
+import { Button, Modal, Form } from 'semantic-ui-react';
 import libraryCompute from "../../computed/library";
 import MapModal from "./MapModal";
 
@@ -61,7 +61,7 @@ class EditLibrary extends Component {
   };
 
   render() {
-    const { showModal, id, form, classes } = this.props;
+    const { id, form, classes } = this.props;
     return (
       <Modal size="tiny" open={!!id} closeOnDimmerClick={false} onClose={this.handleClose}>
         <Modal.Header>

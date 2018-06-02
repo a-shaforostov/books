@@ -1,7 +1,5 @@
 import { Module } from "cerebral";
 import * as sequences from "./publicSequences";
-import FormsProvider from '@cerebral/forms';
-import { state } from 'cerebral/tags';
 
 export default Module({
   state: {
@@ -22,12 +20,7 @@ export default Module({
     startStep: sequences.startStep,
     stopStep: sequences.stopStep,
     greetStep: sequences.greetStep,
-    // startNearestStep: sequences.startNearestStep,
-    // startLibraryStep: sequences.startLibraryStep,
     startBookStep: sequences.startBookStep,
-    // nearestStep: sequences.nearestStep,
-    // libraryStep: sequences.libraryStep,
-    // bookStep: sequences.bookStep,
     findBooks: sequences.findBooks,
     justTextStep: sequences.justTextStep,
     showAllLibsStep: sequences.showAllLibsStep,

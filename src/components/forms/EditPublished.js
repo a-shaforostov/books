@@ -57,7 +57,7 @@ class EditPublished extends Component {
   }
 
   render() {
-    const { showModal, id, form, books, classes } = this.props;
+    const { id, form, books, classes } = this.props;
     const isUsedInLibraries = books.some(book => book.isbn === id);
     return (
       <Modal size="tiny" open={!!id} onClose={this.handleClose}>

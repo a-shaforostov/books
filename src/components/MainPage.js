@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "@cerebral/react";
-import { state, signal } from 'cerebral/tags';
+import { state } from 'cerebral/tags';
 import { CSSTransition } from 'react-transition-group';
 import { pageTransitionDelay } from '../app/constants';
 import injectSheet from 'react-jss';
 
-import { Segment, Button } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
 import Header from './Header';
 import Chat from './Chat';
 import MapPortal from './MapPortal';
+import pencil from '../assets/pencil.png';
 
 const styles = {
   page: {
@@ -40,6 +41,15 @@ const styles = {
     bottom: 0,
     left: '50px',
   },
+  pencil: {
+    backgroundImage: `url(${pencil})`,
+    position: 'absolute',
+    width: '30px',
+    height: '642px',
+    top: '0',
+    right: '30px',
+    transform: 'scale(0.75, 0.75) rotateZ(2deg)',
+  },
 };
 
 class MainPage extends Component {
@@ -62,6 +72,7 @@ class MainPage extends Component {
                 <Chat mapPortal={this.portalRef} />
               </div>
               <MapPortal ref={this.portalRef} />
+              <div className={classes.pencil} />
             </Segment>
           </main>
         </div>
