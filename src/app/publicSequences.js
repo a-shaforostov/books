@@ -13,6 +13,7 @@ export const greetStep = [
   actions.greetStep,
   set(state`publicModule.currentStep`, 'greet'),
   set(state`publicModule.currentStepId`, props`stepId`),
+  set(state`publicModule.mapStyle`, null),
 ];
 
 export const justTextStep = [
@@ -74,4 +75,5 @@ export const showAllLibsStep = [
   actions.allLibsWasShown,
   set(state`publicModule.currentStep`, 'allLibsWasShown'),
   set(state`publicModule.currentStepId`, props`stepId`),
+  set(state`publicModule.mapStyle`, `allLibsMapStyle`),
 ];

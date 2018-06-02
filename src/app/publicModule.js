@@ -15,6 +15,7 @@ export default Module({
       id: null,
     },
     reRender: 0,
+    mapStyle: null,
   },
   signals: {
     startStep: sequences.startStep,

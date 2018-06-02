@@ -164,10 +164,10 @@ class Chat extends Component {
 
   render() {
     const { mapPortal, currentStep, reRenderKey, classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks, reserve, reserveBookRequest, showAllLibsStep, books } = this.props;
-    if (currentStep === 'allLibsWasShown') {
-      debugger;
-      mapPortal.current.showAllLibs();
-    }
+    // if (currentStep === 'allLibsWasShown') {
+    //   debugger;
+    //   mapPortal.current.showAllLibs();
+    // }
     return (
       <div className={classes.chat} key={reRenderKey}>
         <div className={classes.bot}>

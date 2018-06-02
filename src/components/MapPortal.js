@@ -54,7 +54,7 @@ class MapPortal extends Component {
   showAllLibs = () => this.mapRef.current && this.mapRef.current.showAllLibs();
 
   render() {
-    const { classes } = this.props;
+    const { classes, mapStyle } = this.props;
     const { latitude, longitude } = this.state.coords;
 
     return (
@@ -71,6 +71,7 @@ class MapPortal extends Component {
               defaultCenter={{lat: latitude, lng: longitude}}
               returnMarkers={this.returnMarkers}
               markers={this.state.markers}
+              mapStyle={mapStyle}
               // ref={this.mapRef}
             />
           }
@@ -83,6 +84,7 @@ class MapPortal extends Component {
 export default connect(
   {
     currentPage: state`currentPage`,
+    mapStyle: state`publicModule.mapStyle`,
   },
   injectSheet(styles)(MapPortal),
 );

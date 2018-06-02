@@ -23,23 +23,39 @@ class GMap extends Component {
     });
   };
 
+  updateMapStyle = (mapStyle) => {
+    if (this.props.mapStyle !== mapStyle) {
+      switch (mapStyle) {
+        case 'allLibsMapStyle':
+          this.showAllLibs();
+          break;
+        default:
+          this.props.returnMarkers([]);
+      }
+    }
+  };
+
   componentDidMount() {
+    this.updateMapStyle(null);
+  }
+
+  componentWillReceiveProps(props) {
+    this.updateMapStyle(props.mapStyle);
   }
 
   showAllLibs = () => {
-    return new Promise(resolve => {
-      const PlacesService = window.google.maps.places.PlacesService;
-      this.placesService = new PlacesService(this.mapElement.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
-      const request = {
-        location: this.props.defaultCenter,
-        radius: '5000',
-        types: ['library']
-      };
-      this.placesService.nearbySearch(request, callback);
-      function callback(results, status) {
-        resolve(results);
-      }
-    });
+    const PlacesService = window.google.maps.places.PlacesService;
+    this.placesService = new PlacesService(this.mapElement.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+    const request = {
+      location: this.props.defaultCenter,
+      radius: '5000',
+      types: ['library']
+    };
+    const returnMarkers = this.props.returnMarkers;
+    this.placesService.nearbySearch(request, callback);
+    function callback(results, status) {
+      returnMarkers(results);
+    }
   };
 
   render() {
