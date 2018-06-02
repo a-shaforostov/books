@@ -37,6 +37,7 @@ export const startBookStep = [
 ];
 
 export const stopStep = [
+  actions.saveDialog,
   set(state`publicModule.dialog`, []),
   startStep,
 ];

@@ -176,7 +176,7 @@ class Chat extends Component {
         <div className={classes.wrapper}>
           <div className={classes.top}>Доброго дня! Чим можу допомогти?</div>
           <div className={classes.interior} ref={this.myRef}>
-            <div className={classes.content}>
+            <div className={classes.content} id="dialogContent">
               {
                 dialog.map(message => {
                   return (

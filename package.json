@@ -9,6 +9,7 @@
     "cerebral": "^4.2.2",
     "classnames": "^2.2.5",
     "compose": "^0.1.2",
+    "html2canvas": "^1.0.0-alpha.12",
     "isbn-validate": "^1.0.3",
     "isbn-validator": "^1.2.0",
     "js-sha1": "^0.6.0",

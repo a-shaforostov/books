@@ -1,10 +1,12 @@
 import { timeFormatHM, timeFormatHMS } from './utils';
 import { reservationTime } from './constants';
-import { removeDashes } from './utils';
+import { removeDashes, isApproxEqual } from './utils';
+import { downloadFile } from './actions';
+import html2canvas from 'html2canvas';
 
 export const startStep = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'bot',
     time: timeFormatHM(new Date()),
     type: 'start',
@@ -15,7 +17,7 @@ export const startStep = ({ state, props }) => {
 
 export const greetStep = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'bot',
     time: timeFormatHM(new Date()),
     type: 'greet',
@@ -37,7 +39,7 @@ export const geolocationDenied = ({ state, props }) => {
 
 export const startBookStep = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'bot',
     time: timeFormatHM(new Date()),
     type: 'startBook',
@@ -48,7 +50,7 @@ export const startBookStep = ({ state, props }) => {
 
 export const justTextStep = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'guest',
     time: timeFormatHM(new Date()),
     content: props.value,
@@ -81,7 +83,7 @@ export const showRegLibs = ({ state, props }) => {
 
 export const allLibsWasShown = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'bot',
     time: timeFormatHM(new Date()),
     type: 'allLibsWasShown',
@@ -92,7 +94,7 @@ export const allLibsWasShown = ({ state, props }) => {
 
 export const regLibsWasShown = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'bot',
     time: timeFormatHM(new Date()),
     type: 'regLibsWasShown',
@@ -103,7 +105,7 @@ export const regLibsWasShown = ({ state, props }) => {
 
 export const unknownStep = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'bot',
     time: timeFormatHM(new Date()),
     type: 'unknown',
@@ -114,7 +116,7 @@ export const unknownStep = ({ state, props }) => {
 
 export const startSearchBook = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'guest',
     time: timeFormatHM(new Date()),
     content: `Шукаємо книги за текстом: ${props.criteria}`,
@@ -125,7 +127,7 @@ export const startSearchBook = ({ state, props }) => {
 
 export const bookNotFound = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'bot',
     time: timeFormatHM(new Date()),
     type: 'bookNotFound',
@@ -136,7 +138,7 @@ export const bookNotFound = ({ state, props }) => {
 
 export const foundBooks = ({ state, props }) => {
   const value = {
-    id: Date.now(),
+    id: Math.random(),
     author: 'bot',
     time: timeFormatHM(new Date()),
     type: 'foundBooks',
@@ -155,8 +157,10 @@ export const findBooks = ({ state, props, path }) => {
   const { criteria } = props;
   const publishedBooks = published.filter(book => {
     const isbn = removeDashes(String(book.id).toLowerCase()).indexOf(removeDashes(criteria.toLowerCase())) !== -1;
-    const name = String(book.name).toLowerCase().indexOf(criteria.toLowerCase()) !== -1;
-    const author = String(book.author).toLowerCase().indexOf(criteria.toLowerCase()) !== -1;
+    // const name = String(book.name).toLowerCase().indexOf(criteria.toLowerCase()) !== -1;
+    // const author = String(book.author).toLowerCase().indexOf(criteria.toLowerCase()) !== -1;
+    const name = isApproxEqual(book.name, criteria);
+    const author = isApproxEqual(book.author, criteria);
     return isbn || name || author;
   });
 
@@ -249,26 +253,14 @@ export const reserveBookApprove = ({ state, props }) => {
   const time = new Date(now.getTime() + reservationTime*60*1000);
   const updated = books.map(book => book.id === id ? { ...book, reserved: time } : book);
   state.set('data.books', updated);
-
-  // const value = {
-  //   id: Date.now(),
-  //   author: 'bot',
-  //   time: timeFormatHM(new Date()),
-  //   type: 'bookReserved',
-  //   data: name,
-  // };
-  // state.push('publicModule.dialog', value);
-  // props.stepId = value.id;
 };
 
-
-
-// export const updateFoundBooks = ({ state }) => {
-//   const found = state.get('foundBooks');
-//   const books = state.get('data.books');
-//   Object.keys(found).forEach(key => {
-//     const src = books.find(srcBook => srcBook.id === found[key].id);
-//     debugger;
-//     found[key].reserved = src.reserved;
-//   })
-// };
+export const saveDialog = async (context) => {
+  const { state, props } = context;
+  const dialog = document.getElementById('dialogContent');
+  const canvas = await html2canvas(dialog);
+  // const uri = "data:text/html;charset=UTF-8,"+encodeURIComponent(dialogHtml);
+  props.data = canvas.toDataURL('image/png');
+  props.filename = 'dialog.png';
+  downloadFile(context);
+};

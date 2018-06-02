@@ -68,7 +68,7 @@ export function downloadFile({ props }) {
   link.href = data;
   document.body.appendChild(link);
   link.click();
-  document.body.removeChild(link);
+  setTimeout(() => document.body.removeChild(link), 0);
 }
 
 /**
