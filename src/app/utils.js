@@ -23,3 +23,5 @@ export const formatDistance = dist => {
   }
   return parts.join('');
 };
+
+export const removeDashes = str => str.replace(/\-/g, '');

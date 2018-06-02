@@ -31,10 +31,12 @@ class GMap extends Component {
         this.mapElement.current.panTo(defaultCenter);
         this.showAllLibs();
         break;
+
       case 'regLibsMapStyle':
         this.mapElement.current.panTo(defaultCenter);
         this.showRegLibs();
         break;
+
       case 'oneLibMapStyle':
         // Pan to marker position
         this.mapElement.current.panTo({lat: +mapLib.lat, lng: +mapLib.lng,});
@@ -45,6 +47,7 @@ class GMap extends Component {
           name: mapLib.name,
         }]);
         break;
+
       default:
         returnMarkers && returnMarkers([]);
     }

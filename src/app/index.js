@@ -7,6 +7,9 @@ import { hashProvider, longPromise } from "./providers";
 import { authenticate } from './factories';
 import router from './router';
 import publicModule from './publicModule';
+import isbnValidator from 'isbn-validator';
+import ISBN from 'isbn-validate';
+import { removeDashes } from './utils';
 
 import avatar from '../assets/avatar.jpg';
 import avatar2 from '../assets/girl.jpg';
@@ -317,7 +320,10 @@ export default Module({
         existance(value, arg, get) {
           const arr = get(state`data.${arg}`);
           const isNew = get(state`forms.${arg}.isNew.value`);
-          return !(isNew && arr.some(item => item.id === value));
+          return !(isNew && arr.some(item => removeDashes(item.id) === removeDashes(value)));
+        },
+        isbn(value, arg, get) {
+          return ISBN.Validate(value);
         },
       },
 
@@ -325,6 +331,9 @@ export default Module({
       errorMessages: {
         existance() {
           return 'Такий ідентифікатор вже є в системі';
+        },
+        isbn() {
+          return 'ISBN не відповідає формату';
         },
         isRequired() {
           return 'Поле має бути заповненим';
