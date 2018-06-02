@@ -46,7 +46,7 @@ export const stepStartEl = ({ signals, isActive }) => {
     <div style={styles.wrapper}>
       <div>Оберіть розділ</div>
       <div style={styles.row}><Button positive style={styles.button} disabled={!isActive} onClick={() => signals.showAllLibsStep()}>Всі бібліотеки поблизу</Button></div>
-      <div style={styles.row}><Button positive style={styles.button} disabled={!isActive}>Знайти бібліотеку</Button></div>
+      <div style={styles.row}><Button positive style={styles.button} disabled={!isActive} onClick={() => signals.showRegLibsStep()}>Всі зареєстровані бібліотеки</Button></div>
       <div style={styles.row}><Button positive style={styles.button} disabled={!isActive} onClick={() => signals.startBookStep()}>Знайти книгу</Button></div>
       <div style={styles.row}><Button negative style={styles.button} disabled={!isActive} onClick={() => signals.stopStep()}>Завершити бесіду</Button></div>
     </div>
@@ -101,6 +101,18 @@ export const allLibsWasShownEl = ({ signals, isActive }) => {
   return (
     <div>
       <div>На карті відмічені всі бібліотеки поблизу Вас, про які знає Google ;)</div>
+      <div>Наведіть курсор на маркер, щоб побачити назву бібліотеки</div>
+      <div style={{...styles.row, ...styles.wrapper}}>
+        <Button positive style={styles.button} disabled={!isActive} onClick={() => signals.greetStep()}>Продовжити</Button>
+      </div>
+    </div>
+  )
+};
+
+export const regLibsWasShownEl = ({ signals, isActive }) => {
+  return (
+    <div>
+      <div>На карті відмічені всі бібліотеки поблизу Вас, в яких ви можете зарезервувати книгу</div>
       <div>Наведіть курсор на маркер, щоб побачити назву бібліотеки</div>
       <div style={{...styles.row, ...styles.wrapper}}>
         <Button positive style={styles.button} disabled={!isActive} onClick={() => signals.greetStep()}>Продовжити</Button>
@@ -217,5 +229,6 @@ export default {
   unknown: unknownEl,
   bookReserved: bookReservedEl,
   allLibsWasShown: allLibsWasShownEl,
+  regLibsWasShown: regLibsWasShownEl,
   geolocationDenied: geolocationDeniedEl,
 };

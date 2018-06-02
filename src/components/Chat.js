@@ -163,7 +163,7 @@ class Chat extends Component {
   }
 
   render() {
-    const { mapPortal, currentStep, myPosition, showOneLib, reRenderKey, classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks, reserve, reserveBookRequest, showAllLibsStep, books } = this.props;
+    const { mapPortal, currentStep, myPosition, showAllLibsStep, showRegLibsStep, showOneLib, reRenderKey, classes, dialog, stepId, greetStep, stopStep, startBookStep, foundBooks, reserve, reserveBookRequest, books } = this.props;
     // if (currentStep === 'allLibsWasShown') {
     //   debugger;
     //   mapPortal.current.showAllLibs();
@@ -214,6 +214,7 @@ class Chat extends Component {
                                 startBookStep,
                                 reserveBookRequest,
                                 showAllLibsStep,
+                                showRegLibsStep,
                                 showOneLib,
                               },
                               isActive: message.id === stepId,
@@ -263,6 +264,7 @@ export default connect(
     findBooks: signal`publicModule.findBooks`,
     justTextStep: signal`publicModule.justTextStep`,
     showAllLibsStep: signal`publicModule.showAllLibsStep`,
+    showRegLibsStep: signal`publicModule.showRegLibsStep`,
     showOneLib: signal`publicModule.showOneLib`,
     reserveBookRequest: signal`publicModule.reserveBookRequest`,
   },

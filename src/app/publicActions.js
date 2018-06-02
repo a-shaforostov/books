@@ -67,12 +67,34 @@ export const showAllLibs = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+export const showRegLibs = ({ state, props }) => {
+  const value = {
+    id: Math.random(),
+    author: 'guest',
+    time: timeFormatHM(new Date()),
+    content: 'Покажи всі бібліотеки поблизу від мене де я можу зарезервувати книгу',
+  };
+  state.push('publicModule.dialog', value);
+  props.stepId = value.id;
+};
+
 export const allLibsWasShown = ({ state, props }) => {
   const value = {
     id: Date.now(),
     author: 'bot',
     time: timeFormatHM(new Date()),
     type: 'allLibsWasShown',
+  };
+  state.push('publicModule.dialog', value);
+  props.stepId = value.id;
+};
+
+export const regLibsWasShown = ({ state, props }) => {
+  const value = {
+    id: Date.now(),
+    author: 'bot',
+    time: timeFormatHM(new Date()),
+    type: 'regLibsWasShown',
   };
   state.push('publicModule.dialog', value);
   props.stepId = value.id;

@@ -55,6 +55,7 @@ class MapPortal extends Component {
         lat: marker.lat || marker.geometry.location.lat(),
         lng: marker.lng || marker.geometry.location.lng(),
         name: marker.name,
+        key: Math.random(),
       }))
     })
   };
@@ -62,7 +63,7 @@ class MapPortal extends Component {
   showAllLibs = () => this.mapRef.current && this.mapRef.current.showAllLibs();
 
   render() {
-    const { classes, mapStyle, mapLib } = this.props;
+    const { classes, mapStyle, mapLib, libs } = this.props;
     const { latitude, longitude } = this.state.coords;
 
     return (
@@ -81,6 +82,7 @@ class MapPortal extends Component {
               markers={this.state.markers}
               mapStyle={mapStyle}
               mapLib={mapLib}
+              libs={libs}
               // ref={this.mapRef}
             />
           }
@@ -95,6 +97,7 @@ export default connect(
     currentPage: state`currentPage`,
     mapStyle: state`publicModule.mapStyle`,
     mapLib: state`publicModule.mapLib`,
+    libs: state`data.libraries`,
     setMyPosition: signal`publicModule.setMyPosition`,
   },
   injectSheet(styles)(MapPortal),

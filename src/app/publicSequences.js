@@ -86,6 +86,14 @@ export const showAllLibsStep = [
   set(state`publicModule.mapStyle`, `allLibsMapStyle`),
 ];
 
+export const showRegLibsStep = [
+  actions.showRegLibs,
+  actions.regLibsWasShown,
+  set(state`publicModule.currentStep`, 'regLibsWasShown'),
+  set(state`publicModule.currentStepId`, props`stepId`),
+  set(state`publicModule.mapStyle`, `regLibsMapStyle`),
+];
+
 export const showOneLib = [
   set(state`publicModule.mapLib`, props`lib`),
   set(state`publicModule.mapStyle`, `oneLibMapStyle`),

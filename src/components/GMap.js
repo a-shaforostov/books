@@ -28,9 +28,12 @@ class GMap extends Component {
 
     switch (mapStyle) {
       case 'allLibsMapStyle':
-        debugger;
         this.mapElement.current.panTo(defaultCenter);
         this.showAllLibs();
+        break;
+      case 'regLibsMapStyle':
+        this.mapElement.current.panTo(defaultCenter);
+        this.showRegLibs();
         break;
       case 'oneLibMapStyle':
         // Pan to marker position
@@ -43,7 +46,7 @@ class GMap extends Component {
         }]);
         break;
       default:
-        returnMarkers([]);
+        returnMarkers && returnMarkers([]);
     }
   };
 
@@ -52,6 +55,7 @@ class GMap extends Component {
   }
 
   componentWillReceiveProps(props) {
+    // update when style was changed or when we select another library
     if (this.props.mapStyle !== props.mapStyle || this.props.mapLib !== props.mapLib) {
       this.updateMapStyle(props);
     }
@@ -72,6 +76,23 @@ class GMap extends Component {
     }
   };
 
+  showRegLibs = () => {
+    // Build markers array for all libraries
+    const libMarkers = this.props.libs.map(lib => ({
+      lat: +lib.lat,
+      lng: +lib.lng,
+      name: lib.name,
+    }));
+    this.props.returnMarkers(libMarkers);
+
+    // fit map to view all markers
+    const bounds = new window.google.maps.LatLngBounds();
+    libMarkers.forEach(marker => {
+      bounds.extend({ lat: marker.lat, lng: marker.lng });
+    });
+    this.mapElement.current.fitBounds(bounds);
+  };
+
   render() {
     const { markers } = this.props;
     return (
@@ -85,7 +106,7 @@ class GMap extends Component {
           markers && markers.map(marker => (
             <Marker
               title={marker.name}
-              key={''+marker.lat+marker.lng}
+              key={marker.key || ''+marker.lat+marker.lng}
               position={{ lat: marker.lat, lng: marker.lng }}
             />
           ))
@@ -101,13 +122,6 @@ export default compose(
     loadingElement: <div className="loadingElement" style={{ height: `calc(100vh - 200px)` }} ><Dimmer active><Loader>Завантаження карти</Loader></Dimmer></div>,
     mapElement: <div className="mapElement" style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `calc(100vh - 200px)` }} />,
-  }),
-  withStateHandlers(() => ({
-    isOpen: false,
-  }), {
-    onToggleOpen: ({ isOpen }) => () => ({
-      isOpen: !isOpen,
-    })
   }),
   withScriptjs,
   withGoogleMap,

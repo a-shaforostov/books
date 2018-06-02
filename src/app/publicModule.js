@@ -31,6 +31,7 @@ export default Module({
     findBooks: sequences.findBooks,
     justTextStep: sequences.justTextStep,
     showAllLibsStep: sequences.showAllLibsStep,
+    showRegLibsStep: sequences.showRegLibsStep,
     reserveBookRequest: sequences.reserveBookRequest,
     reserveBookCancel: sequences.reserveBookCancel,
     reserveBookApprove: sequences.reserveBookApprove,
