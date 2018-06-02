@@ -9,6 +9,7 @@ import { Segment, Button } from 'semantic-ui-react';
 
 import Header from './Header';
 import Chat from './Chat';
+import MapPortal from './MapPortal';
 
 const styles = {
   page: {
@@ -58,6 +59,7 @@ class MainPage extends Component {
               <div className={classes.chatContainer}>
                 <Chat />
               </div>
+              <MapPortal />
             </Segment>
           </main>
         </div>

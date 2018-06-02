@@ -1,17 +1,60 @@
 import React, { Component, Fragment } from 'react';
-import { compose, withProps, lifecycle } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
+import { findDOMNode } from 'react-dom';
+import { compose, withProps, withStateHandlers, lifecycle } from "recompose";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 
 import { Dimmer, Loader } from 'semantic-ui-react';
 
 class GMap extends Component {
+  constructor(props) {
+    super(props);
+    this.mapElement = React.createRef();
+  }
+
   clickHandler = e => {
-    this.props.onUpdateMarker({
+    const { onUpdateMarker } = this.props;
+
+    onUpdateMarker &&
+    onUpdateMarker({
       lat: e.latLng.lat(),
       lng: e.latLng.lng(),
     });
   };
+
+  componentDidMount() {
+    // const PlacesService = window.google.maps.places.PlacesService;
+    // debugger;
+    // const map = new window.google.maps.Map(this.mapElement.current, {
+    //   ...this.props,
+    //   defaultZoom: 14,
+    // });
+    //
+    // // const map = findDOMNode(this.mapElement.current);
+    // console.log(map);
+    // this.placesService = new PlacesService(this.mapElement.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+    // debugger;
+    const PlacesService = window.google.maps.places.PlacesService;
+    this.placesService = new PlacesService(this.mapElement.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+    const request = {
+      location: this.props.defaultCenter,
+      radius: '5000',
+      types: ['library']
+    };
+    this.placesService.nearbySearch(request, callback);
+    const { returnMarkers } = this.props;
+    function callback(results, status) {
+      // if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+      returnMarkers(results);
+        // for (var i = 0; i < results.length; i++) {
+        //   var place = results[i];
+        //   console.log(results[i]);
+        // }
+      // }
+    }
+
+  }
 
   render() {
     const { markers } = this.props;
@@ -20,14 +63,15 @@ class GMap extends Component {
         { ...this.props }
         defaultZoom={14}
         onClick={this.clickHandler}
+        ref={this.mapElement}
       >
         {
           markers && markers.map(marker => (
-            <Marker key={''+marker.lat+marker.lng} position={{ lat: marker.lat, lng: marker.lng }}>
-              <InfoWindow onCloseClick={null}>
-                <div>{marker.name}</div>
-              </InfoWindow>
-            </Marker>
+            <Marker
+              title={marker.name}
+              key={''+marker.lat+marker.lng}
+              position={{ lat: marker.lat, lng: marker.lng }}
+            />
           ))
         }
       </GoogleMap>
@@ -37,10 +81,17 @@ class GMap extends Component {
 
 export default compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBZANw9QWCv3-zoqnrzgOwamZp5w1xP1-Q&v=3.exp&libraries=geometry,drawing,places",
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBZANw9QWCv3-zoqnrzgOwamZp5w1xP1-Q&v=3.exp&language=uk&libraries=geometry,drawing,places",
     loadingElement: <div className="loadingElement" style={{ height: `calc(100vh - 200px)` }} ><Dimmer active><Loader>Завантаження карти</Loader></Dimmer></div>,
     mapElement: <div className="mapElement" style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `calc(100vh - 200px)` }} />,
+  }),
+  withStateHandlers(() => ({
+    isOpen: false,
+  }), {
+    onToggleOpen: ({ isOpen }) => () => ({
+      isOpen: !isOpen,
+    })
   }),
   withScriptjs,
   withGoogleMap,
