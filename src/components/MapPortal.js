@@ -44,8 +44,8 @@ class MapPortal extends Component {
   returnMarkers = markers => {
     this.setState({
       markers: markers.map(marker => ({
-        lat: marker.geometry.location.lat(),
-        lng: marker.geometry.location.lng(),
+        lat: marker.lat || marker.geometry.location.lat(),
+        lng: marker.lng || marker.geometry.location.lng(),
         name: marker.name,
       }))
     })
@@ -54,7 +54,7 @@ class MapPortal extends Component {
   showAllLibs = () => this.mapRef.current && this.mapRef.current.showAllLibs();
 
   render() {
-    const { classes, mapStyle } = this.props;
+    const { classes, mapStyle, mapLib } = this.props;
     const { latitude, longitude } = this.state.coords;
 
     return (
@@ -72,6 +72,7 @@ class MapPortal extends Component {
               returnMarkers={this.returnMarkers}
               markers={this.state.markers}
               mapStyle={mapStyle}
+              mapLib={mapLib}
               // ref={this.mapRef}
             />
           }
@@ -85,6 +86,7 @@ export default connect(
   {
     currentPage: state`currentPage`,
     mapStyle: state`publicModule.mapStyle`,
+    mapLib: state`publicModule.mapLib`,
   },
   injectSheet(styles)(MapPortal),
 );

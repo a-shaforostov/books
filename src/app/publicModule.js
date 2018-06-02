@@ -33,6 +33,7 @@ export default Module({
     reserveBookRequest: sequences.reserveBookRequest,
     reserveBookCancel: sequences.reserveBookCancel,
     reserveBookApprove: sequences.reserveBookApprove,
+    showOneLib: sequences.showOneLib,
   },
   providers: {},
   modules: {},

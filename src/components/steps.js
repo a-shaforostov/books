@@ -25,7 +25,7 @@ const styles = {
     marginLeft: '20px',
     borderBottom: '1px solid gray',
   },
-} ;
+};
 
 export const stepInitialEl = ({ signals, isActive }) => {
   return (
@@ -86,7 +86,7 @@ export const allLibsWasShownEl = ({ signals, isActive }) => {
   return (
     <div>
       <div>На карті відмічені всі бібліотеки поблизу Вас, про які знає Google ;)</div>
-      <div>Наведить курсор на маркер, щоб побачити назву бібліотеки</div>
+      <div>Наведіть курсор на маркер, щоб побачити назву бібліотеки</div>
       <div style={{...styles.row, ...styles.wrapper}}>
         <Button positive style={styles.button} disabled={!isActive} onClick={() => signals.greetStep()}>Продовжити</Button>
       </div>
@@ -132,6 +132,12 @@ export const stepResultEl = ({ libraries, books }) => {
 };
 
 export const foundBooksEl = ({ signals, isActive, data, books }) => {
+  const handleLibClick = libId => e => {
+    e.preventDefault();
+    // e.stopPropagation();
+    signals.showOneLib({ lib: data[libId].library });
+  };
+
   return (
     <div>
       <div>Результат пошуку:</div>
@@ -141,7 +147,7 @@ export const foundBooksEl = ({ signals, isActive, data, books }) => {
           Object.keys(data).map(key => (
             <div key={key}>
               <div  style={styles.library}>
-                {data[key].library.name} ({data[key].count})
+                <a href="#" title="Показати на карті" onClick={handleLibClick(key)}>{data[key].library.name}</a> ({data[key].count})
               </div>
               <div>
                 {

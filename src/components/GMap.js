@@ -23,15 +23,26 @@ class GMap extends Component {
     });
   };
 
-  updateMapStyle = (mapStyle) => {
-    if (this.props.mapStyle !== mapStyle) {
-      switch (mapStyle) {
-        case 'allLibsMapStyle':
-          this.showAllLibs();
-          break;
-        default:
-          this.props.returnMarkers([]);
-      }
+  updateMapStyle = (props) => {
+    const { mapStyle, mapLib, returnMarkers, defaultCenter } = props || this.props;
+
+    switch (mapStyle) {
+      case 'allLibsMapStyle':
+        this.mapElement.current.panTo(defaultCenter);
+        this.showAllLibs();
+        break;
+      case 'oneLibMapStyle':
+        // Pan to marker position
+        this.mapElement.current.panTo({lat: +mapLib.lat, lng: +mapLib.lng,});
+        // Update markers with specified one
+        returnMarkers([{
+          lat: +mapLib.lat,
+          lng: +mapLib.lng,
+          name: mapLib.name,
+        }]);
+        break;
+      default:
+        returnMarkers([]);
     }
   };
 
@@ -40,7 +51,9 @@ class GMap extends Component {
   }
 
   componentWillReceiveProps(props) {
-    this.updateMapStyle(props.mapStyle);
+    if (this.props.mapStyle !== props.mapStyle || this.props.mapLib !== props.mapLib) {
+      this.updateMapStyle(props);
+    }
   }
 
   showAllLibs = () => {
