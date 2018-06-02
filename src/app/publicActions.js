@@ -1,5 +1,6 @@
 import { timeFormatHM, timeFormatHMS } from './utils';
 import { reservationTime } from './constants';
+import { removeDashes } from './utils';
 
 export const startStep = ({ state, props }) => {
   const value = {
@@ -153,7 +154,7 @@ export const findBooks = ({ state, props, path }) => {
   // find relevant
   const { criteria } = props;
   const publishedBooks = published.filter(book => {
-    const isbn = String(book.id).toLowerCase().indexOf(criteria.toLowerCase()) !== -1;
+    const isbn = removeDashes(String(book.id).toLowerCase()).indexOf(removeDashes(criteria.toLowerCase())) !== -1;
     const name = String(book.name).toLowerCase().indexOf(criteria.toLowerCase()) !== -1;
     const author = String(book.author).toLowerCase().indexOf(criteria.toLowerCase()) !== -1;
     return isbn || name || author;
