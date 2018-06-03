@@ -100,7 +100,6 @@ export const showOneLib = [
 ];
 
 export const setMyPosition = [
-  ({ props }) => console.log(props),
   when(props`position`, loc => !!loc),
   {
     true: set(state`publicModule.myPosition`, props`position`),

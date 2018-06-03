@@ -241,8 +241,9 @@ class Chat extends Component {
             </div>
           </div>
           <div>
-            <label>
+            <label htmlFor="chatInput">
               <Input
+                id="chatInput"
                 className={classes.inputRow}
                 value={this.state.input}
                 onChange={this.handleChange}

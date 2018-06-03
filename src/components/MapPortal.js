@@ -56,8 +56,6 @@ class MapPortal extends Component {
     })
   };
 
-  // showAllLibs = () => this.mapRef.current && this.mapRef.current.showAllLibs();
-
   render() {
     const { classes, mapStyle, mapLib, libs } = this.props;
     const { latitude, longitude } = this.state.coords;

@@ -14,17 +14,11 @@ export const openRoute = route => {
         when(state`currentPage`, currentPage => currentPage !== route),
         {
           true: [
-            () => console.log(route),
-            ({ state }) => console.log(state.get('currentPage')),
             set(state`currentPage`, null),
             wait(pageTransitionDelay),
             set(state`currentPage`, route),
           ],
-          false: [
-            () => console.log(route),
-            ({ state }) => console.log(state.get('currentPage')),
-            () => console.log(false),
-          ],
+          false: [],
         },
       ],
       false: [
