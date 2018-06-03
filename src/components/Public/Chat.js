@@ -159,16 +159,17 @@ class Chat extends Component {
             </div>
           </div>
           <div>
-            <label htmlFor="chatInput">
-              <Input
-                id="chatInput"
-                className={classes.inputRow}
-                value={this.state.input}
-                onChange={this.handleChange}
-                onKeyUp={this.handleKeyUp}
-                placeholder="Введіть текст та натисніть Enter"
-              />
-            </label>
+            <label htmlFor="chatInput"></label>
+            <Input
+              id="chatInput"
+              className={classes.inputRow}
+              value={this.state.input}
+              onChange={this.handleChange}
+              onKeyUp={this.handleKeyUp}
+              placeholder="Введіть текст та натисніть Enter"
+              label=">"
+              labelPosition="left"
+            />
             <QRModal id={reserve.id} name={reserve.name} libName={reserve.libName} />
 
           </div>
