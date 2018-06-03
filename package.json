@@ -31,8 +31,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm build/static/*/*.map",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postbuild": "node node_modules/gzip-all/bin \"build/static/js/*.js\""
+  },
+  "devDependencies": {
+    "gzip-all": "^1.0.0"
   }
 }
