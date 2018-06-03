@@ -8,6 +8,7 @@
  * @returns {string}
  */
 export const timeFormatHM = date => {
+  if (!(date instanceof Date)) return '';
   return `${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;
 };
 
@@ -17,10 +18,12 @@ export const timeFormatHM = date => {
  * @returns {string}
  */
 export const timeFormatHMS = date => {
-  return `
-    ${String(date.getHours()).padStart(2,'0')}:
-    ${String(date.getMinutes()).padStart(2,'0')}:
-    ${String(date.getSeconds()).padStart(2,'0')}`;
+  if (!(date instanceof Date)) return '';
+  return [
+    `${String(date.getHours()).padStart(2,'0')}`,
+    `${String(date.getMinutes()).padStart(2,'0')}`,
+    `${String(date.getSeconds()).padStart(2,'0')}`,
+  ].join(':');
 };
 
 /**
@@ -29,6 +32,7 @@ export const timeFormatHMS = date => {
  * @returns {boolean}
  */
 export const isReserveActive = time => {
+  if (!(time instanceof Date)) return false;
   const now = new Date();
   return time > now;
 };
@@ -39,6 +43,7 @@ export const isReserveActive = time => {
  * @returns {string}
  */
 export const formatDistance = dist => {
+  if (!Number.isFinite(dist)) return '';
   const km = Math.floor(dist / 1000);
   const m = Math.round(dist - km * 1000);
   const parts = [];
@@ -56,7 +61,10 @@ export const formatDistance = dist => {
  * @param str
  * @returns {string}
  */
-export const removeDashes = str => str.replace(/-/g, '');
+export const removeDashes = str => {
+  if (!(typeof str === 'string') && !Number.isFinite(str)) return '';
+  return String(str).replace(/-/g, '');
+};
 
 /**
  * Match parts of strings
@@ -131,6 +139,7 @@ const indistinctMatching = (maxMatching, strInputMatching, strInputStandart) => 
  * @returns {boolean}
  */
 export const isApproxEqual = (a, b) => {
+  if (!(typeof a === 'string') || !(typeof b === 'string')) return false;
   for (let i = 0; i <= a.length - b.length; i++) {
     const m = indistinctMatching(3, a.toLowerCase().substr(i, b.length), b.toLowerCase());
     if (m > 70)
