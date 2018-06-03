@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from "@cerebral/react";
-import { state } from 'cerebral/tags';
+import { state, signal } from 'cerebral/tags';
 import injectSheet from 'react-jss';
 import { pageTransitionDelay } from '../../app/constants';
 
@@ -8,6 +8,7 @@ import MainPage from '../MainPage';
 import AdminPage from '../AdminPage';
 
 import LoginForm from '../LoginForm';
+import controller from "../../controller";
 
 const styles = {
   '@global body': {
@@ -44,19 +45,27 @@ const styles = {
   },
 };
 
-function Application(props) {
-  return (
-    <div className={props.classes.container}>
-      <MainPage />
-      <AdminPage />
-      <LoginForm open={props.visibleLogin} />
-    </div>
-  )
+class Application extends Component {
+  componentDidMount() {
+    this.props.applicationLoaded();
+  }
+
+  render() {
+    const { classes, visibleLogin } = this.props;
+    return (
+      <div className={classes.container}>
+        <MainPage />
+        <AdminPage />
+        <LoginForm open={visibleLogin} />
+      </div>
+    )
+  }
 }
 
 export default connect(
   {
     visibleLogin: state`env.login.edit`,
+    applicationLoaded: signal`applicationLoaded`,
   },
   injectSheet(styles)(Application),
 );

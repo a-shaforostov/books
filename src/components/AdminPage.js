@@ -43,6 +43,14 @@ const styles = {
   librarySide: {
     width: '60%',
     display: 'flex',
+    marginBottom: '1%',
+    marginLeft: '2%',
+  },
+  bookSide: {
+    display: 'flex',
+    width: '30%',
+    marginBottom: '1%',
+    marginRight: '3%',
   },
   '@global body': {
     backgroundImage: `url(${back})!important`,
@@ -88,10 +96,12 @@ class AdminPage extends Component {
                     onEdit={this.handleEdit}
                   />
                 </div>
-                <Published
-                  onDelete={this.handleDelete}
-                  onEdit={this.handleEdit}
-                />
+                <div className={classes.bookSide}>
+                  <Published
+                    onDelete={this.handleDelete}
+                    onEdit={this.handleEdit}
+                  />
+                </div>
               </Segment>
             </DragDropContextProvider>
           </main>

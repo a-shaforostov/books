@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "@cerebral/react";
-import { state, signal } from 'cerebral/tags';
+import controller from '../../controller';
+import { Container } from '@cerebral/react';
 
 import {create as createJss} from 'jss';
 import {JssProvider} from 'react-jss';
@@ -16,22 +16,19 @@ jss.use(jssNested(), jssCamelCase(), jssGlobal());
 
 class AppWrapper extends Component {
   componentDidMount() {
-    this.props.applicationLoaded();
+    const event = new Event('applicationLoaded');
+    document.dispatchEvent(event);
   };
 
   render() {
     return (
-      <JssProvider jss={jss}>
-        <Application />
-      </JssProvider>
+      <Container controller={controller}>
+        <JssProvider jss={jss}>
+          <Application />
+        </JssProvider>
+      </Container>
     )
   }
 }
 
-export default connect(
-  {
-    currentPage: state`currentPage`,
-    applicationLoaded: signal`applicationLoaded`,
-  },
-  AppWrapper,
-);
+export default AppWrapper;

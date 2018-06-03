@@ -2,7 +2,7 @@ import paper from '../assets/white-paper.jpg';
 
 export default {
   list: {
-    width: '30%',
+    width: '100%',
   },
   header: {
     color: 'white!important',

@@ -26,7 +26,8 @@ const styles = {
     border: 'none',
     borderRadius: 0,
     margin: '10px!important',
-    padding: '0 10px!important',
+    padding: '10px!important',
+    boxShadow: '1px 1px 1px 1px #00000059',
   },
   logo: {
     display: 'flex',
@@ -44,11 +45,20 @@ const styles = {
   },
   stats: {
     display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
     fontSize: '90%',
     lineHeight: '17px',
     margin: '3px',
+    left: '50%',
+    transform: 'translateX(-50%) rotateZ(-2deg)',
+    position: 'absolute',
+    width: '250px',
+    justifyContent: 'space-between',
+    top: '53px',
+    backgroundColor: 'white',
+    padding: '5px 10px',
+    zIndex: '-1',
+    paddingTop: '11px',
+    boxShadow: '1px 1px 1px 1px #00000063',
   },
   statLabel: {
     fontWeight: '700',
@@ -106,13 +116,14 @@ class Header extends Component {
             </label>
             <Button onClick={this.handleSaveData}>Зберегти</Button>
           </div>
-          <div className={classes.stats}>
-            <div><span className={classes.statLabel}>Книг:</span> <span className={classes.statValue}>{bookStat.books}</span></div>
-            <div><span className={classes.statLabel}>Бібліотек:</span> <span className={classes.statValue}>{bookStat.libraries}</span></div>
-            <div><span className={classes.statLabel}>Видань:</span> <span className={classes.statValue}>{bookStat.published}</span></div>
-          </div>
         </div>
         <User />
+        <div className={classes.stats}>
+          <div><span className={classes.statLabel}>Книг:</span> <span className={classes.statValue}>{bookStat.books}</span></div>
+          <div><span className={classes.statLabel}>Бібліотек:</span> <span className={classes.statValue}>{bookStat.libraries}</span></div>
+          <div><span className={classes.statLabel}>Видань:</span> <span className={classes.statValue}>{bookStat.published}</span></div>
+        </div>
+
       </Segment>
     )
   }

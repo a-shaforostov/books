@@ -34,9 +34,17 @@ const styles = {
 };
 
 class Loader extends Component {
+  state = {
+    visible: true,
+  };
+
+  componentDidMount() {
+    document.addEventListener('applicationLoaded', () => this.setState({ visible: false }));
+  }
+
   render() {
     return (
-      !this.props.isApplicationLoaded &&
+      this.state.visible &&
       <div style={styles.frame}>
         <div style={styles.container}>
           <img style={styles.image} src={gif} alt="book"/>
@@ -48,9 +56,4 @@ class Loader extends Component {
   }
 }
 
-export default connect(
-  {
-    isApplicationLoaded: state`isApplicationLoaded`,
-  },
-  Loader,
-);
+export default Loader;
