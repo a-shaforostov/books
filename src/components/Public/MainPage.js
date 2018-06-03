@@ -1,3 +1,8 @@
+/**
+ * Component. Public page
+ * @file
+ */
+
 import React, { Component } from "react";
 import { connect } from "@cerebral/react";
 import { state } from 'cerebral/tags';

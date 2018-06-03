@@ -1,2 +1,16 @@
+/**
+ * Global constants
+ * @module constants
+ */
+
+/**
+ * time for fade transitions between pages
+ * @type {number}
+ */
 export const pageTransitionDelay = 1000;
-export const reservationTime = 1; // in minutes
+
+/**
+ * time in minutes for reservation of book in library
+ * @type {number}
+ */
+export const reservationTime = 5; // in minutes

@@ -1,3 +1,8 @@
+/**
+ * Component. Published books list
+ * @file
+ */
+
 import React, { Component, Fragment } from 'react';
 import injectSheet from 'react-jss';
 import { connect } from "@cerebral/react";

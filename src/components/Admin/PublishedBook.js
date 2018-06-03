@@ -1,3 +1,8 @@
+/**
+ * Component. Book in published books list
+ * @file
+ */
+
 import React, { Component, Fragment } from 'react';
 import injectSheet from 'react-jss';
 import classnames from 'classnames';

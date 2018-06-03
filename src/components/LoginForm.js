@@ -1,3 +1,8 @@
+/**
+ * Component. Login form
+ * @file
+ */
+
 import React, { Component } from 'react';
 import { state, signal } from 'cerebral/tags';
 import { connect } from '@cerebral/react';

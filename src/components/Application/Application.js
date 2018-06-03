@@ -1,3 +1,8 @@
+/**
+ * Component. Application
+ * @file
+ */
+
 import React, { Component } from 'react';
 import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';
@@ -8,7 +13,6 @@ import MainPage from '../Public/MainPage';
 import AdminPage from '../Admin/AdminPage';
 
 import LoginForm from '../LoginForm';
-import controller from "../../controller";
 
 const styles = {
   '@global body': {

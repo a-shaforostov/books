@@ -1,3 +1,8 @@
+/**
+ * Component. User block in header
+ * @file
+ */
+
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import { connect } from "@cerebral/react";

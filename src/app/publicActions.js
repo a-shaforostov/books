@@ -1,4 +1,5 @@
 /**
+ * Actions for public part
  * @module ActionsPublic
  */
 

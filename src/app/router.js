@@ -1,4 +1,5 @@
 /**
+ * Routes of application
  * @module Router
  */
 

@@ -1,3 +1,8 @@
+/**
+ * Component. Portal fot map in-place
+ * @file
+ */
+
 import React, { Component } from "react";
 import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';

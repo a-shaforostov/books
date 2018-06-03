@@ -1,3 +1,8 @@
+/**
+ * Services for creating bot`s and guest`s messages
+ * @file
+ */
+
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 import { isReserveActive, timeFormatHMS } from '../../app/utils';
@@ -120,43 +125,6 @@ export const regLibsWasShownEl = ({ signals, isActive }) => {
   )
 };
 
-export const bookReservedEl = ({ signals, isActive, data }) => {
-  return (
-    <div>
-      <div>Книга {data} зарезервована</div>
-      <div style={{...styles.row, ...styles.wrapper}}>
-        <Button positive style={styles.button} disabled={!isActive} onClick={() => signals.greetStep()}>Продовжити</Button>
-      </div>
-    </div>
-  )
-};
-
-export const stepResultEl = ({ libraries, books }) => {
-  return (
-    <div>
-      <div>Результат пошуку:</div>
-      <div>
-        {
-          libraries &&
-          libraries.map(library => (
-            <div key={library.id}>
-              {library.name}
-            </div>
-          ))
-        }
-        {
-          books &&
-          books.map(book => (
-            <div key={book.id}>
-              {book.name}
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  )
-};
-
 export const foundBooksEl = ({ signals, isActive, data, books, myPosition }) => {
   const handleLibClick = libId => e => {
     e.preventDefault();
@@ -218,16 +186,24 @@ export const foundBooksEl = ({ signals, isActive, data, books, myPosition }) => 
 };
 
 export default {
+  /* Offer to start dialog */
   start: stepInitialEl,
+  /* Options for interaction */
   greet: stepStartEl,
+  /* Message before showing libraries */
   startLibrary: stepStartLibraryEl,
+  /* Message before book search */
   startBook: stepStartBookEl,
-  result: stepResultEl,
+  /* Book not found message */
   bookNotFound: bookNotFoundEl,
+  /* List of libraries with books */
   foundBooks: foundBooksEl,
+  /* Bot says that she can't recognize guest`s message */
   unknown: unknownEl,
-  bookReserved: bookReservedEl,
+  /* All google books was shown */
   allLibsWasShown: allLibsWasShownEl,
+  /* All registered libraries waqs shown */
   regLibsWasShown: regLibsWasShownEl,
+  /* Message about geolocation blocking */
   geolocationDenied: geolocationDeniedEl,
 };

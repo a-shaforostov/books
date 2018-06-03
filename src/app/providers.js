@@ -1,6 +1,14 @@
+/**
+ * @module providers
+ */
+
 import { Provider } from "cerebral";
 import sha1 from 'js-sha1';
 
+/**
+ * Returns sha1 hash of string
+ * @type {Provider}
+ */
 export const hashProvider = Provider({
   sha1(str) {
     return sha1(str);
@@ -9,6 +17,12 @@ export const hashProvider = Provider({
 
 let ggg;
 
+/**
+ * Gives service for long leaving of promise to process delete confirmation.<br>
+ * Promise is created when user wants to delete item.<br>
+ * Promise is resolved or rejected as result of user confirmation.<br>
+ * @type {Provider}
+ */
 export const longPromise = Provider({
   createPromise() {
     return new Promise((resolve, reject) => ggg = { resolve, reject });

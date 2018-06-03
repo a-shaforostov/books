@@ -1,4 +1,5 @@
 /**
+ * Actions for admin part
  * @module ActionsAdmin
  */
 

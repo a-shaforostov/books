@@ -1,3 +1,8 @@
+/**
+ * Module of admin part and general part
+ * @module ModuleAdmin
+ */
+
 import { Module } from "cerebral";
 import * as sequences from "./sequences";
 import FormsProvider from '@cerebral/forms';
@@ -17,12 +22,6 @@ export default Module({
     currentPage: null,
     isApplicationLoaded: false,
     user: null,
-    // user: {
-    //   id: 'test@gmail.com',
-    //   name: 'Тарас Шевченко',
-    //   pass: 'e42776aa51230617b6ac2d4690d78771d26acd39',
-    //   avatar: avatar,
-    // },
     loginError: false,
     env: {
       login: {

@@ -1,11 +1,29 @@
+/**
+ * Module of public part
+ * @module ModulePublic
+ */
+
 import { Module } from "cerebral";
 import * as sequences from "./publicSequences";
+
+/*
+Available steps is:
+start
+greet
+startLibrary
+startBook
+bookNotFound
+foundBooks
+unknown
+allLibsWasShown
+regLibsWasShown
+geolocationDenied
+*/
 
 export default Module({
   state: {
     currentStep: null,
     currentStepId: null,
-    steps: ['start', 'stop', 'greet', 'startNearest', 'startLibrary', 'startBook', 'nearest', 'library', 'book', 'showAllLibs'],
     dialog: [],
     reserve: {
       name: null,

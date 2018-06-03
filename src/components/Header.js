@@ -1,3 +1,8 @@
+/**
+ * Component. Header for all pages
+ * @file
+ */
+
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import { connect } from "@cerebral/react";

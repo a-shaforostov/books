@@ -1,3 +1,8 @@
+/**
+ * Component. Modal map
+ * @file
+ */
+
 import React, { Component } from 'react';
 import { connect } from '@cerebral/react';
 import injectSheet from 'react-jss';

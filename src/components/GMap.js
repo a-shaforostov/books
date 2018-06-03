@@ -1,3 +1,8 @@
+/**
+ * Component. Map with services
+ * @file
+ */
+
 import React, { Component } from 'react';
 import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";

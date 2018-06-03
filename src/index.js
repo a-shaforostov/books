@@ -6,7 +6,8 @@ import Application from './components/Application/Loadable';
 
 import registerServiceWorker from './registerServiceWorker';
 
-// to avoid arror in google.maps library in offline mode
+// to avoid error in google.maps library in offline mode
+// eslint-disable-next-line no-unused-vars
 var google;
 
 ReactDOM.render(
