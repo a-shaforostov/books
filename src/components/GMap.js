@@ -123,7 +123,7 @@ class GMap extends Component {
 
 export default compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBZANw9QWCv3-zoqnrzgOwamZp5w1xP1-Q&v=3.exp&language=uk&libraries=geometry,drawing,places",
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBhh7lW2AwsYhs5QBm4Cm0NZtrhuifbTt8&v=3.exp&language=uk&libraries=geometry,drawing,places",
     loadingElement: <div className="loadingElement" style={{ height: `100%` }} ><Dimmer active><Loader>Завантаження карти</Loader></Dimmer></div>,
     mapElement: <div className="mapElement" style={{ height: `100%` }} />,
     containerElement: <Segment raised piled style={{ height: `100%` }} />,
