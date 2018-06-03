@@ -149,7 +149,7 @@ export const postEntity = context => {
   const { isNew, ...data } = formData;
   if (isNew) {
     // Create entity
-    data.id = data.id || Date.now();
+    data.id = data.id || String(Date.now());
     push(props.entity, data);
   } else {
     // Update entity

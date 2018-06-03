@@ -174,7 +174,7 @@ export const foundBooksEl = ({ signals, isActive, data, books, myPosition }) => 
           data.map(lib => (
             <div key={lib.library.id}>
               <div  style={styles.library}>
-                <a href="#" title="Показати на карті" onClick={handleLibClick(lib.library.id)}>{lib.library.name}</a>
+                <a href="#library" title="Показати на карті" onClick={handleLibClick(lib.library.id)}>{lib.library.name}</a>
                 <span title="Кількість книг, що знайдено в бібліотеці"> ({lib.count}) </span>
                 <span title="Відстань від бібліотеки" style={styles.dist}>{formatDistance(lib.dist)}</span>
               </div>
@@ -191,7 +191,7 @@ export const foundBooksEl = ({ signals, isActive, data, books, myPosition }) => 
                           ? timeFormatHMS(book.reserved)
                           : isActive
                             ? <a
-                                href="#"
+                                href="#book"
                                 onClick={e => {
                                   e.preventDefault();
                                   signals.reserveBookRequest({ id: book.id, name: book.name, libName: lib.library.name });

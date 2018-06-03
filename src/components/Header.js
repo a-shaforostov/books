@@ -6,6 +6,7 @@ import { state, signal } from 'cerebral/tags';
 import { Segment, Button } from 'semantic-ui-react';
 
 import User from './User';
+import bookStat from '../computed/bookStat';
 
 import logo from '../assets/logo.png';
 import title from '../assets/title.png';
@@ -25,6 +26,7 @@ const styles = {
     border: 'none',
     borderRadius: 0,
     margin: '10px!important',
+    padding: '0 10px!important',
   },
   logo: {
     display: 'flex',
@@ -39,6 +41,20 @@ const styles = {
   },
   menu: {
     marginLeft: '30px!important',
+  },
+  stats: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    fontSize: '90%',
+    lineHeight: '17px',
+    margin: '3px',
+  },
+  statLabel: {
+    fontWeight: '700',
+  },
+  statValue: {
+
   },
   '@global .page-header .button': {
     border: '2px solid black',
@@ -68,7 +84,7 @@ class Header extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, bookStat } = this.props;
     return (
       <Segment className={`${classes.header} page-header`}>
         <div className={classes.group}>
@@ -90,6 +106,11 @@ class Header extends Component {
             </label>
             <Button onClick={this.handleSaveData}>Зберегти</Button>
           </div>
+          <div className={classes.stats}>
+            <div><span className={classes.statLabel}>Книг:</span> <span className={classes.statValue}>{bookStat.books}</span></div>
+            <div><span className={classes.statLabel}>Бібліотек:</span> <span className={classes.statValue}>{bookStat.libraries}</span></div>
+            <div><span className={classes.statLabel}>Видань:</span> <span className={classes.statValue}>{bookStat.published}</span></div>
+          </div>
         </div>
         <User />
       </Segment>
@@ -104,6 +125,7 @@ export default connect(
     adminRouted: signal`adminRouted`,
     loadFile: signal`loadFile`,
     downloadFile: signal`downloadFile`,
+    bookStat,
   },
   injectSheet(styles)(Header),
 );
