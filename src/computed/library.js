@@ -1,3 +1,8 @@
+/**
+ * Build library object with data
+ * @module computed/library
+ */
+
 import { Compute } from "cerebral";
 import { state } from "cerebral/tags";
 

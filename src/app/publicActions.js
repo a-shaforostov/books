@@ -1,9 +1,18 @@
+/**
+ * @module ActionsPublic
+ */
+
 import { timeFormatHM } from './utils';
 import { reservationTime } from './constants';
 import { removeDashes, isApproxEqual } from './utils';
 import { downloadFile } from './actions';
 import html2canvas from 'html2canvas';
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const startStep = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -15,6 +24,11 @@ export const startStep = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const greetStep = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -26,6 +40,11 @@ export const greetStep = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const geolocationDenied = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -37,6 +56,11 @@ export const geolocationDenied = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const startBookStep = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -48,6 +72,11 @@ export const startBookStep = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const justTextStep = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -59,6 +88,11 @@ export const justTextStep = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const showAllLibs = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -70,6 +104,11 @@ export const showAllLibs = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const showRegLibs = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -81,6 +120,11 @@ export const showRegLibs = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const allLibsWasShown = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -92,6 +136,11 @@ export const allLibsWasShown = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const regLibsWasShown = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -103,6 +152,11 @@ export const regLibsWasShown = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const unknownStep = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -114,6 +168,11 @@ export const unknownStep = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const startSearchBook = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -125,6 +184,11 @@ export const startSearchBook = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const bookNotFound = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -136,6 +200,11 @@ export const bookNotFound = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ */
 export const foundBooks = ({ state, props }) => {
   const value = {
     id: Math.random(),
@@ -148,6 +217,12 @@ export const foundBooks = ({ state, props }) => {
   props.stepId = value.id;
 };
 
+/**
+ * Step of chat
+ * @param state
+ * @param props
+ * @param path
+ */
 export const findBooks = ({ state, props, path }) => {
   const books = state.get('data.books');
   const published = state.get('data.published');
@@ -157,8 +232,6 @@ export const findBooks = ({ state, props, path }) => {
   const { criteria } = props;
   const publishedBooks = published.filter(book => {
     const isbn = removeDashes(String(book.id).toLowerCase()).indexOf(removeDashes(criteria.toLowerCase())) !== -1;
-    // const name = String(book.name).toLowerCase().indexOf(criteria.toLowerCase()) !== -1;
-    // const author = String(book.author).toLowerCase().indexOf(criteria.toLowerCase()) !== -1;
     const name = isApproxEqual(book.name, criteria);
     const author = isApproxEqual(book.author, criteria);
     return isbn || name || author;
@@ -188,19 +261,6 @@ export const findBooks = ({ state, props, path }) => {
       },
     }
   }, {});
-
-  // const groupedBooks = {};
-  // rawBooks.forEach(book => {
-  //   if (groupedBooks[book.library]) {
-  //     if (groupedBooks[book.library].books) {
-  //       groupedBooks[book.library].books.push(book);
-  //     } else {
-  //       groupedBooks[book.library].books = [book];
-  //     }
-  //   } else {
-  //     groupedBooks[book.library] = { books: [] }
-  //   }
-  // });
 
   // update libraries with data and books number
   Object.keys(groupedBooks).forEach(item => {
@@ -245,7 +305,11 @@ export const findBooks = ({ state, props, path }) => {
   }
 };
 
-export const reserveBookApprove = ({ state, props }) => {
+/**
+ * Approve reservation
+ * @param state
+ */
+export const reserveBookApprove = ({ state }) => {
   const books = state.get('data.books');
   const id = state.get('publicModule.reserve.id');
   const now = new Date();
@@ -254,11 +318,14 @@ export const reserveBookApprove = ({ state, props }) => {
   state.set('data.books', updated);
 };
 
+/**
+ * Save dialog in file
+ * @param context
+ */
 export const saveDialog = async (context) => {
   const { props } = context;
   const dialog = document.getElementById('dialogContent');
   const canvas = await html2canvas(dialog);
-  // const uri = "data:text/html;charset=UTF-8,"+encodeURIComponent(dialogHtml);
   props.data = canvas.toDataURL('image/png');
   props.filename = 'dialog.png';
   downloadFile(context);

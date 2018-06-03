@@ -5,9 +5,9 @@ import { state, signal } from 'cerebral/tags';
 import classnames from 'classnames';
 import flow from 'lodash/flow';
 import { DropTarget } from 'react-dnd';
-import { isReserveActive, timeFormatHMS } from '../app/utils';
+import { isReserveActive, timeFormatHMS } from '../../app/utils';
 
-import libraryCompute from '../computed/library';
+import libraryCompute from '../../computed/library';
 
 import { Segment, Header, Icon, Popup } from 'semantic-ui-react';
 

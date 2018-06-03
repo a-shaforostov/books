@@ -1,3 +1,8 @@
+/**
+ * Check if book is stored in libraries
+ * @module computed/isUsedInLibraries
+ */
+
 import { Compute } from "cerebral";
 import { state } from "cerebral/tags";
 

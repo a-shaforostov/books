@@ -1,3 +1,8 @@
+/**
+ * Split book by libraries and count totals
+ * @module computed/booksInLibraries
+ */
+
 import { Compute } from "cerebral";
 import { state } from "cerebral/tags";
 

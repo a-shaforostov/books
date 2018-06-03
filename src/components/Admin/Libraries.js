@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { Segment, Header, Icon } from 'semantic-ui-react';
 
-import paper from '../assets/white-paper.jpg';
+import paper from '../../assets/white-paper.jpg';
 
 const styles = {
   list: {

@@ -1,3 +1,14 @@
+/**
+ * @module ActionsAdmin
+ */
+
+/**
+ * Automatic login using Credentials API
+ * @param state
+ * @param path
+ * @param props
+ * @returns {*|Promise<T>}
+ */
 export const autologin = ({ state, path, props }) => {
   if (window.PasswordCredential) {
     const user = state.get('user');
@@ -25,6 +36,14 @@ export const autologin = ({ state, path, props }) => {
   }
 };
 
+/**
+ * Submit data from login form
+ * @param state
+ * @param hash - hash provider
+ * @param form
+ * @param path
+ * @param longPromise
+ */
 export const submitLogin = ({ state, hash, form, path, longPromise }) => {
   const loginForm = form.get(`forms.login`);
   const { name, pass } = loginForm;
@@ -51,7 +70,10 @@ export const submitLogin = ({ state, hash, form, path, longPromise }) => {
   }
 };
 
-export const logout = ({ state }) => {
+/**
+ * Logout
+ */
+export const logout = () => {
   if (window.PasswordCredential) {
     navigator.credentials.preventSilentAccess();
   }
@@ -110,6 +132,11 @@ export async function loadFile({ state, props }) {
   state.set('data', dataObj);
 }
 
+/**
+ * Confirm delete item in confirmation modal
+ * @param state
+ * @param props
+ */
 export const deleteEntityConfirm = ({ state, props }) => {
   const { confirm } = props;
   if (confirm) {
@@ -140,6 +167,10 @@ export const deleteEntityConfirm = ({ state, props }) => {
   state.set(`delete.name`, null);
 };
 
+/**
+ * Add new or update existing item
+ * @param context
+ */
 export const postEntity = context => {
   const { state, form, props } = context;
 
@@ -169,12 +200,22 @@ export const postEntity = context => {
   }
 };
 
+/**
+ * Remove book from library
+ * @param state
+ * @param props
+ */
 export const removeFromLibraries = ({ state, props }) => {
   const id = props.id;
   const books = state.get('data.books');
   state.set('data.books', books.filter(book => book.isbn !== id));
 };
 
+/**
+ * Put book into library
+ * @param state
+ * @param props
+ */
 export const putInLibrary = ({ state, props }) => {
   const id = Date.now();
   const isbn = props.id;

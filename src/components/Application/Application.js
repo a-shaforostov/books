@@ -4,8 +4,8 @@ import { state, signal } from 'cerebral/tags';
 import injectSheet from 'react-jss';
 import { pageTransitionDelay } from '../../app/constants';
 
-import MainPage from '../MainPage';
-import AdminPage from '../AdminPage';
+import MainPage from '../Public/MainPage';
+import AdminPage from '../Admin/AdminPage';
 
 import LoginForm from '../LoginForm';
 import controller from "../../controller";

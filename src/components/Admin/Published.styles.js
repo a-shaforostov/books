@@ -1,4 +1,4 @@
-import paper from '../assets/white-paper.jpg';
+import paper from '../../assets/white-paper.jpg';
 
 export default {
   list: {

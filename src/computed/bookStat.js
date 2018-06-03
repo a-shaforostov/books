@@ -1,3 +1,8 @@
+/**
+ * Statistics of data. Books, Libraries, Published books
+ * @module computed/bookStats
+ */
+
 import { Compute } from "cerebral";
 import { state } from "cerebral/tags";
 

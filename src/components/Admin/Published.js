@@ -5,7 +5,7 @@ import { state, signal } from 'cerebral/tags';
 
 import { Segment, Header, Icon } from 'semantic-ui-react';
 
-import booksInLibraries from '../computed/booksInLibraries';
+import booksInLibraries from '../../computed/booksInLibraries';
 import PublishedBook from './PublishedBook';
 import styles from './Published.styles';
 

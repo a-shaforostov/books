@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { connect } from "@cerebral/react";
 import { state } from 'cerebral/tags';
 import { CSSTransition } from 'react-transition-group';
-import { pageTransitionDelay } from '../app/constants';
+import { pageTransitionDelay } from '../../app/constants';
 import injectSheet from 'react-jss';
 
 import { Segment } from 'semantic-ui-react';
 
-import Header from './Header';
+import Header from '../Header';
 import Chat from './Chat';
 import MapPortal from './MapPortal';
-import pencil from '../assets/pencil.png';
+import pencil from '../../assets/pencil.png';
 
 const styles = {
   page: {

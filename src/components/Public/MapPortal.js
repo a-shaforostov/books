@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "@cerebral/react";
 import { state, signal } from 'cerebral/tags';
 import { CSSTransition } from 'react-transition-group';
-import { pageTransitionDelay } from '../app/constants';
+import { pageTransitionDelay } from '../../app/constants';
 import injectSheet from 'react-jss';
 
-import GMap from "./GMap";
+import GMap from "../GMap";
 
 const styles = {
   portal: {

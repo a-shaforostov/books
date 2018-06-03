@@ -5,12 +5,12 @@ import injectSheet from 'react-jss';
 import classnames from 'classnames';
 
 import stepElements from './steps';
-import QRModal from './forms/QRModal';
+import QRModal from '../forms/QRModal';
 
 import { Input } from 'semantic-ui-react';
 
-import botImage from '../assets/bot.png';
-import sheet from '../assets/sheet.png';
+import botImage from '../../assets/bot.png';
+import sheet from '../../assets/sheet.png';
 
 const styles = {
   chat: {

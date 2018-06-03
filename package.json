@@ -34,9 +34,14 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "postbuild": "node node_modules/gzip-all/bin \"build/static/js/*.js\""
+    "postbuild": "node node_modules/gzip-all/bin \"build/static/js/*.js\"",
+    "doc": "node node_modules/jsdoc/jsdoc.js src -r -d documentation",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
-    "gzip-all": "^1.0.0"
+    "gzip-all": "^1.0.0",
+    "jsdoc": "^3.5.5",
+    "@kadira/storybook": "^2.21.0"
   }
 }

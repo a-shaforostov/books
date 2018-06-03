@@ -1,16 +1,43 @@
-export const timeFormatHM = (date) => {
+/**
+ * @module utils
+ */
+
+/**
+ * format time without seconds
+ * @param date
+ * @returns {string}
+ */
+export const timeFormatHM = date => {
   return `${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;
 };
 
-export const timeFormatHMS = (date) => {
-  return `${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}:${String(date.getSeconds()).padStart(2,'0')}`;
+/**
+ * format time with seconds
+ * @param date
+ * @returns {string}
+ */
+export const timeFormatHMS = date => {
+  return `
+    ${String(date.getHours()).padStart(2,'0')}:
+    ${String(date.getMinutes()).padStart(2,'0')}:
+    ${String(date.getSeconds()).padStart(2,'0')}`;
 };
 
-export const isReserveActive = (time) => {
+/**
+ * Checks if reservation is active
+ * @param {Date} time
+ * @returns {boolean}
+ */
+export const isReserveActive = time => {
   const now = new Date();
   return time > now;
 };
 
+/**
+ * Format distance as strings of kilometers and meters
+ * @param dist
+ * @returns {string}
+ */
 export const formatDistance = dist => {
   const km = Math.floor(dist / 1000);
   const m = Math.round(dist - km * 1000);
@@ -24,8 +51,20 @@ export const formatDistance = dist => {
   return parts.join('');
 };
 
+/**
+ * Remove dashes from ISBN string
+ * @param str
+ * @returns {string}
+ */
 export const removeDashes = str => str.replace(/-/g, '');
 
+/**
+ * Match parts of strings
+ * @param strInputA - string 1
+ * @param strInputB - string 2
+ * @param lngLen - length of partials
+ * @returns {{lngCountLike: number, lngSubRows: number}} - stats of equalities
+ */
 const matching = (strInputA, strInputB, lngLen) => {
   const strA = strInputA;
   const strB = strInputB;
@@ -51,7 +90,13 @@ const matching = (strInputA, strInputB, lngLen) => {
   return tempRet;
 };
 
-
+/**
+ * Approximate matching
+ * @param maxMatching - max length of parts
+ * @param strInputMatching - string
+ * @param strInputStandart - template
+ * @returns {number} - percentage of match
+ */
 const indistinctMatching = (maxMatching, strInputMatching, strInputStandart) => {
   if (!(maxMatching && strInputMatching && strInputStandart)) {
     return 0;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import { isReserveActive, timeFormatHMS } from '../app/utils';
-import { formatDistance } from '../app/utils';
+import { isReserveActive, timeFormatHMS } from '../../app/utils';
+import { formatDistance } from '../../app/utils';
 
 const styles = {
   wrapper: {

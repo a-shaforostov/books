@@ -6,18 +6,18 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContextProvider } from 'react-dnd';
 
 import { CSSTransition } from 'react-transition-group';
-import { pageTransitionDelay } from '../app/constants';
+import { pageTransitionDelay } from '../../app/constants';
 
 import { Segment } from 'semantic-ui-react';
 
-import Header from './Header';
+import Header from '../Header';
 import Libraries from './Libraries';
 import LibraryInfo from './LibraryInfo';
 import Published from './Published';
-import DeleteConfirmation from './forms/DeleteConfirmation';
-import EditLibrary from './forms/EditLibrary';
-import EditPublished from './forms/EditPublished';
-import back from '../assets/wood-bg.jpg';
+import DeleteConfirmation from '../forms/DeleteConfirmation';
+import EditLibrary from '../forms/EditLibrary';
+import EditPublished from '../forms/EditPublished';
+import back from '../../assets/wood-bg.jpg';
 
 const styles = {
   page: {

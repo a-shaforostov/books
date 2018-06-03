@@ -2,6 +2,7 @@
 
 #tools
 .idea
+/documentation
 
 # dependencies
 /node_modules
