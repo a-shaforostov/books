@@ -52,6 +52,8 @@ const styles = {
   inputRow: {
     width: 'calc(100% + 10px)',
     margin: '10px -5px',
+    border: '1px solid brown',
+    borderRadius: '3px',
   },
   content: {
     margin: '20px 0 5px',

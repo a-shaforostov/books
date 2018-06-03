@@ -8,10 +8,17 @@ export default {
     cursor: 'pointer',
     paddingTop: '6px!important',
     paddingBottom: '6px!important',
+    '&:hover': {
+      backgroundColor: '#d4a16387!important',
+      transition: 'all 500ms',
+    }
   },
   bookSel: {
     backgroundColor: 'rgba(255,255,255,0.65)!important',
     fontWeight: '700',
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,0.65)!important',
+    }
   },
   draggingBook: {
     color: 'orangered',

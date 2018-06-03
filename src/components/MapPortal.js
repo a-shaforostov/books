@@ -43,8 +43,6 @@ class MapPortal extends Component {
         },
       });
     });
-    // const PlacesService = window.google.maps.places.PlacesService;
-    // const map = findDOMNode();
   }
 
   returnMarkers = markers => {
@@ -58,7 +56,7 @@ class MapPortal extends Component {
     })
   };
 
-  showAllLibs = () => this.mapRef.current && this.mapRef.current.showAllLibs();
+  // showAllLibs = () => this.mapRef.current && this.mapRef.current.showAllLibs();
 
   render() {
     const { classes, mapStyle, mapLib, libs } = this.props;
@@ -81,7 +79,6 @@ class MapPortal extends Component {
               mapStyle={mapStyle}
               mapLib={mapLib}
               libs={libs}
-              // ref={this.mapRef}
             />
           }
         </div>

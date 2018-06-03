@@ -188,7 +188,7 @@ export const foundBooksEl = ({ signals, isActive, data, books, myPosition }) => 
                         {book.name}&nbsp;({book.author})&nbsp;
                         [{
                           book.reserved && isReserveActive(book.reserved)
-                          ? timeFormatHMS(book.reserved)
+                          ? <span title="Час, коли книга має бути повернена">{timeFormatHMS(book.reserved)}</span>
                           : isActive
                             ? <a
                                 href="#book"

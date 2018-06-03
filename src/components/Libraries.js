@@ -42,6 +42,10 @@ const styles = {
     cursor: 'pointer',
     paddingTop: '6px!important',
     paddingBottom: '6px!important',
+    '&:hover': {
+      backgroundColor: '#d4a16387!important',
+      transition: 'all 500ms',
+    }
   },
   librarySel: {
     backgroundColor: '#d4a16387!important',

@@ -75,7 +75,7 @@ class MapModal extends Component {
         <Modal.Header>
           Вкажіть розташування бібліотеки на карті
         </Modal.Header>
-        <Modal.Content>
+        <Modal.Content style={{ height: 'calc(100vh - 200px)' }}>
           <GMap
             defaultCenter={{ lat: latitude, lng: longitude }}
             markers={marker ? [{ ...marker, name }] : []}

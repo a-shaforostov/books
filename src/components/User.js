@@ -21,12 +21,16 @@ class User extends Component {
     this.props.logout();
   };
 
+  handleMain = () => {
+    this.props.rootRouted();
+  };
+
   handleAdmin = () => {
     this.props.adminRouted();
   };
 
   render() {
-    const { user, classes } = this.props;
+    const { user, classes, currentPage } = this.props;
     return (
       <div>
         {
@@ -38,7 +42,8 @@ class User extends Component {
                 <List.Header>{user.name}</List.Header>
               </List.Content>
             </List.Item>
-            <Button onClick={this.handleAdmin}>Картотека</Button>
+            {currentPage === 'admin' && <Button onClick={this.handleMain}>Головна</Button>}
+            {currentPage === 'root' && <Button onClick={this.handleAdmin}>Картотека</Button>}
             <Button onClick={this.handleLogout}>Вихід</Button>
           </List>
         }
@@ -54,8 +59,10 @@ class User extends Component {
 export default connect(
   {
     user: state`user`,
+    currentPage: state`currentPage`,
     autologin: signal`autologin`,
     logout: signal`logout`,
+    rootRouted: signal`rootRouted`,
     adminRouted: signal`adminRouted`,
   },
   injectSheet(styles)(User),
